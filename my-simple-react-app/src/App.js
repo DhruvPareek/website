@@ -61,6 +61,15 @@ function AssortedLinks() {
         <li><a href="https://paulgraham.com/wisdom.html" target="_blank" rel="noopener noreferrer">Is it Worth Being Wise? Intelligence vs Wisdom (Paul Graham)</a></li>
         <li><a href="https://youtu.be/3qHkcs3kG44?si=pOhVjEF5zzAjLIXC" target="_blank" rel="noopener noreferrer">Naval Ravikant Interview JRE</a></li>
         <li><a href="https://open.spotify.com/episode/3DQfcTY4viyXsIXQ89NXvg?si=4a22621fcfb14a75" target="_blank" rel="noopener noreferrer">Robert F. Kennedy Jr. Interview JRE</a></li>
+        <li><a href="https://www.amazon.com/Naked-Economics-Undressing-Science-Revised/dp/0393337642" target="_blank" rel="noopener noreferrer">Naked Economics: Undressing the Dismal Science (Charles Wheelan)</a></li>
+        <li><a href="https://www.amazon.com/Shoe-Dog-Memoir-Creator-Nike-ebook/dp/B0176M1A44" target="_blank" rel="noopener noreferrer">Shoe Dog: A Memoir by the Creator of Nike (Phil Knight)</a></li>
+        <li><a href="https://www.amazon.com/Steve-Jobs-Walter-Isaacson/dp/1451648537" target="_blank" rel="noopener noreferrer">Steve Jobs (Walter Isaacson)</a></li>
+        <li><a href="https://www.gutenberg.org/files/84/84-h/84-h.htm" target="_blank" rel="noopener noreferrer">Frankenstein (Mary Shelley)</a></li>
+        <li><a href="https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/0804139296" target="_blank" rel="noopener noreferrer">Zero to One: Notes on Startups, or How to Build the Future (Peter Thiel)</a></li>
+        <li><a href="https://www.amazon.com/Steve-Jobs-Walter-Isaacson/dp/1451648537" target="_blank" rel="noopener noreferrer">Steve Jobs (Walter Isaacson)</a></li>
+        <li><a href="https://www.amazon.com/Outliers-Story-Success-Malcolm-Gladwell/dp/0316017930" target="_blank" rel="noopener noreferrer">Outliers: The Story of Success (Malcolm Gladwell)</a></li>
+        <li><a href="https://www.amazon.com/Short-History-Nearly-Everything-Illustrated/dp/0307885151/ref=sr_1_4?crid=ZJHBDGPA3GD&dib=eyJ2IjoiMSJ9.U4DBIT6mA30DzuVlDswfh9QCaah39vyugjiWufPrqhXnfILUibgWPE7uF6YTHu53LShTydtTWU-siG7vtVqdoeWoUoq-9ej1fWqsyeH70_h788xqgBnISNv5EF3VsBT2VErHu9cgqzzp2eCDcSpRSw.Ic38iBQKw1pmleVVvYmWKryVIqP5SGWMoj1qgIrXkdE&dib_tag=se&keywords=a+short+history+of+nearly+everything&qid=1705278859&s=books&sprefix=a+short+hi%2Cstripbooks%2C169&sr=1-4" target="_blank" rel="noopener noreferrer">A Short History of Nearly Everything (Bill Bryson)</a></li>
+        <li><a href="https://www.amazon.com/Elon-Musk-Walter-Isaacson/dp/1982181281" target="_blank" rel="noopener noreferrer">Elon Musk (Walter Isaacson)</a></li>
     </ul>
     </div>
     );    
