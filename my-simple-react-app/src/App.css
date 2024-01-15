@@ -64,11 +64,36 @@ h1 {
   height: auto; /* Maintain aspect ratio */
 }
 
+.image4{
+  border: 5px solid #000000; /* Example border: 5px solid green */
+  display: block;
+  margin: 0 auto; /* Center the image */
+  margin-top: 20px; /* Adds 20px padding above the image */
+  width: 230px; /* Fixed width */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.image5{
+  border: 5px solid #000000; /* Example border: 5px solid green */
+  display: block;
+  margin: 0 auto; /* Center the image */
+  margin-top: 20px; /* Adds 20px padding above the image */
+  width: 250px; /* Fixed width */
+  height: auto; /* Maintain aspect ratio */
+}
+
 .content{
-  margin-left: 30px;
+  font-family: Crimson Text,sans-serif;
+  margin-left: 200px;
   margin-top: 20px;
+  line-height: 2; /* This creates double spacing in paragraphs */
+  font-size: 16px;
 }
 
 .pics{
   display: flex;
+}
+
+a {
+  color: black;
 }

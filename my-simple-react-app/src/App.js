@@ -5,25 +5,65 @@ import './App.css';
 // Components or pages
 function Home() {
     return (
+        <div>
         <div className='content'>
-            <h3>Random funky stuff:</h3>
+            <h2>Random funky stuff:</h2>
             <ul>
                 <li><a href="http://dartstracker301.xyz" target="_blank" rel="noopener noreferrer">Darts Tracker</a></li>
                 <li><a href="https://github.com/DhruvPareek/HIllTalkV2" target="_blank" rel="noopener noreferrer">Hilltalk</a></li>
-                <li><a href="https://www.youtube.com/@dpak576" target="_blank" rel="noopener noreferrer">videos</a></li>
+                <li><a href="https://bold-doll-6ca.notion.site/cb6726e483d14fedb2ad2632f65e1407?v=1c8cf307c77e4ad4854e4a4cd9e6abc6" target="_blank" rel="noopener noreferrer">Blockchain Learning Resource</a></li>
+                <li><a href="https://youtu.be/hN5xxrnfPlI?si=evBJEuM8DsxV7D7V" target="_blank" rel="noopener noreferrer">Blockchain@UCLA presentation</a></li>
+                <li><a href="https://www.youtube.com/@dpak576" target="_blank" rel="noopener noreferrer">Videos</a></li>
             </ul>
+        </div>
+        <div className='pics'>
+            <img src="/RIP.jpg" alt="Main" className="image3"/>
+            <img src="/collage_copy.jpg" alt="Main" className="image2"/>
+        </div>
         </div>
     );
 }
 
 function Contact() {
     return (
+        <div>
     <div className='content'>
     <ul>
         <li>dhruvpareek883@gmail.com</li>
         <li><a href="https://twitter.com/dpak_1024" target="_blank" rel="noopener noreferrer">twitter</a></li>
     </ul>
-    </div>);    
+    </div>
+    <div className='pics'>
+        <img src="/wanderer.jpeg" alt="Main" className="image4"/>
+        <img src="/steph.jpeg" alt="Main" className="image5"/>
+    </div>
+    </div>
+    );    
+}
+
+function AssortedLinks() {
+    return (
+    <div className='content'>
+    <ul>
+        <li><a href="https://paulgraham.com/selfindulgence.html" target="_blank" rel="noopener noreferrer">How to Lose Time and Money (Paul Graham)</a></li>
+        <li><a href="https://a16z.com/why-bitcoin-matters/" target="_blank" rel="noopener noreferrer">Why Bitcoin Matters (Marc Andreesen)</a></li>
+        <li><a href="https://www.youtube.com/watch?v=liz8rZx1NJ8&t=3186s&ab_channel=PBDPodcast" target="_blank" rel="noopener noreferrer">Tom Brady Interview With PBD</a></li>
+        <li><a href="https://www.youtube.com/watch?v=o5fdhfVrg1I&ab_channel=NFLFilms" target="_blank" rel="noopener noreferrer">The Brady 6</a></li>
+        <li><a href="https://www.paulgraham.com/conformism.html" target="_blank" rel="noopener noreferrer">The Four Quadrants of Conformism (Paul Graham)</a></li>
+        <li><a href="https://www.paulgraham.com/say.html" target="_blank" rel="noopener noreferrer">What You Can't Say (Paul Graham)</a></li>
+        <li><a href="https://www.youtube.com/watch?v=wLn28DrSF68&ab_channel=HarvardBusinessSchool" target="_blank" rel="noopener noreferrer">Building A Life Lecture (Howard H. Stevenson)</a></li>
+        <li><a href="https://wellsbaum.blog/alan-watts-story-of-the-chinese-farmer/" target="_blank" rel="noopener noreferrer">The Story of the Chinese Farmer (Alan Watts)</a></li>
+        <li><a href="https://www.16personalities.com/free-personality-test" target="_blank" rel="noopener noreferrer">Meyers Briggs Personality Test</a></li>
+        <li><a href="https://cdixon.org/2009/09/19/climbing-the-wrong-hill" target="_blank" rel="noopener noreferrer">Climbing the Wrong Hill (Chris Dixon)</a></li>
+        <li><a href="https://www.youtube.com/watch?v=1qeWugmiGt4&ab_channel=6Fxc24" target="_blank" rel="noopener noreferrer">Game with the Supreme Facist (Paul Erdos)</a></li>
+        <li><a href="https://www.goodreads.com/quotes/7-it-is-not-the-critic-who-counts-not-the-man" target="_blank" rel="noopener noreferrer">The Man in the Arena (Theodore Roosevelt)</a></li>
+        <li><a href="https://www.reddit.com/media?url=https%3A%2F%2Fi.redd.it%2Fqk2ktutoo68z.jpg" target="_blank" rel="noopener noreferrer">Chief Justice John Roberts Commencement Speach Quote</a></li>
+        <li><a href="https://paulgraham.com/wisdom.html" target="_blank" rel="noopener noreferrer">Is it Worth Being Wise? Intelligence vs Wisdom (Paul Graham)</a></li>
+        <li><a href="https://youtu.be/3qHkcs3kG44?si=pOhVjEF5zzAjLIXC" target="_blank" rel="noopener noreferrer">Naval Ravikant Interview JRE</a></li>
+        <li><a href="https://open.spotify.com/episode/3DQfcTY4viyXsIXQ89NXvg?si=4a22621fcfb14a75" target="_blank" rel="noopener noreferrer">Robert F. Kennedy Jr. Interview JRE</a></li>
+    </ul>
+    </div>
+    );    
 }
 
 // App Component
@@ -38,16 +78,14 @@ function App() {
                 <nav>
                     <Link to="/">Home</Link>
                     <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">Resume</a>
+                    <Link to="/assortedLinks">Assorted Links</Link>
                     <Link to="/contact">Contact</Link>
                 </nav>
                 <Routes>
                     <Route path="/" element={<Home />} />
+                    <Route path="/assortedLinks" element={<AssortedLinks />} />
                     <Route path="/contact" element={<Contact />} />
                 </Routes>
-                <div className='pics'>
-                    <img src="/RIP.jpg" alt="Main" className="image3"/>
-                    <img src="/collage_copy.jpg" alt="Main" className="image2"/>
-                </div>
             </div>
         </Router>
     );
