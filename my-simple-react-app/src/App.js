@@ -44,6 +44,7 @@ function Contact() {
 function AssortedLinks() {
     return (
     <div className='content'>
+        In no specific order:
     <ul>
         <li><a href="https://paulgraham.com/selfindulgence.html" target="_blank" rel="noopener noreferrer">How to Lose Time and Money (Paul Graham)</a></li>
         <li><a href="https://a16z.com/why-bitcoin-matters/" target="_blank" rel="noopener noreferrer">Why Bitcoin Matters (Marc Andreesen)</a></li>
@@ -70,6 +71,7 @@ function AssortedLinks() {
         <li><a href="https://www.amazon.com/Outliers-Story-Success-Malcolm-Gladwell/dp/0316017930" target="_blank" rel="noopener noreferrer">Outliers: The Story of Success (Malcolm Gladwell)</a></li>
         <li><a href="https://www.amazon.com/Short-History-Nearly-Everything-Illustrated/dp/0307885151/ref=sr_1_4?crid=ZJHBDGPA3GD&dib=eyJ2IjoiMSJ9.U4DBIT6mA30DzuVlDswfh9QCaah39vyugjiWufPrqhXnfILUibgWPE7uF6YTHu53LShTydtTWU-siG7vtVqdoeWoUoq-9ej1fWqsyeH70_h788xqgBnISNv5EF3VsBT2VErHu9cgqzzp2eCDcSpRSw.Ic38iBQKw1pmleVVvYmWKryVIqP5SGWMoj1qgIrXkdE&dib_tag=se&keywords=a+short+history+of+nearly+everything&qid=1705278859&s=books&sprefix=a+short+hi%2Cstripbooks%2C169&sr=1-4" target="_blank" rel="noopener noreferrer">A Short History of Nearly Everything (Bill Bryson)</a></li>
         <li><a href="https://www.amazon.com/Elon-Musk-Walter-Isaacson/dp/1982181281" target="_blank" rel="noopener noreferrer">Elon Musk (Walter Isaacson)</a></li>
+        <li><a href="https://www.youtube.com/watch?v=aGNUWY_aePU&ab_channel=DaveFeinstein" target="_blank" rel="noopener noreferrer">Everybody wants to be the beast (Nick Saban)</a></li>
     </ul>
     </div>
     );    
