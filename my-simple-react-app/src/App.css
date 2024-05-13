@@ -1,7 +1,8 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('https://img.freepik.com/free-photo/light-gray-concrete-wall_53876-89532.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699488000&semt=ais');
+  /* background-image: url('https://img.freepik.com/free-photo/light-gray-concrete-wall_53876-89532.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699488000&semt=ais'); */
+  background-color: #e7e3d7;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -9,6 +10,7 @@ body {
 }
 
 nav {
+  font-family: 'Courier New', monospace;
   text-align: center;
   margin-top: 20px;
 }
@@ -83,7 +85,7 @@ h1 {
 }
 
 .content{
-  font-family: Crimson Text,sans-serif;
+  font-family: 'Courier New', monospace;
   margin-left: 200px;
   margin-top: 20px;
   line-height: 2; /* This creates double spacing in paragraphs */
@@ -96,4 +98,8 @@ h1 {
 
 a {
   color: black;
+}
+
+h1{
+  font-family: 'Luminari', fantasy;
 }
