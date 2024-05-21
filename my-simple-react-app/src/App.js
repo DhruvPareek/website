@@ -44,7 +44,9 @@ function Contact() {
 function AssortedLinks() {
     return (
     <div className='content'>
+    <div style={{color: '#2b3e50'}}>
         In no specific order:
+    </div>
     <ul>
         <li><a href="https://paulgraham.com/selfindulgence.html" target="_blank" rel="noopener noreferrer">How to Lose Time and Money (Paul Graham)</a></li>
         <li><a href="https://a16z.com/why-bitcoin-matters/" target="_blank" rel="noopener noreferrer">Why Bitcoin Matters (Marc Andreesen)</a></li>

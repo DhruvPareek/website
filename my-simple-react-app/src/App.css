@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'Steelfish';
+  src: url('steelfish/steelfish rg.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Define the Steelfish Outline font */
+@font-face {
+  font-family: 'Steelfish Outline';
+  src: url('steelfish/steelfish outline.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -7,6 +22,10 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+h2{
+  color: #2b3e50;
 }
 
 nav {
@@ -19,7 +38,8 @@ nav {
 nav a {
   margin: 0 10px;
   padding: 10px 20px;
-  background-color: #5fd9c9;
+  /* background-color: #5fd9c9; */
+  background-color: #bf8896;
   color: white;
   border: none;
   border-radius: 5px;
@@ -31,16 +51,26 @@ nav a {
 
 /* Hover effect for <Link> components */
 nav a:hover {
-  background-color: #49d5c2;
+  background-color: #aa7b86;
 }
 
 h1 {
   text-align: center;
-  font-size: 50px;
+  font-size: 80px;
+  font-family: 'Steelfish', sans-serif;
+  position: relative;
+  color: #2b3e50;
+  text-shadow: 
+  3px 3px 0 #b53b35, 
+  6px 6px 0 #b53b35, 
+  9px 9px 0 #b53b35;
+  /* 12px 12px 0 #b53b35; */
+  /* 15px 15px 0 #b53b35; Long shadow effect */
 }
 
+
 .main-image {
-  border: 5px solid #000000; /* Example border: 5px solid green */
+  border: 5px solid #94a5a1; /* Example border: 5px solid green */
   display: block;
   margin: 0 auto; /* Center the image */
   margin-top: 20px; /* Adds 20px padding above the image */
@@ -49,7 +79,7 @@ h1 {
 }
 
 .image2{
-  border: 5px solid #000000; /* Example border: 5px solid green */
+  border: 5px solid #94a5a1; /* Example border: 5px solid green */
   display: block;
   margin: 0 auto; /* Center the image */
   margin-top: 20px; /* Adds 20px padding above the image */
@@ -58,7 +88,7 @@ h1 {
 }
 
 .image3{
-  border: 5px solid #000000; /* Example border: 5px solid green */
+  border: 5px solid #94a5a1; /* Example border: 5px solid green */
   display: block;
   margin: 0 auto; /* Center the image */
   margin-top: 20px; /* Adds 20px padding above the image */
@@ -67,7 +97,7 @@ h1 {
 }
 
 .image4{
-  border: 5px solid #000000; /* Example border: 5px solid green */
+  border: 5px solid #94a5a1; /* Example border: 5px solid green */
   display: block;
   margin: 0 auto; /* Center the image */
   margin-top: 20px; /* Adds 20px padding above the image */
@@ -76,7 +106,7 @@ h1 {
 }
 
 .image5{
-  border: 5px solid #000000; /* Example border: 5px solid green */
+  border: 5px solid #94a5a1; /* Example border: 5px solid green */
   display: block;
   margin: 0 auto; /* Center the image */
   margin-top: 20px; /* Adds 20px padding above the image */
@@ -90,6 +120,7 @@ h1 {
   margin-top: 20px;
   line-height: 2; /* This creates double spacing in paragraphs */
   font-size: 16px;
+  /* color: #386e6a; */
 }
 
 .pics{
@@ -97,9 +128,9 @@ h1 {
 }
 
 a {
-  color: black;
+  color: #000; /* Ensure all links have the desired color */
 }
 
-h1{
-  font-family: 'Luminari', fantasy;
+a:hover {
+  color: #94a5a1; /* Ensure the color doesn't change on hover, if desired */
 }
