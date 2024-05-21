@@ -62,8 +62,8 @@ h1 {
   color: #2b3e50;
   text-shadow: 
   3px 3px 0 #b53b35, 
-  6px 6px 0 #b53b35, 
-  9px 9px 0 #b53b35;
+  6px 6px 0 #b53b35;
+  /* 9px 9px 0 #b53b35; */
   /* 12px 12px 0 #b53b35; */
   /* 15px 15px 0 #b53b35; Long shadow effect */
 }
