@@ -6,37 +6,37 @@ import './App.css';
 function Home() {
     return (
         <div>
-        <div className='content'>
-            <h2>Random funky stuff:</h2>
-            <ul>
-                <li><a href="http://dartstracker301.xyz" target="_blank" rel="noopener noreferrer">Darts Tracker</a></li>
-                <li><a href="https://github.com/DhruvPareek/HIllTalkV2" target="_blank" rel="noopener noreferrer">Hilltalk</a></li>
-                <li><a href="https://bold-doll-6ca.notion.site/cb6726e483d14fedb2ad2632f65e1407?v=1c8cf307c77e4ad4854e4a4cd9e6abc6" target="_blank" rel="noopener noreferrer">Blockchain Learning Resource</a></li>
-                <li><a href="https://youtube.com/playlist?list=PLsmKXxXxQhJSZUidAgoepyXiL37bdPtx1&si=LRrmYGGCmpFVV_Cm" target="_blank" rel="noopener noreferrer">Blockchain@UCLA presentations</a></li>
-                <li><a href="https://www.youtube.com/@dpak576" target="_blank" rel="noopener noreferrer">Videos</a></li>
-            </ul>
-        </div>
-        <div className='pics'>
-            <img src="/RIP.jpg" alt="Main" className="image3"/>
-            <img src="/collage_copy.jpg" alt="Main" className="image2"/>
-        </div>
+            <div className='content'>
+                <h2>Random funky stuff:</h2>
+                <ul>
+                    <li><a href="http://dartstracker301.xyz" target="_blank" rel="noopener noreferrer">Darts Tracker</a></li>
+                    <li><a href="https://github.com/DhruvPareek/HIllTalkV2" target="_blank" rel="noopener noreferrer">Hilltalk</a></li>
+                    <li><a href="https://bold-doll-6ca.notion.site/cb6726e483d14fedb2ad2632f65e1407?v=1c8cf307c77e4ad4854e4a4cd9e6abc6" target="_blank" rel="noopener noreferrer">Blockchain Learning Resource</a></li>
+                    <li><a href="https://youtube.com/playlist?list=PLsmKXxXxQhJSZUidAgoepyXiL37bdPtx1&si=LRrmYGGCmpFVV_Cm" target="_blank" rel="noopener noreferrer">Blockchain@UCLA presentations</a></li>
+                    <li><a href="https://www.youtube.com/@dpak576" target="_blank" rel="noopener noreferrer">Videos</a></li>
+                </ul>
+            </div>
+            <div className='pics'>
+                <img src="/collage_copy.jpg" alt="collage" className="image2"/>
+                <img src="/wanderer.jpeg" alt="Main" className="image4"/>
+            </div>
         </div>
     );
 }
 
 function Contact() {
     return (
-        <div>
-    <div className='content'>
-    <ul>
-        <li>dhruvpareek883@gmail.com</li>
-        <li><a href="https://twitter.com/dpak_1024" target="_blank" rel="noopener noreferrer">twitter</a></li>
-    </ul>
-    </div>
-    <div className='pics'>
-        <img src="/wanderer.jpeg" alt="Main" className="image4"/>
-        <img src="/steph.jpeg" alt="Main" className="image5"/>
-    </div>
+    <div>
+        <div className='content'>
+        <ul>
+            <li>dhruvpareek883@gmail.com</li>
+            <li><a href="https://twitter.com/dpak_1024" target="_blank" rel="noopener noreferrer">twitter</a></li>
+        </ul>
+        </div>
+        <div className='pics'>
+            <img src="/RIP.jpg" alt="rip" className="image3"/>
+            <img src="/steph.jpeg" alt="Main" className="image5"/>
+        </div>
     </div>
     );    
 }
@@ -74,6 +74,7 @@ function AssortedLinks() {
         <li><a href="https://www.amazon.com/Short-History-Nearly-Everything-Illustrated/dp/0307885151/ref=sr_1_4?crid=ZJHBDGPA3GD&dib=eyJ2IjoiMSJ9.U4DBIT6mA30DzuVlDswfh9QCaah39vyugjiWufPrqhXnfILUibgWPE7uF6YTHu53LShTydtTWU-siG7vtVqdoeWoUoq-9ej1fWqsyeH70_h788xqgBnISNv5EF3VsBT2VErHu9cgqzzp2eCDcSpRSw.Ic38iBQKw1pmleVVvYmWKryVIqP5SGWMoj1qgIrXkdE&dib_tag=se&keywords=a+short+history+of+nearly+everything&qid=1705278859&s=books&sprefix=a+short+hi%2Cstripbooks%2C169&sr=1-4" target="_blank" rel="noopener noreferrer">A Short History of Nearly Everything (Bill Bryson)</a></li>
         <li><a href="https://www.amazon.com/Elon-Musk-Walter-Isaacson/dp/1982181281" target="_blank" rel="noopener noreferrer">Elon Musk (Walter Isaacson)</a></li>
         <li><a href="https://www.youtube.com/watch?v=aGNUWY_aePU&ab_channel=DaveFeinstein" target="_blank" rel="noopener noreferrer">Everybody wants to be the beast (Nick Saban)</a></li>
+        <li><a href="https://www.goodreads.com/quotes/845-the-individual-has-always-had-to-struggle-to-keep-from" target ="_blank" rel="noopener noreferrer">The Struggle of the Individual (Friedrich Nietzsche)</a></li>
     </ul>
     </div>
     );    

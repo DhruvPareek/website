@@ -95,7 +95,7 @@ h1 {
   display: block;
   margin: 0 auto; /* Center the image */
   margin-top: 20px; /* Adds 20px padding above the image */
-  width: 200px; /* Fixed width */
+  width: 250px; /* Fixed width */
   height: auto; /* Maintain aspect ratio */
 }
 
@@ -128,6 +128,7 @@ h1 {
 
 .pics{
   display: flex;
+  margin-bottom: 10px;
 }
 
 a {
