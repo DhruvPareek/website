@@ -86,7 +86,7 @@ h1 {
   display: block;
   margin: 0 auto; /* Center the image */
   margin-top: 20px; /* Adds 20px padding above the image */
-  width: 400px; /* Fixed width */
+  width: 450px; /* Fixed width */
   height: auto; /* Maintain aspect ratio */
 }
 
