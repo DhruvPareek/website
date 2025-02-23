@@ -1,0 +1,54 @@
+.essay-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Georgia', serif;
+    line-height: 1.8;
+    color: #333;
+}
+
+.essay-title {
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Steelfish', sans-serif;
+    position: relative;
+    color: #2b3e50;
+    text-shadow: 
+    2px 2px 0 #43ba26, 
+    4px 4px 0 #2dbd83;
+    margin-bottom: 5px;
+  }
+
+.date {
+    text-align: center;
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.image-container {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.image-caption {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+.large-space {
+    margin-bottom: 300px;
+}
