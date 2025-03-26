@@ -1,5 +1,5 @@
 import React from 'react';
-import './ScaleEssay.css';
+import '../Styling/ScaleEssay.css';
 
 function ScaleEssay() {
     return (
@@ -113,11 +113,11 @@ function ScaleEssay() {
             Ultimately, Solana’s high-performance networking and parallelized execution allow it to achieve unparalleled speed and throughput, but at the cost of accessibility for node operators and long-term decentralization risks. In analyzing Solana’s scalability, the next logical question is whether these tradeoffs are sustainable in the long run—or whether Ethereum’s rollup-based approach, despite its current lag in raw throughput, may ultimately prove to be the more robust model for scaling blockchains.
             </p>
 
+            <div style={{ marginTop: '500px' }}></div>
 
-            <p className="large-space"></p>
 
             <p>
-                The discussions around security and decentralization along with their effects on the utility, safety, and trust 
+                *****The discussions around security and decentralization along with their effects on the utility, safety, and trust 
                 in a blockchain deserve more detailed analysis than the simple remarks I made in this essay. This is best 
                 expressed by Mike Neuder, who says 
                 <a href="https://hackmd.io/@mikeneuder/ethesis" target="_blank" rel="noopener noreferrer">
@@ -125,17 +125,17 @@ function ScaleEssay() {
                     limiting the market opportunity of a digital property rights system.”
                 </a>
                 Ethereum is immutable (with extremely high probability), while Solana can be tampered with. This creates serious 
-                implications to consider when trusting a blockchain to run meaningful applications or store meaningful amounts of wealth.
+                implications to consider when trusting a blockchain to run meaningful applications or store meaningful amounts of wealth.*****
             </p>
 
             <p>
-                One of my key takeaways from doing this research is the following: Say you gave the average crypto enthusiast the 
+            *****One of my key takeaways from doing this research is the following: Say you gave the average crypto enthusiast the 
                 following power: with the snap of your fingers, you could permanently wipe away the entire legacy banking 
                 infrastructure, forcing everyone to move on-chain. I believe most people in our industry would decide to snap 
                 their fingers. However, I think most people don’t realize how far away blockchains are from being able to handle 
                 that quantity of people with reasonable fees and transaction speeds. At the moment, even the parallel executing, 
                 highly performant Solana nodes that comprise the Solana blockchain can’t handle high profile memecoin launches. 
-                Ethereum has a roadmap to reach 100,000 tps, but Ethereum is currently nowhere near that scale.
+                Ethereum has a roadmap to reach 100,000 tps, but Ethereum is currently nowhere near that scale.*****
             </p>
         </div>
     );

@@ -1,49 +1,4 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import './App.css';
-import ScaleEssay from './ScaleEssay';
-
-// Components or pages
-function Home() {
-    return (
-        <div>
-            <div className='content'>
-                <h2>Stuff I've Done:</h2>
-                <ul>
-                    <li><a href="https://github.com/DhruvPareek/TheBookFund/tree/main" target="_blank" rel="noopener noreferrer">The Book Fund</a></li>
-                    <li><Link to="/scaleEssay">On the Scale of Networks</Link></li>
-                    <li><a href="https://safe-transactions-frontend.vercel.app/" target="_blank" rel="noopener noreferrer">Safe Transactions</a></li>
-                    <li><a href="http://dartstracker301.xyz" target="_blank" rel="noopener noreferrer">Darts Tracker</a></li>
-                    <li><a href="https://github.com/DhruvPareek/HIllTalkV2" target="_blank" rel="noopener noreferrer">Hilltalk</a></li>
-                    <li><a href="https://bold-doll-6ca.notion.site/cb6726e483d14fedb2ad2632f65e1407?v=1c8cf307c77e4ad4854e4a4cd9e6abc6" target="_blank" rel="noopener noreferrer">Blockchain Learning Resource</a></li>
-                    <li><a href="https://youtube.com/playlist?list=PLsmKXxXxQhJSZUidAgoepyXiL37bdPtx1&si=LRrmYGGCmpFVV_Cm" target="_blank" rel="noopener noreferrer">Blockchain@UCLA presentations</a></li>
-                    <li><a href="https://www.youtube.com/@dpak576" target="_blank" rel="noopener noreferrer">Videos</a></li>
-                </ul>
-            </div>
-            <div className='pics'>
-                <img src="/collage_copy.jpg" alt="collage" className="image2"/>
-                <img src="/wanderer.jpeg" alt="Main" className="image4"/>
-            </div>
-        </div>
-    );
-}
-
-function Contact() {
-    return (
-    <div>
-        <div className='content'>
-        <ul>
-            <li>dhruvpareek883@gmail.com</li>
-            <li><a href="https://twitter.com/dpak_1024" target="_blank" rel="noopener noreferrer">twitter</a></li>
-        </ul>
-        </div>
-        <div className='pics'>
-            <img src="/RIP.jpg" alt="rip" className="image3"/>
-            <img src="/steph.jpeg" alt="Main" className="image5"/>
-        </div>
-    </div>
-    );    
-}
+import '../Styling/App.css';
 
 function AssortedLinks() {
     return (
@@ -53,20 +8,26 @@ function AssortedLinks() {
             <li><a href="https://www.amazon.com/Naked-Economics-Undressing-Science-Revised/dp/0393337642" target="_blank" rel="noopener noreferrer">Naked Economics: Undressing the Dismal Science (Charles Wheelan)</a></li>
             <li><a href="https://www.amazon.com/Shoe-Dog-Memoir-Creator-Nike-ebook/dp/B0176M1A44" target="_blank" rel="noopener noreferrer">Shoe Dog: A Memoir by the Creator of Nike (Phil Knight)</a></li>
             <li><a href="https://www.amazon.com/Steve-Jobs-Walter-Isaacson/dp/1451648537" target="_blank" rel="noopener noreferrer">Steve Jobs (Walter Isaacson)</a></li>
+            <li><a href="https://www.amazon.com/Prisoners-Geography-Explain-Everything-Politics/dp/1501121472" target="_blank" rel="noopener noreferrer">Prisoners of Geography: Ten Maps That Explain Everything About the World  (Tim Marshall)</a></li>
             <li><a href="https://www.gutenberg.org/files/84/84-h/84-h.htm" target="_blank" rel="noopener noreferrer">Frankenstein (Mary Shelley)</a></li>
             <li><a href="https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/0804139296" target="_blank" rel="noopener noreferrer">Zero to One (Peter Thiel)</a></li>
             <li><a href="https://www.amazon.com/Outliers-Story-Success-Malcolm-Gladwell/dp/0316017930" target="_blank" rel="noopener noreferrer">Outliers: The Story of Success (Malcolm Gladwell)</a></li>
             <li><a href="https://www.amazon.com/Short-History-Nearly-Everything-Illustrated/dp/0307885151" target="_blank" rel="noopener noreferrer">A Short History of Nearly Everything (Bill Bryson)</a></li>
             <li><a href="https://www.amazon.com/Elon-Musk-Walter-Isaacson/dp/1982181281" target="_blank" rel="noopener noreferrer">Elon Musk (Walter Isaacson)</a></li>
+            <li><a href="https://www.amazon.com/Dreamers-Deceivers-Stories-Villains-America/dp/1476783896" target="_blank" rel="noopener noreferrer">Dreamers and Deceivers (Glenn Beck)</a></li>
+            <li><a href="https://www.amazon.com/Man-Who-Loved-Only-Numbers/dp/0786884061" target="_blank" rel="noopener noreferrer">The Man Who Loved Only Numbers (Paul Hoffman)</a></li>
             <li><a href="https://paulgraham.com/selfindulgence.html" target="_blank" rel="noopener noreferrer">How to Lose Time and Money (Paul Graham)</a></li>
             <li><a href="https://a16z.com/why-bitcoin-matters/" target="_blank" rel="noopener noreferrer">Why Bitcoin Matters (Marc Andreesen)</a></li>
             <li><a href="https://www.paulgraham.com/conformism.html" target="_blank" rel="noopener noreferrer">The Four Quadrants of Conformism (Paul Graham)</a></li>
             <li><a href="https://www.paulgraham.com/say.html" target="_blank" rel="noopener noreferrer">What You Can't Say (Paul Graham)</a></li>
             <li><a href="https://cdixon.org/2009/09/19/climbing-the-wrong-hill" target="_blank" rel="noopener noreferrer">Climbing the Wrong Hill (Chris Dixon)</a></li>
             <li><a href="https://paulgraham.com/wisdom.html" target="_blank" rel="noopener noreferrer">Is it Worth Being Wise? Intelligence vs Wisdom (Paul Graham)</a></li>
-            <li><a href="https://www.amazon.com/Dreamers-Deceivers-Stories-Villains-America/dp/1476783896" target="_blank" rel="noopener noreferrer">Dreamers and Deceivers (Glenn Beck)</a></li>
-            <li><a href="https://www.amazon.com/Man-Who-Loved-Only-Numbers/dp/0786884061" target="_blank" rel="noopener noreferrer">The Man Who Loved Only Numbers (Paul Hoffman)</a></li>
-            <li><a href="https://www.amazon.com/Prisoners-Geography-Explain-Everything-Politics/dp/1501121472" target="_blank" rel="noopener noreferrer">Prisoners of Geography: Ten Maps That Explain Everything About the World  (Tim Marshall)</a></li>
+            <li><a href="https://www.newyorker.com/magazine/2015/05/18/tomorrows-advance-man" target="_blank" rel="noopener noreferrer">Marc Andreessen profile</a></li>
+            <li><a href=" https://www.newyorker.com/magazine/2023/12/04/how-jensen-huangs-nvidia-is-powering-the-ai-revolution" target="_blank" rel="noopener noreferrer">Jensen Huang profile</a></li>
+            <li><a href="https://www.newyorker.com/magazine/2022/09/26/shane-gillis-fall-and-rise" target="_blank" rel="noopener noreferrer">Shane Gillis profile</a></li>
+            <li><a href="https://www.newyorker.com/magazine/2011/11/28/no-death-no-taxes" target="_blank" rel="noopener noreferrer">Peter Thiel profile</a></li>
+            <li><a href="https://www.newyorker.com/magazine/2018/12/10/the-friendship-that-made-google-huge" target="_blank" rel="noopener noreferrer">Jeff Dean and Sanajy Ghemawat profile</a></li>
+            <li>Use archive.vn for articles behind paywalls</li>
         </ul>
 
         <h3>Videos & Podcasts</h3>
@@ -76,7 +37,6 @@ function AssortedLinks() {
             <li><a href="https://www.youtube.com/watch?v=wLn28DrSF68&ab_channel=HarvardBusinessSchool" target="_blank" rel="noopener noreferrer">Building A Life Lecture (Howard H. Stevenson)</a></li>
             <li><a href="https://www.youtube.com/watch?v=1qeWugmiGt4&ab_channel=6Fxc24" target="_blank" rel="noopener noreferrer">Game with the Supreme Facist (Paul Erdos)</a></li>
             <li><a href="https://youtu.be/3qHkcs3kG44?si=pOhVjEF5zzAjLIXC" target="_blank" rel="noopener noreferrer">Naval Ravikant Interview JRE</a></li>
-            <li><a href="https://open.spotify.com/episode/3DQfcTY4viyXsIXQ89NXvg?si=4a22621fcfb14a75" target="_blank" rel="noopener noreferrer">Robert F. Kennedy Jr. Interview JRE</a></li>
             <li><a href="https://www.youtube.com/watch?v=aGNUWY_aePU&ab_channel=DaveFeinstein" target="_blank" rel="noopener noreferrer">Everybody wants to be the beast (Nick Saban)</a></li>
             <li><a href="https://www.youtube.com/watch?v=Rls8H6MktrA&list=WL&index=173&t=183s&ab_channel=brittle13" target="_blank" rel="noopener noreferrer">Milton Friedman on the Free Market</a></li>
             
@@ -94,30 +54,4 @@ function AssortedLinks() {
     );    
 }
 
-// App Component
-function App() {
-    return (
-        <Router>
-            <div>
-            <img src="/main.png" alt="Main" className="main-image"/>
-                <header>
-                    <h1>Dhruv Pareek</h1>
-                </header>
-                <nav>
-                    <Link to="/">Home</Link>
-                    <a href="/resume.html" target="_blank" rel="noopener noreferrer">Resume</a>
-                    <Link to="/assortedLinks">Assorted Links</Link>
-                    <Link to="/contact">Contact</Link>
-                </nav>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/assortedLinks" element={<AssortedLinks />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/scaleEssay" element={<ScaleEssay />} />
-                </Routes>
-            </div>
-        </Router>
-    );
-}
-
-export default App;
+export default AssortedLinks;
