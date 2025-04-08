@@ -27,6 +27,7 @@ function AssortedLinks() {
             <li><a href="https://www.newyorker.com/magazine/2022/09/26/shane-gillis-fall-and-rise" target="_blank" rel="noopener noreferrer">Shane Gillis profile</a></li>
             <li><a href="https://www.newyorker.com/magazine/2011/11/28/no-death-no-taxes" target="_blank" rel="noopener noreferrer">Peter Thiel profile</a></li>
             <li><a href="https://www.newyorker.com/magazine/2018/12/10/the-friendship-that-made-google-huge" target="_blank" rel="noopener noreferrer">Jeff Dean and Sanajy Ghemawat profile</a></li>
+            <li><a href="https://joincolossus.com/article/paradigm-shifts-matt-huang/" target="_blank" rel="noopener noreferrer">Matt Huang profile</a></li>
             <li>Use archive.vn for articles behind paywalls</li>
         </ul>
 
