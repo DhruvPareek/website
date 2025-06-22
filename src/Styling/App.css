@@ -13,166 +13,346 @@
   font-style: normal;
 }
 
+/* Fix overscroll white space */
+html {
+  background: 
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a1a 100%);
+  background-size: 50px 50px, 50px 50px, 100% 100%;
+  background-attachment: fixed;
+  overscroll-behavior: none;
+}
+
+/* Dark cyberpunk background with subtle grid */
 body {
   margin: 0;
   padding: 0;
-  /* background-image: url('https://img.freepik.com/free-photo/light-gray-concrete-wall_53876-89532.jpg?size=626&ext=jpg&ga=GA1.1.1826414947.1699488000&semt=ais'); */
-  background-color: #e7e3d7;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  background: 
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(180deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a1a 100%);
+  background-size: 50px 50px, 50px 50px, 100% 100%;
   background-attachment: fixed;
+  min-height: 100vh;
+  color: #00ffff;
+  overscroll-behavior: none;
 }
 
-h2{
-  color: #2b3e50;
+/* Neon pink heading */
+h2 {
+  color: #ff0080;
+  text-shadow: 
+    0 0 5px #ff0080,
+    0 0 10px #ff0080,
+    0 0 15px #ff0080,
+    0 0 20px #ff0080;
+  font-family: 'Steelfish', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
+/* Neon navigation bar */
 nav {
   display: flex;
   justify-content: center;
-  font-family: 'Courier New', monospace;
+  font-family: 'Steelfish', sans-serif;
   text-align: center;
   margin-top: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 20px 0;
+  border-top: 2px solid #00ffff;
+  border-bottom: 2px solid #00ffff;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.5),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
 }
 
-/* Style for <Link> components, making them look like buttons */
+/* Neon button styling for navigation links */
 nav a {
   justify-content: center;
   align-items: center;
-  margin: 0 10px;
-  padding: 10px 10px;
-  /* background-color: #5fd9c9; */
-  background-color: #bf8896;
-  color: white;
-  border: none;
-  border-radius: 5px;
+  margin: 0 15px;
+  padding: 12px 20px;
+  background: linear-gradient(45deg, rgba(255, 0, 128, 0.2), rgba(0, 255, 255, 0.2));
+  color: #00ffff;
+  border: 2px solid #00ffff;
+  border-radius: 0;
   cursor: pointer;
-  text-decoration: none; /* Removes the underline from links */
-  display: inline-block; /* Aligns links in a row */
-  border: 3px solid #aaaaaa;
+  text-decoration: none;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  transition: all 0.3s ease;
   box-shadow: 
-  4px 4px 0 #2b3e50, 
-  8px 8px 0 #2b3e50;
+    0 0 10px rgba(0, 255, 255, 0.5),
+    inset 0 0 10px rgba(0, 255, 255, 0.1);
+  text-shadow: 0 0 8px #00ffff;
 }
 
-/* Hover effect for <Link> components */
+/* Hover effect with pink neon glow */
 nav a:hover {
-  background-color: #aa7b86;
+  background: linear-gradient(45deg, rgba(255, 0, 128, 0.4), rgba(255, 255, 0, 0.2));
+  color: #ff0080;
+  border-color: #ff0080;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 128, 0.8),
+    inset 0 0 20px rgba(255, 0, 128, 0.2);
+  text-shadow: 0 0 12px #ff0080;
+  transform: translateY(-2px);
 }
 
+/* Massive neon title */
 h1 {
   text-align: center;
   font-size: 80px;
   font-family: 'Steelfish', sans-serif;
   position: relative;
-  color: #2b3e50;
+  color: #0080ff;
+  text-transform: uppercase;
+  letter-spacing: 4px;
   text-shadow: 
-  3px 3px 0 #b53b35, 
-  6px 6px 0 #b53b35;
-  /* 9px 9px 0 #b53b35; */
-  /* 12px 12px 0 #b53b35; */
-  /* 15px 15px 0 #b53b35; Long shadow effect */
+    0 0 3px #0080ff,
+    0 0 6px #0080ff,
+    0 0 10px #0080ff,
+    0 0 15px #0080ff;
+  animation: neonFlicker 5s ease-in-out infinite alternate;
 }
 
+/* Neon flicker animation */
+@keyframes neonFlicker {
+  0%, 18%, 22%, 25%, 53%, 57%, 100% {
+    text-shadow: 
+      0 0 3px #0080ff,
+      0 0 6px #0080ff,
+      0 0 10px #0080ff,
+      0 0 15px #0080ff;
+  }
+  20%, 24%, 55% {
+    text-shadow: 
+      0 0 2px #0080ff,
+      0 0 4px #0080ff,
+      0 0 6px #0080ff,
+      0 0 8px #0080ff;
+  }
+}
 
+/* Neon border images */
 .main-image {
-  border: 5px solid #94a5a1; /* Example border: 5px solid green */
+  border: 3px solid #ff0080;
   display: block;
-  margin: 0 auto; /* Center the image */
-  margin-top: 20px; /* Adds 20px padding above the image */
-  width: 200px; /* Fixed width */
-  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 128, 0.6),
+    inset 0 0 20px rgba(255, 0, 128, 0.1);
+  filter: brightness(1.2) contrast(1.1);
 }
 
-.image2{
-  border: 5px solid #94a5a1; /* Example border: 5px solid green */
+.image2 {
+  border: 3px solid #00ffff;
   display: block;
-  margin: 0 auto; /* Center the image */
-  margin-top: 20px; /* Adds 20px padding above the image */
-  width: 450px; /* Fixed width */
-  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 450px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.6),
+    inset 0 0 20px rgba(0, 255, 255, 0.1);
+  filter: brightness(1.2) contrast(1.1);
 }
 
-.image3{
-  border: 5px solid #94a5a1; /* Example border: 5px solid green */
+.image3 {
+  border: 3px solid #ffff00;
   display: block;
-  margin: 0 auto; /* Center the image */
-  margin-top: 20px; /* Adds 20px padding above the image */
-  width: 250px; /* Fixed width */
-  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 
+    0 0 20px rgba(255, 255, 0, 0.6),
+    inset 0 0 20px rgba(255, 255, 0, 0.1);
+  filter: brightness(1.2) contrast(1.1);
 }
 
-.image4{
-  border: 5px solid #94a5a1; /* Example border: 5px solid green */
+.image4 {
+  border: 3px solid #ff0080;
   display: block;
-  margin: 0 auto; /* Center the image */
-  margin-top: 20px; /* Adds 20px padding above the image */
-  width: 230px; /* Fixed width */
-  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 230px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 128, 0.6),
+    inset 0 0 20px rgba(255, 0, 128, 0.1);
+  filter: brightness(1.2) contrast(1.1);
 }
 
-.image5{
-  border: 5px solid #94a5a1; /* Example border: 5px solid green */
+.image5 {
+  border: 3px solid #8000ff;
   display: block;
-  margin: 0 auto; /* Center the image */
-  margin-top: 20px; /* Adds 20px padding above the image */
-  width: 250px; /* Fixed width */
-  height: auto; /* Maintain aspect ratio */
+  margin: 0 auto;
+  margin-top: 20px;
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 
+    0 0 20px rgba(128, 0, 255, 0.6),
+    inset 0 0 20px rgba(128, 0, 255, 0.1);
+  filter: brightness(1.2) contrast(1.1);
 }
 
+/* Neon content styling */
 .content {
   font-family: 'Courier New', monospace;
-  padding: 0 5%;         /* Adds horizontal padding relative to screen size */
-  max-width: 900px;      /* Optional: keeps line length readable on wide screens */
-  margin: 20px auto 0;   /* Centers content horizontally while preserving top margin */
-  line-height: 2;
+  padding: 0 5%;
+  max-width: 900px;
+  margin: 20px auto 0;
+  line-height: 1;
   font-size: 16px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid #00ffff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 
+    0 0 30px rgba(0, 255, 255, 0.3),
+    inset 0 0 30px rgba(0, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
 }
 
-.pics{
+/* Neon list styling */
+.content ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.content li {
+  margin: 5px 0;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+  position: relative;
+}
+
+.content li::before {
+  content: "▶";
+  color: #ff0080;
+  font-weight: bold;
+  margin-right: 10px;
+  text-shadow: 0 0 8px #ff0080;
+}
+
+.pics {
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
+  gap: 20px;
 }
 
 @media (max-width: 720px) {
-  .pics{
+  .pics {
     display: flex;
     flex-direction: column;
-
     margin-bottom: 10px;
+    gap: 20px;
   }
 }
 
 @media (max-width: 500px) {
-  .image2{
-    border: 5px solid #94a5a1; /* Example border: 5px solid green */
+  .image2 {
+    border: 3px solid #00ffff;
     display: block;
-    margin: 0 auto; /* Center the image */
-    margin-top: 20px; /* Adds 20px padding above the image */
-    width: 300px; /* Fixed width */
-    height: auto; /* Maintain aspect ratio */
-  }  
+    margin: 0 auto;
+    margin-top: 20px;
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 
+      0 0 20px rgba(0, 255, 255, 0.6),
+      inset 0 0 20px rgba(0, 255, 255, 0.1);
+    filter: brightness(1.2) contrast(1.1);
+  }
+  
+  h1 {
+    font-size: 60px;
+  }
+  
+  .content {
+    padding: 20px;
+    margin: 10px;
+  }
 }
 
 @media (max-width: 415px) {
   nav {
-    display: flex-block;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 15px;
-    font-family: 'Courier New', monospace;
+    font-family: 'Steelfish', sans-serif;
     text-align: center;
     margin-top: 20px;
   }
+  
+  h1 {
+    font-size: 50px;
+  }
 }
 
-
+/* Neon link styling */
 a {
-  color: #000; /* Ensure all links have the desired color */
+  color: #00ffff;
+  text-decoration: none;
+  text-shadow: 0 0 8px #00ffff;
+  transition: all 0.3s ease;
 }
 
 a:hover {
-  color: #616161; /* Ensure the color doesn't change on hover, if desired */
+  color: #ff0080;
+  text-shadow: 0 0 12px #ff0080;
+  text-decoration: underline;
+}
+
+/* Special neon effects for external links */
+.content a[href*="http"] {
+  position: relative;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 128, 0.1));
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.content a[href*="http"]:hover {
+  background: linear-gradient(45deg, rgba(255, 0, 128, 0.2), rgba(255, 255, 0, 0.2));
+  border-color: #ff0080;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 0, 128, 0.4);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border: 1px solid #00ffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff0080, #00ffff);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ffff, #ff0080);
+  box-shadow: 0 0 15px rgba(255, 0, 128, 0.8);
 }

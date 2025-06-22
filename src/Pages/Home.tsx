@@ -18,10 +18,6 @@ function Home() {
                     <li><a href="https://www.youtube.com/@dpak576" target="_blank" rel="noopener noreferrer">Videos</a></li>
                 </ul>
             </div>
-            {/* <div className='pics'>
-                <img src="/collage_copy.jpg" alt="collage" className="image2"/>
-                <img src="/wanderer.jpeg" alt="Main" className="image4"/>
-            </div> */}
         </div>
     );
 }
