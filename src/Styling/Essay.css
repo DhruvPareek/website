@@ -4,7 +4,7 @@
     padding: 20px;
     font-family: 'Georgia', serif;
     line-height: 1.8;
-    color: #333;
+    color: #e7e7e7;
 }
 
 .essay-title {
@@ -12,10 +12,9 @@
     font-size: 50px;
     font-family: 'Steelfish', sans-serif;
     position: relative;
-    color: #2b3e50;
+    color: #697785;
     text-shadow: 
-    2px 2px 0 #43ba26, 
-    4px 4px 0 #2dbd83;
+    2px 2px 0 #43ba26;
     margin-bottom: 5px;
   }
 
