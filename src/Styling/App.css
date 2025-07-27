@@ -35,13 +35,13 @@ body {
   background-size: 50px 50px, 50px 50px, 100% 100%;
   background-attachment: fixed;
   min-height: 100vh;
-  color: #00ffff;
+  color: #a0e6e6;
   overscroll-behavior: none;
 }
 
 /* Neon pink heading */
 h2 {
-  color: #ff0080;
+  color: #e6739f;
   text-shadow: 
     0 0 5px #ff0080,
     0 0 10px #ff0080,
@@ -75,7 +75,7 @@ nav a {
   margin: 0 15px;
   padding: 12px 20px;
   background: linear-gradient(45deg, rgba(255, 0, 128, 0.2), rgba(0, 255, 255, 0.2));
-  color: #00ffff;
+  color: #a0e6e6;
   border: 2px solid #00ffff;
   border-radius: 0;
   cursor: pointer;
@@ -94,7 +94,7 @@ nav a {
 /* Hover effect with pink neon glow */
 nav a:hover {
   background: linear-gradient(45deg, rgba(255, 0, 128, 0.4), rgba(255, 255, 0, 0.2));
-  color: #ff0080;
+  color: #e6739f;
   border-color: #ff0080;
   box-shadow: 
     0 0 20px rgba(255, 0, 128, 0.8),
@@ -109,7 +109,7 @@ h1 {
   font-size: 80px;
   font-family: 'Steelfish', sans-serif;
   position: relative;
-  color: #0080ff;
+  color: #73b3ff;
   text-transform: uppercase;
   letter-spacing: 4px;
   text-shadow: 
@@ -225,6 +225,7 @@ h1 {
     0 0 30px rgba(0, 255, 255, 0.3),
     inset 0 0 30px rgba(0, 255, 255, 0.05);
   backdrop-filter: blur(10px);
+  color: #b3e6e6;
 }
 
 /* Neon list styling */
@@ -242,7 +243,7 @@ h1 {
 
 .content li::before {
   content: "▶";
-  color: #ff0080;
+  color: #e6739f;
   font-weight: bold;
   margin-right: 10px;
   text-shadow: 0 0 8px #ff0080;
@@ -307,33 +308,26 @@ h1 {
 
 /* Neon link styling */
 a {
-  color: #00ffff;
+  color: #80d9d9;
   text-decoration: none;
   text-shadow: 0 0 8px #00ffff;
   transition: all 0.3s ease;
 }
 
 a:hover {
-  color: #ff0080;
+  color: #e6739f;
   text-shadow: 0 0 12px #ff0080;
   text-decoration: underline;
 }
 
 /* Special neon effects for external links */
 .content a[href*="http"] {
-  position: relative;
-  background: linear-gradient(45deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 128, 0.1));
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid rgba(0, 255, 255, 0.5);
+  color: #80d9d9;
   transition: all 0.3s ease;
 }
 
 .content a[href*="http"]:hover {
-  background: linear-gradient(45deg, rgba(255, 0, 128, 0.2), rgba(255, 255, 0, 0.2));
-  border-color: #ff0080;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 0, 128, 0.4);
+  color: #e6739f;
 }
 
 /* Scrollbar styling */
@@ -355,4 +349,99 @@ a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #00ffff, #ff0080);
   box-shadow: 0 0 15px rgba(255, 0, 128, 0.8);
+}
+
+/* PayUSDCButton styling to match cyberpunk theme */
+.pay-button {
+  padding: 15px 25px;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 128, 0.2));
+  color: #a0e6e6;
+  border: 2px solid #00ffff;
+  border-radius: 0;
+  cursor: pointer;
+  font-family: 'Steelfish', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 255, 0.6),
+    inset 0 0 15px rgba(0, 255, 255, 0.1);
+  text-shadow: 0 0 8px #00ffff;
+  min-width: 180px;
+  position: relative;
+  overflow: hidden;
+}
+
+.pay-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+  transition: left 0.5s;
+}
+
+.pay-button:hover::before {
+  left: 100%;
+}
+
+.pay-button:hover {
+  background: linear-gradient(45deg, rgba(255, 0, 128, 0.4), rgba(255, 255, 0, 0.2));
+  color: #e6739f;
+  border-color: #ff0080;
+  box-shadow: 
+    0 0 25px rgba(255, 0, 128, 0.8),
+    inset 0 0 25px rgba(255, 0, 128, 0.2);
+  text-shadow: 0 0 12px #ff0080;
+  transform: translateY(-2px) scale(1.02);
+}
+
+.pay-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+  animation: pulse 2s infinite;
+}
+
+.pay-button:disabled:hover {
+  transform: none;
+  background: linear-gradient(45deg, rgba(0, 255, 255, 0.2), rgba(255, 0, 128, 0.2));
+  color: #a0e6e6;
+  border-color: #00ffff;
+  box-shadow: 
+    0 0 15px rgba(0, 255, 255, 0.6),
+    inset 0 0 15px rgba(0, 255, 255, 0.1);
+  text-shadow: 0 0 8px #00ffff;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 
+      0 0 15px rgba(0, 255, 255, 0.6),
+      inset 0 0 15px rgba(0, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 25px rgba(0, 255, 255, 0.8),
+      inset 0 0 25px rgba(0, 255, 255, 0.2);
+  }
+}
+
+/* Error message styling */
+.pay-button + p {
+  color: #ff6b6b !important;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  text-shadow: 0 0 8px #ff6b6b;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  border-radius: 4px;
+  margin-top: 8px !important;
+  max-width: 300px;
+  text-align: center;
 }

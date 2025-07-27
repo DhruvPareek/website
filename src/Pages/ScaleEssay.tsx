@@ -1,6 +1,27 @@
 import '../Styling/Essay.css';
+import { ConnectKitButton } from "connectkit";
+import { PayUSDCButton, ARBITRUM_CHAIN_ID, MICROPAY_CONTRACT, micropayAbi } from './PayScaleUSDCButton'
+import { useAccount, useReadContract } from 'wagmi'
+
 
 function ScaleEssay() {
+    const { address } = useAccount()
+    
+    const { data: paidAmount, refetch: refetchPaymentStatus } = useReadContract({
+        address: MICROPAY_CONTRACT,
+        abi: micropayAbi,
+        functionName: 'getPaidAmount',
+        args: [address!],
+        chainId: ARBITRUM_CHAIN_ID,
+        query: {
+            enabled: !!address,
+            refetchInterval: 5000, // Refetch every 5 seconds as fallback
+        },
+    })
+
+    // Check if user has paid at least 0.1 USDC (100000 with 6 decimals)
+    const hasAccess = address && paidAmount && typeof paidAmount === 'bigint' && paidAmount >= 100000n
+
     return (
         <div className="essay-container">
             <p className="essay-title">On the Scale of Networks</p>
@@ -26,6 +47,9 @@ function ScaleEssay() {
                 look like for them to catch Solana?
             </p>
 
+
+            {hasAccess ? (
+                <>
             <p>
                 The scale of a blockchain network can be defined by the network’s speed and throughput. Speed is the sum of 
                 latency time + finality time, where latency is the length of time from when a transaction is submitted to when 
@@ -136,6 +160,16 @@ function ScaleEssay() {
                 highly performant Solana nodes that comprise the Solana blockchain can’t handle high profile memecoin launches. 
                 Ethereum has a roadmap to reach 100,000 tps, but Ethereum is currently nowhere near that scale.*****
             </p>
+
+                </>
+            ) : (
+                <div className="connectkit-button" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <p>In order to read the rest of this essay, please pay 10 cents USDC (or more if you want to).</p>
+                    <ConnectKitButton />
+                    <PayUSDCButton refetchPaymentStatus={refetchPaymentStatus} />
+                </div>
+            )}
+
         </div>
     );
 }
