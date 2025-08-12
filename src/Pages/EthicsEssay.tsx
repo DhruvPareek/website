@@ -1,102 +1,339 @@
-import '../Styling/Essay.css';
-import { ConnectKitButton } from "connectkit";
-import { PayUSDCButton, ARBITRUM_CHAIN_ID, MICROPAY_CONTRACT, micropayAbi } from './PayEthicsUSDCButton'
-import { useAccount, useReadContract } from 'wagmi'
+import "../Styling/Essay.css";
+import { PayUSDCButton } from "./PayUSDCButton";
 
 function EthicsEssay() {
-    const { address } = useAccount()
-    
-    const { data: paidAmount, refetch: refetchPaymentStatus } = useReadContract({
-        address: MICROPAY_CONTRACT,
-        abi: micropayAbi,
-        functionName: 'getPaidAmount',
-        args: [address!],
-        chainId: ARBITRUM_CHAIN_ID,
-        query: {
-            enabled: !!address,
-            refetchInterval: 5000, // Refetch every 5 seconds as fallback
-        },
-    })
+  return (
+    <div className="essay-container">
+      <p className="essay-title">
+        Ethical Blockchain Regulation <br />
+        (Engr186EW - Computer Science Ethics)
+      </p>
+      <p className="date">May 30th, 2025</p>
+      <br />
+      <p>
+        The young cryptocurrency and blockchain technology industry has faced
+        considerable regulatory uncertainty in the United States. Under
+        President Biden's administration, vague compliance guidelines and
+        aggressive enforcement by the SEC marked an era of unclear regulation
+        and unfair limitations. This stifled the industry's growth and led many
+        cryptocurrency companies to relocate abroad to jurisdictions with more
+        clear or favorable policies. Consequently, these actions reduced
+        consumer choice, diminished America's competitive advantage in
+        blockchain innovation, and resulted in financial crimes involving
+        blockchain companies operating under loosely regulated foreign
+        jurisdictions. On the contrary, the new administration in the White
+        House has emerged with a pro-crypto stance. This has included pledging
+        to develop clear and friendly regulations intended to attract crypto
+        companies back to the U.S. However, critics of this policy argue that
+        the new administration is placing corporate interests over safeguarding
+        Americans from volatility, fraud, scams, and general malpractice that
+        has plagued the cryptocurrency industry. This leads to an ethical
+        dilemma regarding blockchain policy. How can policy be crafted to
+        protect consumers while maintaining a business climate that promotes
+        innovation and progress in the field? Additionally, how can a balance be
+        struck between preventing fraud and enabling experimentation necessary
+        for this technology's growth to bring its benefits to the general
+        population? This paper will argue that a minimal framework of permissive
+        regulation, specifically enacting transparency, consumer rights, and
+        operational guidelines while refraining from excessive regulatory
+        enforcement that obstructs the crypto industry, is the most ethical path
+        forward in a consequentialist framework to attain the economic and
+        social benefits of a thriving blockchain industry while minimizing harm
+        to participants.
+      </p>
+      <br />
 
-    // Check if user has paid at least 0.1 USDC (100000 with 6 decimals)
-    const hasAccess = address && paidAmount && typeof paidAmount === 'bigint' && paidAmount >= 100000n
-
-    return (
-        <div className="essay-container">
-            <p className="essay-title">Ethical Blockchain Regulation <br />(Engr186EW - Computer Science Ethics)</p>
-            <p className="date">May 30th, 2025</p>
-            <br />
-            <p>
-                The young cryptocurrency and blockchain technology industry has faced considerable regulatory uncertainty in the United States. Under President Biden's administration, vague compliance guidelines and aggressive enforcement by the SEC marked an era of unclear regulation and unfair limitations. This stifled the industry's growth and led many cryptocurrency companies to relocate abroad to jurisdictions with more clear or favorable policies. Consequently, these actions reduced consumer choice, diminished America's competitive advantage in blockchain innovation, and resulted in financial crimes involving blockchain companies operating under loosely regulated foreign jurisdictions. On the contrary, the new administration in the White House has emerged with a pro-crypto stance. This has included pledging to develop clear and friendly regulations intended to attract crypto companies back to the U.S. However, critics of this policy argue that the new administration is placing corporate interests over safeguarding Americans from volatility, fraud, scams, and general malpractice that has plagued the cryptocurrency industry. This leads to an ethical dilemma regarding blockchain policy. How can policy be crafted to protect consumers while maintaining a business climate that promotes innovation and progress in the field? Additionally, how can a balance be struck between preventing fraud and enabling experimentation necessary for this technology's growth to bring its benefits to the general population? This paper will argue that a minimal framework of permissive regulation, specifically enacting transparency, consumer rights, and operational guidelines while refraining from excessive regulatory enforcement that obstructs the crypto industry, is the most ethical path forward in a consequentialist framework to attain the economic and social benefits of a thriving blockchain industry while minimizing harm to participants.
-            </p>
-            <br />
-            
-            {hasAccess ? (
-                <>
-                    <p>
-                        Harsh, over scrutinous regulation of the cryptocurrency industry can suppress blockchain technology into obscurity, preventing the upside of the technology from ever being realized. Unfortunately, it is increasingly common for new technologies with the potential to positively revolutionize many aspects of the world to be regulated into obscurity before reaching a consequential scale. Over the last 70 years, nuclear power with the ability to generate abundant, clean, cheap electricity was suppressed into insignificance. Blockchains may suffer the same fate as nuclear power if poorly structured legislation and regulation continue to stand in the way of innovation. Investor and journalist Nic Carter's investigative work uncovered that the previous administration in the White House actively restricted banking access to cryptocurrency businesses, forcing banks to limit crypto-related deposits and halt their support for crypto clients (Carter & Campbell, 2024). Such regulatory driven debanking severely restricted the operation capabilities of cryptocurrency companies, causing many to move offshore or close entirely. This directly undermined innovation and growth potential of blockchain technology within the U.S. (Carter & Campbell, 2024). Additionally, the FDIC's Office of Inspector General stated in an October 2023 report that the FDIC may "inadvertently limit financial institution innovation and growth in the crypto space" (FDIC's Office of Inspector General, 2023). With this statement, it can't be questioned that the practices of regulators when dealing with cryptocurrency related companies in the United States has handcuffed the ability for these companies to grow and innovate. The act of debanking did not target malicious businesses or malicious business practices, it did not publicly inform Americans of any laws potentially broken by these companies that should be complied with, instead it pulled the rug out from underneath businesses attempting to innovate in a new industry. The result of these actions is an industry that finds it extremely difficult to conduct business and grow, as well as hordes of entrepreneurs and investors who become unsure of the upside from investing time and resources into working with blockchain technology.
-                    </p>
-                    <br />
-                    <p>
-                        The intent of relentless harassment of the blockchain industry has been to protect consumers, however viewing these actions through a consequentialist ethical framework would emphasize the negative effects for consumers due to this harassment rather than its well meaning intentions. When referring to cryptocurrencies at the Aspen Security Forum in 2021, then SEC Chair Gary Gensler stated, "This asset class is rife with fraud, scams, and abuse in certain applications. If we don't address these issues, I worry a lot of people will be hurt" (van der Heyden, 2021). It is clear from this quote that Gensler viewed his position as a necessary savior of consumers from the harm of crypto. However, the result of Gensler's aggressive actions was that companies like FTX (a former prominent cryptocurrency exchange) chose to establish their headquarters abroad in jurisdictions like the Bahamas with less regulatory maturity and a limited capacity to enforce financial oversight. This regulatory arbitrage directly contributed to the collapse of FTX, when the company misused customer funds leading to a hole of $8 billion in deposits and eventual bankruptcy (U.S. Department of Justice, 2024). The main victims of this failure were the one million plus users of FTX who had their funds stolen. In a 2025 interview with Tucker Carlson, Sam Bankman-Fried, founder and former CEO of FTX, criticized regulators, claiming, "They have been playing a really obstructive role for a decade in crypto" (Carlson, 2025, 16:30). He further elaborated, "The U.S. is 30% of the world's finance, it's 5% of the world's crypto and the reason is entirely regulatory. The US was unique in its difficulty to work with" (Carlson, 2025, 16:40). SBF's testimony, while coming from a controversial figure, reflects a broader opinion shared with many other people in the crypto community. The blockchain sector has been stifled domestically not by market failure, but by policy failure. If regulators created and enforced a clear and fair environment for crypto companies to innovate in America, it is likely that these businesses would not feel the need to relocate abroad to friendlier, unrestricted, incompetent jurisdictions. When entrepreneurs are driven away from the safer, regulated United States, the unintended consequence is greater consumer harm. Furthermore, considering a world in which the status quo was not for crypto companies to offshore, it is a real possibility that SBF would not have needed to relocate FTX to the Bahamas, and the ensuing misuse of customer funds could have been prevented or mitigated. This directly supports the argument that excessive or poorly structured regulation, even when motivated by consumer protection, can backfire by undermining the very safeguards it seeks to implement.
-                    </p>
-                    <br />
-                    <p>
-                        The previous arguments and general stance that a minimal, permissive framework of regulation promoting transparency is ideal for the crypto industry may raise some questions regarding an ability to protect consumers from unethical actions taken by businesses. For example, the Bahamas had a crypto-friendly regulatory environment that was unable to prevent the FTX collapse. However, the failure of FTX in the Bahamas does not demonstrate that permissive regulatory frameworks are inherently flawed, it reveals the consequences of poorly enforced or inconsistently applied regulations, not the permissiveness itself. The Bahamas had established a legal framework through the DARE Act, but reports following the collapse suggest significant shortcomings in the oversight and enforcement process, especially a lack of timely intervention and limited interagency cooperation. John J. Ray III, the new CEO appointed during FTX's bankruptcy proceedings, described the situation as an "unprecedented lack of documentation" and a "paperless bankruptcy" (AP, 2022). This absence of internal records highlights the failure of any sort of proper regulatory oversight, something that would not be possible with even a bare minimum enforcement of policy and supervision. Additionally, the Security Commission of the Bahamas took action to freeze FTX's assets only after the company's collapse, defining a reactive rather than proactive approach to enforcement. This delayed response emphasizes that the existence of regulations is insufficient without timely and competent enforcement. The United States's federal agencies do not suffer from this same level of ineptness. When these agencies are given clear policy and regulatory frameworks, they are capable of maintaining a higher quality of cooperation and oversight. Companies operating in the United States won't be able to restrain entirely from documenting accounting or any other important internal information, unlike companies based in some foreign jurisdictions. Essentially, a tolerant framework of light regulation is not to blame for fraud like FTX, rather the ineffectiveness of regulatory agencies is at the root of the problem.
-                    </p>
-                    <br />
-                    <p>
-                        An important point is also that a well crafted minimal framework which is properly enforced will be enough to protect consumers participating in the crypto industry while allowing for strong ethical economic development that rewards the general public. The nature of blockchains is transparency, all transactions are included in a public ledger and all code is deployed to a public ledger. Account balances and the inner workings of products are all pseudonymously available to be scrutinized, simply adding public reporting of insider token allocations to de-anonymize key actors and their transactions will supplement existing transparency to root out shady behaviour. Most malicious actions and scams in the crypto industry stem from insiders of new projects taking advantage of their token allocations and information asymmetry. Enforcing a new modest level of information reporting combined with the transparent nature of blockchains will advance public knowledge in important facets of crypto services, promoting investor confidence and safety. Transparency and minimalism in the proposed regulatory framework is a major point of emphasis as well to ensure the economic and societal benefits of blockchains can be realized. Cryptocurrencies offer payment rails with fees that are a fraction of a percent, in comparison to traditional credit cards which charge around 3%. This difference is massive for small businesses and retail businesses who often have profit margins of less than 5%, allowing far more mom and pop ventures to succeed. Additionally, people who live in developing countries with incomes that are a fraction of the developed world are unprofitable for traditional banks to accept as customers, preventing these people from having access to the internet economy. Blockchains are a public good that can profitably 'bank' a user with any volume of transaction size, allowing anyone of any income to be included into the internet's financial system. These are just small examples of how blockchain technology can be of significant use to billions of regular people around the world right now, it doesn't take much imagination to consider the even greater utility that could come with decades of innovation. Societal improvements, as mentioned above, contribute to the ethical considerations in pro-crypto regulation. It would be extremely unethical to prevent these collective societal improvements from taking place, a consequentialist ethical analysis weighs the true value lost from the improvement in blockchain technology against the destructive savior hood mentality of heavy handed regulators. Concluding this point, a well formed, permissive structure of regulation that increases transparency will no longer obstruct blockchain innovation from unleashing its widespread societal benefits and will still protect crypto users.
-                    </p>
-                    <br />
-                    <p>
-                        The path forward for the blockchain industry in the United States lies not in obstructive oversight or unregulated chaos, but in a clear minimally invasive regulatory framework that enforces transparency and consumer protection without discouraging innovation. The failure of past regulatory regimes, in their overreach and their enforcement gaps, have created an environment in which well intentioned businesses struggle to operate domestically while fraudulent actors thrive abroad. The FTX collapse illustrates not that permissiveness is the problem, but that permissive frameworks require competent enforcement. Rather than applying vague laws retroactively or deplatforming crypto businesses without due process, regulators must work to build trust through clarity, fairness, and predictable policy. The innate transparency of blockchains supported by limited regulation focused on disclosures and public accountability can create effective consumer safeguards. Fulfilling these goals will maximize the social and economic utility of blockchain technology for all of its current and future users. The technological advancement of blockchains on top of the current financial and internet infrastructure can be of great value to people around the globe, providing a fairer, inclusive financial system. Consequentialism offers the perspective that permissive regulation which can potentially improve the well being of billions of people should be valued over the well meaning intentions of harmful, stringent crypto regulation. The proposed regulatory structure will foster innovation while safeguarding the public, unlocking the broad societal and economic benefits of blockchain technology, from lowering transaction costs to expanding financial inclusion worldwide. Ultimately, if the United States is to pursue the most ethically sound and social beneficial policy, it must replace regulatory hostility with a transparent and permissive framework that allows the blockchain industry to realize its potential and serve the common good.
-                    </p>
-                    <br />
-                    <p className="works-cited">Works Cited</p>
-                    <br />
-                    <p>
-                        Associated Press, 2022, FTX founder Sam Bankman-Fried testifies at trial: 'I made a number of small mistakes and a number of larger mistakes' [Video]: AP Newsroom.
-                        <a href="https://newsroom.ap.org/editorial-photos-videos/detail?itemid=d13c7814703c4686bd66b427492e7983&mediatype=video&source=youtube" target="_blank" rel="noopener noreferrer">[https://newsroom.ap.org/editorial-photos-videos/detail?itemid=d13c7814703c4686bd66b427492e7983&mediatype=video&source=youtube]</a>
-                    </p>
-                    <br />
-                    <p>
-                        Carlson, T., 2025, Tucker Carlson interviews Sam Bankman-Fried [Video]: YouTube.
-                        <a href="https://www.youtube.com/watch?v=dN1CR2dyfo8" target="_blank" rel="noopener noreferrer">[https://www.youtube.com/watch?v=dN1CR2dyfo8]</a>
-                    </p>
-                    <br />
-                    <p>
-                        Carter, N., and Campbell, A., 2024, Debanking hurts everyone. It's time to end it once and for all: Fortune Magazine. <a href="https://fortune.com/crypto/2024/12/10/debanking-hurts-everyone-its-time-to-end-it-once-and-for-all/" target="_blank" rel="noopener noreferrer">[https://fortune.com/crypto/2024/12/10/debanking-hurts-everyone-its-time-to-end-it-once-and-for-all/]</a>
-                    </p>
-                    <br />
-                    <p>
-                        Federal Deposit Insurance Corporation Office of Inspector General, 2023, FDIC strategies related to crypto-asset risks (Report No. EVAL-24-01): Washington, D.C., Federal Deposit Insurance Corporation Office of Inspector General, 46 p. <a href="https://www.fdicoig.gov/sites/default/files/reports/2023-10/EVAL-24-01-Redacted.pdf" target="_blank" rel="noopener noreferrer">[https://www.fdicoig.gov/sites/default/files/reports/2023-10/EVAL-24-01-Redacted.pdf]</a>
-                    </p>
-                    <br />
-                    <p>
-                        Goldstein, M., 2023, Sam Bankman-Fried is convicted of fraud after FTX collapse: The New York Times. <a href="https://www.nytimes.com/2023/11/02/technology/sam-bankman-fried-fraud-trial-ftx.html" target="_blank" rel="noopener noreferrer">[https://www.nytimes.com/2023/11/02/technology/sam-bankman-fried-fraud-trial-ftx.html]</a>
-                    </p>
-                    <br />
-                    <p>
-                        U.S. Department of Justice, 2024, Samuel Bankman-Fried sentenced to 25 years for his orchestration of multiple fraudulent schemes: Washington, D.C., U.S. Department of Justice. <a href="https://www.justice.gov/archives/opa/pr/samuel-bankman-fried-sentenced-25-years-his-orchestration-multiple-fraudulent-schemes" target="_blank" rel="noopener noreferrer">[https://www.justice.gov/archives/opa/pr/samuel-bankman-fried-sentenced-25-years-his-orchestration-multiple-fraudulent-schemes]</a>
-                    </p>
-                    <br />
-                    <p>
-                        van der Heyden, N., 2021, SEC's Gary Gensler calls for further crypto regulation: Crypto Briefing. <a href="https://cryptobriefing.com/secs-gary-gensler-calls-for-further-crypto-regulation/" target="_blank" rel="noopener noreferrer">[https://cryptobriefing.com/secs-gary-gensler-calls-for-further-crypto-regulation/]</a>
-                    </p>
-                </>
-            ) : (
-                <div style={{ padding: '20px', textAlign: 'center', fontStyle: 'italic', color: '#666' }}>
-                    <div className="connectkit-button" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <p>In order to read the rest of this essay, please pay 10 cents USDC (or more if you want to).</p>
-                <ConnectKitButton />
-                <PayUSDCButton refetchPaymentStatus={refetchPaymentStatus} />
-            </div>
-
-                </div>
-            )}
-        </div>
-    );
+      <PayUSDCButton>
+        <p>
+          Harsh, over scrutinous regulation of the cryptocurrency industry can
+          suppress blockchain technology into obscurity, preventing the upside
+          of the technology from ever being realized. Unfortunately, it is
+          increasingly common for new technologies with the potential to
+          positively revolutionize many aspects of the world to be regulated
+          into obscurity before reaching a consequential scale. Over the last 70
+          years, nuclear power with the ability to generate abundant, clean,
+          cheap electricity was suppressed into insignificance. Blockchains may
+          suffer the same fate as nuclear power if poorly structured legislation
+          and regulation continue to stand in the way of innovation. Investor
+          and journalist Nic Carter's investigative work uncovered that the
+          previous administration in the White House actively restricted banking
+          access to cryptocurrency businesses, forcing banks to limit
+          crypto-related deposits and halt their support for crypto clients
+          (Carter & Campbell, 2024). Such regulatory driven debanking severely
+          restricted the operation capabilities of cryptocurrency companies,
+          causing many to move offshore or close entirely. This directly
+          undermined innovation and growth potential of blockchain technology
+          within the U.S. (Carter & Campbell, 2024). Additionally, the FDIC's
+          Office of Inspector General stated in an October 2023 report that the
+          FDIC may "inadvertently limit financial institution innovation and
+          growth in the crypto space" (FDIC's Office of Inspector General,
+          2023). With this statement, it can't be questioned that the practices
+          of regulators when dealing with cryptocurrency related companies in
+          the United States has handcuffed the ability for these companies to
+          grow and innovate. The act of debanking did not target malicious
+          businesses or malicious business practices, it did not publicly inform
+          Americans of any laws potentially broken by these companies that
+          should be complied with, instead it pulled the rug out from underneath
+          businesses attempting to innovate in a new industry. The result of
+          these actions is an industry that finds it extremely difficult to
+          conduct business and grow, as well as hordes of entrepreneurs and
+          investors who become unsure of the upside from investing time and
+          resources into working with blockchain technology.
+        </p>
+        <br />
+        <p>
+          The intent of relentless harassment of the blockchain industry has
+          been to protect consumers, however viewing these actions through a
+          consequentialist ethical framework would emphasize the negative
+          effects for consumers due to this harassment rather than its well
+          meaning intentions. When referring to cryptocurrencies at the Aspen
+          Security Forum in 2021, then SEC Chair Gary Gensler stated, "This
+          asset class is rife with fraud, scams, and abuse in certain
+          applications. If we don't address these issues, I worry a lot of
+          people will be hurt" (van der Heyden, 2021). It is clear from this
+          quote that Gensler viewed his position as a necessary savior of
+          consumers from the harm of crypto. However, the result of Gensler's
+          aggressive actions was that companies like FTX (a former prominent
+          cryptocurrency exchange) chose to establish their headquarters abroad
+          in jurisdictions like the Bahamas with less regulatory maturity and a
+          limited capacity to enforce financial oversight. This regulatory
+          arbitrage directly contributed to the collapse of FTX, when the
+          company misused customer funds leading to a hole of $8 billion in
+          deposits and eventual bankruptcy (U.S. Department of Justice, 2024).
+          The main victims of this failure were the one million plus users of
+          FTX who had their funds stolen. In a 2025 interview with Tucker
+          Carlson, Sam Bankman-Fried, founder and former CEO of FTX, criticized
+          regulators, claiming, "They have been playing a really obstructive
+          role for a decade in crypto" (Carlson, 2025, 16:30). He further
+          elaborated, "The U.S. is 30% of the world's finance, it's 5% of the
+          world's crypto and the reason is entirely regulatory. The US was
+          unique in its difficulty to work with" (Carlson, 2025, 16:40). SBF's
+          testimony, while coming from a controversial figure, reflects a
+          broader opinion shared with many other people in the crypto community.
+          The blockchain sector has been stifled domestically not by market
+          failure, but by policy failure. If regulators created and enforced a
+          clear and fair environment for crypto companies to innovate in
+          America, it is likely that these businesses would not feel the need to
+          relocate abroad to friendlier, unrestricted, incompetent
+          jurisdictions. When entrepreneurs are driven away from the safer,
+          regulated United States, the unintended consequence is greater
+          consumer harm. Furthermore, considering a world in which the status
+          quo was not for crypto companies to offshore, it is a real possibility
+          that SBF would not have needed to relocate FTX to the Bahamas, and the
+          ensuing misuse of customer funds could have been prevented or
+          mitigated. This directly supports the argument that excessive or
+          poorly structured regulation, even when motivated by consumer
+          protection, can backfire by undermining the very safeguards it seeks
+          to implement.
+        </p>
+        <br />
+        <p>
+          The previous arguments and general stance that a minimal, permissive
+          framework of regulation promoting transparency is ideal for the crypto
+          industry may raise some questions regarding an ability to protect
+          consumers from unethical actions taken by businesses. For example, the
+          Bahamas had a crypto-friendly regulatory environment that was unable
+          to prevent the FTX collapse. However, the failure of FTX in the
+          Bahamas does not demonstrate that permissive regulatory frameworks are
+          inherently flawed, it reveals the consequences of poorly enforced or
+          inconsistently applied regulations, not the permissiveness itself. The
+          Bahamas had established a legal framework through the DARE Act, but
+          reports following the collapse suggest significant shortcomings in the
+          oversight and enforcement process, especially a lack of timely
+          intervention and limited interagency cooperation. John J. Ray III, the
+          new CEO appointed during FTX's bankruptcy proceedings, described the
+          situation as an "unprecedented lack of documentation" and a "paperless
+          bankruptcy" (AP, 2022). This absence of internal records highlights
+          the failure of any sort of proper regulatory oversight, something that
+          would not be possible with even a bare minimum enforcement of policy
+          and supervision. Additionally, the Security Commission of the Bahamas
+          took action to freeze FTX's assets only after the company's collapse,
+          defining a reactive rather than proactive approach to enforcement.
+          This delayed response emphasizes that the existence of regulations is
+          insufficient without timely and competent enforcement. The United
+          States's federal agencies do not suffer from this same level of
+          ineptness. When these agencies are given clear policy and regulatory
+          frameworks, they are capable of maintaining a higher quality of
+          cooperation and oversight. Companies operating in the United States
+          won't be able to restrain entirely from documenting accounting or any
+          other important internal information, unlike companies based in some
+          foreign jurisdictions. Essentially, a tolerant framework of light
+          regulation is not to blame for fraud like FTX, rather the
+          ineffectiveness of regulatory agencies is at the root of the problem.
+        </p>
+        <br />
+        <p>
+          An important point is also that a well crafted minimal framework which
+          is properly enforced will be enough to protect consumers participating
+          in the crypto industry while allowing for strong ethical economic
+          development that rewards the general public. The nature of blockchains
+          is transparency, all transactions are included in a public ledger and
+          all code is deployed to a public ledger. Account balances and the
+          inner workings of products are all pseudonymously available to be
+          scrutinized, simply adding public reporting of insider token
+          allocations to de-anonymize key actors and their transactions will
+          supplement existing transparency to root out shady behaviour. Most
+          malicious actions and scams in the crypto industry stem from insiders
+          of new projects taking advantage of their token allocations and
+          information asymmetry. Enforcing a new modest level of information
+          reporting combined with the transparent nature of blockchains will
+          advance public knowledge in important facets of crypto services,
+          promoting investor confidence and safety. Transparency and minimalism
+          in the proposed regulatory framework is a major point of emphasis as
+          well to ensure the economic and societal benefits of blockchains can
+          be realized. Cryptocurrencies offer payment rails with fees that are a
+          fraction of a percent, in comparison to traditional credit cards which
+          charge around 3%. This difference is massive for small businesses and
+          retail businesses who often have profit margins of less than 5%,
+          allowing far more mom and pop ventures to succeed. Additionally,
+          people who live in developing countries with incomes that are a
+          fraction of the developed world are unprofitable for traditional banks
+          to accept as customers, preventing these people from having access to
+          the internet economy. Blockchains are a public good that can
+          profitably 'bank' a user with any volume of transaction size, allowing
+          anyone of any income to be included into the internet's financial
+          system. These are just small examples of how blockchain technology can
+          be of significant use to billions of regular people around the world
+          right now, it doesn't take much imagination to consider the even
+          greater utility that could come with decades of innovation. Societal
+          improvements, as mentioned above, contribute to the ethical
+          considerations in pro-crypto regulation. It would be extremely
+          unethical to prevent these collective societal improvements from
+          taking place, a consequentialist ethical analysis weighs the true
+          value lost from the improvement in blockchain technology against the
+          destructive savior hood mentality of heavy handed regulators.
+          Concluding this point, a well formed, permissive structure of
+          regulation that increases transparency will no longer obstruct
+          blockchain innovation from unleashing its widespread societal benefits
+          and will still protect crypto users.
+        </p>
+        <br />
+        <p>
+          The path forward for the blockchain industry in the United States lies
+          not in obstructive oversight or unregulated chaos, but in a clear
+          minimally invasive regulatory framework that enforces transparency and
+          consumer protection without discouraging innovation. The failure of
+          past regulatory regimes, in their overreach and their enforcement
+          gaps, have created an environment in which well intentioned businesses
+          struggle to operate domestically while fraudulent actors thrive
+          abroad. The FTX collapse illustrates not that permissiveness is the
+          problem, but that permissive frameworks require competent enforcement.
+          Rather than applying vague laws retroactively or deplatforming crypto
+          businesses without due process, regulators must work to build trust
+          through clarity, fairness, and predictable policy. The innate
+          transparency of blockchains supported by limited regulation focused on
+          disclosures and public accountability can create effective consumer
+          safeguards. Fulfilling these goals will maximize the social and
+          economic utility of blockchain technology for all of its current and
+          future users. The technological advancement of blockchains on top of
+          the current financial and internet infrastructure can be of great
+          value to people around the globe, providing a fairer, inclusive
+          financial system. Consequentialism offers the perspective that
+          permissive regulation which can potentially improve the well being of
+          billions of people should be valued over the well meaning intentions
+          of harmful, stringent crypto regulation. The proposed regulatory
+          structure will foster innovation while safeguarding the public,
+          unlocking the broad societal and economic benefits of blockchain
+          technology, from lowering transaction costs to expanding financial
+          inclusion worldwide. Ultimately, if the United States is to pursue the
+          most ethically sound and social beneficial policy, it must replace
+          regulatory hostility with a transparent and permissive framework that
+          allows the blockchain industry to realize its potential and serve the
+          common good.
+        </p>
+        <br />
+        <p className="works-cited">Works Cited</p>
+        <br />
+        <p>
+          Associated Press, 2022, FTX founder Sam Bankman-Fried testifies at
+          trial: 'I made a number of small mistakes and a number of larger
+          mistakes' [Video]: AP Newsroom.
+          <a
+            href="https://newsroom.ap.org/editorial-photos-videos/detail?itemid=d13c7814703c4686bd66b427492e7983&mediatype=video&source=youtube"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            [https://newsroom.ap.org/editorial-photos-videos/detail?itemid=d13c7814703c4686bd66b427492e7983&mediatype=video&source=youtube]
+          </a>
+        </p>
+        <br />
+        <p>
+          Carlson, T., 2025, Tucker Carlson interviews Sam Bankman-Fried
+          [Video]: YouTube.
+          <a
+            href="https://www.youtube.com/watch?v=dN1CR2dyfo8"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            [https://www.youtube.com/watch?v=dN1CR2dyfo8]
+          </a>
+        </p>
+        <br />
+        <p>
+          Carter, N., and Campbell, A., 2024, Debanking hurts everyone. It's
+          time to end it once and for all: Fortune Magazine.{" "}
+          <a
+            href="https://fortune.com/crypto/2024/12/10/debanking-hurts-everyone-its-time-to-end-it-once-and-for-all/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            [https://fortune.com/crypto/2024/12/10/debanking-hurts-everyone-its-time-to-end-it-once-and-for-all/]
+          </a>
+        </p>
+        <br />
+        <p>
+          Federal Deposit Insurance Corporation Office of Inspector General,
+          2023, FDIC strategies related to crypto-asset risks (Report No.
+          EVAL-24-01): Washington, D.C., Federal Deposit Insurance Corporation
+          Office of Inspector General, 46 p.{" "}
+          <a
+            href="https://www.fdicoig.gov/sites/default/files/reports/2023-10/EVAL-24-01-Redacted.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            [https://www.fdicoig.gov/sites/default/files/reports/2023-10/EVAL-24-01-Redacted.pdf]
+          </a>
+        </p>
+        <br />
+        <p>
+          Goldstein, M., 2023, Sam Bankman-Fried is convicted of fraud after FTX
+          collapse: The New York Times.{" "}
+          <a
+            href="https://www.nytimes.com/2023/11/02/technology/sam-bankman-fried-fraud-trial-ftx.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            [https://www.nytimes.com/2023/11/02/technology/sam-bankman-fried-fraud-trial-ftx.html]
+          </a>
+        </p>
+        <br />
+        <p>
+          U.S. Department of Justice, 2024, Samuel Bankman-Fried sentenced to 25
+          years for his orchestration of multiple fraudulent schemes:
+          Washington, D.C., U.S. Department of Justice.{" "}
+          <a
+            href="https://www.justice.gov/archives/opa/pr/samuel-bankman-fried-sentenced-25-years-his-orchestration-multiple-fraudulent-schemes"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            [https://www.justice.gov/archives/opa/pr/samuel-bankman-fried-sentenced-25-years-his-orchestration-multiple-fraudulent-schemes]
+          </a>
+        </p>
+        <br />
+        <p>
+          van der Heyden, N., 2021, SEC's Gary Gensler calls for further crypto
+          regulation: Crypto Briefing.{" "}
+          <a
+            href="https://cryptobriefing.com/secs-gary-gensler-calls-for-further-crypto-regulation/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            [https://cryptobriefing.com/secs-gary-gensler-calls-for-further-crypto-regulation/]
+          </a>
+        </p>
+      </PayUSDCButton>
+    </div>
+  );
 }
 
 export default EthicsEssay;
