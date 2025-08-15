@@ -6,7 +6,7 @@ import { ConnectKitButton } from 'connectkit'
 
 const ARBITRUM_CHAIN_ID = 42161
 type Address = `0x${string}`
-const MICROPAY_CONTRACT: Address = '0x4d01CD8348f95761261B0E3448975150370F30D8'
+const MICROPAY_CONTRACT: Address = '0xf38B566e8dE174e1500d38083bB07033185EE651'
 const USDC_ADDRESS: Address = '0xaf88d065e77c8cC2239327C5EDb3A432268e5831'
 
 // ERC-20 ABI for allowance and approve
@@ -38,13 +38,13 @@ const micropayAbi = [
   {
     type: 'function',
     name: 'pay',
-    inputs: [{ name: 'amount', type: 'uint256' }],
+    inputs: [{ name: 'amount', type: 'uint256'}, { name: 'webpageId', type: 'uint256'}, { name: 'webpageOwner', type: 'address' }],
     stateMutability: 'nonpayable',
   },
   {
     type: 'function',
     name: 'getPaidAmount',
-    inputs: [{ name: 'payer', type: 'address' }],
+    inputs: [{ name: 'webpageOwner', type: 'address' }, { name: 'webpageId', type: 'uint256'}, { name: 'payer', type: 'address' }],
     outputs: [{ type: 'uint256' }],
     stateMutability: 'view',
   },
@@ -57,7 +57,7 @@ export { ARBITRUM_CHAIN_ID, MICROPAY_CONTRACT, micropayAbi }
 //   refetchPaymentStatus?: () => Promise<any>
 // }
 
-export function PayUSDCButton({ children }: { children: React.ReactNode }) {
+export function PayUSDCButton({ children, webpageId, webpageOwner }: { children: React.ReactNode, webpageId: number, webpageOwner: string }) {
   const { address, isConnected } = useAccount()
   const chainId = useChainId()
   const { switchChainAsync } = useSwitchChain()
@@ -70,7 +70,7 @@ export function PayUSDCButton({ children }: { children: React.ReactNode }) {
     address: MICROPAY_CONTRACT,
     abi: micropayAbi,
     functionName: 'getPaidAmount',
-    args: [address!],
+    args: [webpageOwner, webpageId, address!],
     chainId: ARBITRUM_CHAIN_ID,
     query: {
       enabled: !!address,
@@ -116,7 +116,7 @@ export function PayUSDCButton({ children }: { children: React.ReactNode }) {
         address: MICROPAY_CONTRACT,
         abi: micropayAbi,
         functionName: 'pay',
-        args: [amount],
+        args: [amount, webpageId, webpageOwner],
         chainId: ARBITRUM_CHAIN_ID,
       })
 

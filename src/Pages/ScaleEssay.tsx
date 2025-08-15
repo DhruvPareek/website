@@ -35,7 +35,7 @@ function ScaleEssay() {
         what would it look like for them to catch Solana?
       </p>
 
-      <PayUSDCButton>
+      <PayUSDCButton webpageId={2} webpageOwner="0x8f6577F8C5130BDd2d1E38D3e821C97A17d927c8">
         <p>
           The scale of a blockchain network can be defined by the network’s
           speed and throughput. Speed is the sum of latency time + finality
