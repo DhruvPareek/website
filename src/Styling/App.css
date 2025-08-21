@@ -18,7 +18,7 @@ html {
   background: 
     linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(180deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a1a 100%);
+    linear-gradient(180deg, #0a0a0a 0%, #0a141a 50%, #0a0f14 100%);
   background-size: 50px 50px, 50px 50px, 100% 100%;
   background-attachment: fixed;
   overscroll-behavior: none;
@@ -31,7 +31,7 @@ body {
   background: 
     linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(180deg, #0a0a0a 0%, #1a0a1a 50%, #0a0a1a 100%);
+    linear-gradient(180deg, #0a0a0a 0%, #0a141a 50%, #0a0f14 100%);
   background-size: 50px 50px, 50px 50px, 100% 100%;
   background-attachment: fixed;
   min-height: 100vh;
@@ -196,7 +196,7 @@ h1 {
 }
 
 .image5 {
-  border: 3px solid #8000ff;
+  border: 3px solid #00ff80;
   display: block;
   margin: 0 auto;
   margin-top: 20px;
@@ -204,8 +204,8 @@ h1 {
   height: auto;
   border-radius: 10px;
   box-shadow: 
-    0 0 20px rgba(128, 0, 255, 0.6),
-    inset 0 0 20px rgba(128, 0, 255, 0.1);
+    0 0 20px rgba(0, 255, 128, 0.6),
+    inset 0 0 20px rgba(0, 255, 128, 0.1);
   filter: brightness(1.2) contrast(1.1);
 }
 
