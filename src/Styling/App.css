@@ -438,13 +438,6 @@ a:hover {
   align-items: center;
   margin: 20px 0;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid #00ffff;
-  border-radius: 10px;
-  box-shadow: 
-    0 0 8px rgba(0, 255, 255, 0.3),
-    inset 0 0 8px rgba(0, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
 }
 
 .connectkit-button {
