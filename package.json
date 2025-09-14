@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.83.0",
-    "connectkit": "^1.9.1",
-    "micropayments": "^0.1.17",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^7.6.2"

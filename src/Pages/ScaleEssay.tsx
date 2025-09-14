@@ -1,5 +1,5 @@
 import "../Styling/Essay.css";
-import PayUSDCButton from 'micropayments';
+// import PayUSDCButton from 'micropayments';
 
 function ScaleEssay() {
   return (
@@ -35,11 +35,11 @@ function ScaleEssay() {
         what would it look like for them to catch Solana?
       </p>
 
-      <PayUSDCButton
+      {/* <PayUSDCButton
         webpageId={2}
         webpageOwnerAddress="0x8f6577F8C5130BDd2d1E38D3e821C97A17d927c8"
         amount={0.10}
-      >
+      > */}
         <p>
           The scale of a blockchain network can be defined by the network’s
           speed and throughput. Speed is the sum of latency time + finality
@@ -289,7 +289,7 @@ function ScaleEssay() {
           Ethereum has a roadmap to reach 100,000 tps, but Ethereum is currently
           nowhere near that scale.*****
         </p>
-      </PayUSDCButton>
+      {/* </PayUSDCButton> */}
     </div>
   );
 }
