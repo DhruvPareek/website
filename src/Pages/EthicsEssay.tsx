@@ -43,7 +43,7 @@ function EthicsEssay() {
       </p>
       <br />
 
-      <PayUSDCButton webpageId={1} webpageOwnerAddress="0x8f6577F8C5130BDd2d1E38D3e821C97A17d927c8" amount={0.10}>
+      <PayUSDCButton webpageId={2} webpageOwnerAddress="0x8f6577F8C5130BDd2d1E38D3e821C97A17d927c8" amount={0.10}>
         <p>
           Harsh, over scrutinous regulation of the cryptocurrency industry can
           suppress blockchain technology into obscurity, preventing the upside
