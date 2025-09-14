@@ -8,6 +8,7 @@ function Home() {
                 <h2>Stuff I've Done:</h2>
                 <ul>
                     <li><a href="https://github.com/DhruvPareek/TheBookFund/tree/main" target="_blank" rel="noopener noreferrer">The Book Fund</a></li>
+                    <li><a href="https://micropayments-one.vercel.app/" target="_blank" rel="noopener noreferrer">Micropayments</a></li>
                     <li><a href="https://safe-transactions-frontend.vercel.app/" target="_blank" rel="noopener noreferrer">Safe Transactions</a></li>
                     <li><Link to="/EthicsEssay">Ethical Blockchain Regulation Essay (Engr186EW - Computer Science Ethics)</Link></li>
                     <li><a href="http://dartstracker301.xyz" target="_blank" rel="noopener noreferrer">Darts Tracker</a></li>
