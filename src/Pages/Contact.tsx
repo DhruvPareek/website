@@ -11,7 +11,6 @@ function Contact() {
         </div>
         <div className='pics'>
             <img src="/wanderer.jpeg" alt="Main" className="image4"/>
-            <img src="/steph.jpeg" alt="Main" className="image5"/>
         </div>
     </div>
     );    
