@@ -34,6 +34,10 @@ const previews: Record<string, PreviewItem> = {
         type: 'image',
         src: '/blockchain_at_ucla_presentations_preview.png'
     },
+    techreading: {
+        type: 'image',
+        src: '/tech_reading_preview.png'
+    },
     ethicsessay: {
         type: 'essay',
         title: 'Ethical Blockchain Regulation',
@@ -73,6 +77,17 @@ function Home() {
                             onMouseLeave={() => setActivePreview(null)}
                         >
                             Micropayments
+                        </a>
+                    </li>
+                    <li>
+                        <a 
+                            href="https://techreadingclub.xyz/companies" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            onMouseEnter={() => setActivePreview(previews.techreading)}
+                            onMouseLeave={() => setActivePreview(null)}
+                        >
+                            Technology Reading Club
                         </a>
                     </li>
                     <li>
