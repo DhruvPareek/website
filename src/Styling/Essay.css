@@ -1,53 +1,190 @@
+/* Essay page styles - matching main site theme */
+
 .essay-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    font-family: 'Georgia', serif;
+    font-family: 'SFMono', monospace;
     line-height: 1.8;
-    color: #e7e7e7;
+    color: var(--text-color);
 }
 
-.essay-title {
-    text-align: center;
-    font-size: 50px;
-    font-family: 'Steelfish', sans-serif;
-    position: relative;
-    color: #697785;
-    text-shadow: 
-    2px 2px 0 #43ba26;
-    margin-bottom: 5px;
-  }
+.essay-container .essay-title {
+    display: block;
+    text-align: left;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'SFMono', monospace;
+    color: var(--text-color);
+    text-shadow: none;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
 
-.date {
-    text-align: center;
-    font-size: 1rem;
-    color: #777;
+.essay-container .date {
+    text-align: left;
+    font-size: 14px;
+    color: var(--nav-link-color);
+    margin-bottom: 32px;
+}
+
+.essay-container p {
+    font-size: 16px;
     margin-bottom: 20px;
+    color: var(--text-color);
 }
 
-p {
-    font-size: 1.1rem;
-    margin-bottom: 20px;
+.essay-container a {
+    color: var(--link-color);
+    text-decoration: underline;
 }
 
-.image-container {
+.essay-container a:hover {
+    background-color: var(--highlight-color);
+}
+
+.essay-container .image-container {
     text-align: center;
     margin: 30px 0;
 }
 
-.image-container img {
+.essay-container .image-container img {
     max-width: 100%;
     height: auto;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
-.image-caption {
-    font-size: 0.9rem;
-    color: #555;
-    margin-top: 5px;
+.essay-container .image-caption {
+    font-size: 14px;
+    color: var(--nav-link-color);
+    margin-top: 8px;
     font-style: italic;
 }
 
-.large-space {
+.essay-container .works-cited {
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 40px;
+}
+
+.essay-container .large-space {
     margin-bottom: 300px;
+}
+
+/* PayUSDCButton styling to match site theme */
+.essay-container button,
+.essay-container [class*="PayUSDC"] button,
+.essay-container [class*="connect"] button,
+.essay-container [class*="wallet"] button {
+    font-family: 'SFMono', monospace;
+    font-size: 14px;
+    padding: 10px 16px;
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: 1px solid var(--text-color);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.essay-container button:hover,
+.essay-container [class*="PayUSDC"] button:hover,
+.essay-container [class*="connect"] button:hover,
+.essay-container [class*="wallet"] button:hover {
+    background-color: var(--highlight-color);
+    border-color: var(--highlight-color);
+    color: #000000;
+}
+
+/* Dropdown/select styling */
+.essay-container select {
+    font-family: 'SFMono', monospace;
+    font-size: 14px;
+    padding: 10px 12px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--toggle-border);
+    border-radius: 4px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+    padding-right: 32px;
+}
+
+.essay-container select:focus {
+    outline: none;
+    border-color: var(--highlight-color);
+}
+
+/* Input styling */
+.essay-container input {
+    font-family: 'SFMono', monospace;
+    font-size: 14px;
+    padding: 10px 12px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: 1px solid var(--toggle-border);
+    border-radius: 4px;
+}
+
+.essay-container input:focus {
+    outline: none;
+    border-color: var(--highlight-color);
+}
+
+/* Payment section - distinct card styling */
+.essay-container .payment-section {
+    background-color: var(--toggle-bg);
+    border: 1px solid var(--toggle-border);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 32px 0;
+}
+
+/* Style the direct div children of payment-section (the payment UI elements) */
+.essay-container .payment-section > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+/* Remove bottom margin from last payment UI div */
+.essay-container .payment-section > div:last-of-type {
+    margin-bottom: 0;
+}
+
+/* Payment instruction text */
+.essay-container .payment-section > div > p {
+    margin: 0 0 8px 0 !important;
+    font-size: 14px !important;
+    width: 100%;
+}
+
+/* Style any wrapper div containing the payment elements */
+.essay-container > div > button,
+.essay-container > div > select {
+    width: fit-content;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .essay-container {
+        padding: 16px;
+    }
+
+    .essay-container .essay-title {
+        font-size: 20px;
+    }
+
+    .essay-container p {
+        font-size: 15px;
+    }
 }

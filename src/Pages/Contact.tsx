@@ -5,7 +5,7 @@ function Contact() {
     <div>
         <div className='content'>
         <ul>
-            <li>dhruvpareek883@gmail.com</li>
+            <li>dhruvpareek88 [at] gmail [dot] com</li>
             <li><a href="https://twitter.com/dpak_1024" target="_blank" rel="noopener noreferrer">twitter</a></li>
         </ul>
         </div>

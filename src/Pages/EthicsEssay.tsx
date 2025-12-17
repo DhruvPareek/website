@@ -43,6 +43,7 @@ function EthicsEssay() {
       </p>
       <br />
 
+      <div className="payment-section">
       <PayUSDCButton webpageId={2} webpageOwnerAddress="0x8f6577F8C5130BDd2d1E38D3e821C97A17d927c8" amount={0.10}>
         <p>
           Harsh, over scrutinous regulation of the cryptocurrency industry can
@@ -332,6 +333,7 @@ function EthicsEssay() {
           </a>
         </p>
       </PayUSDCButton>
+      </div>
     </div>
   );
 }

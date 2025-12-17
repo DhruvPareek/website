@@ -35,6 +35,7 @@ function ScaleEssay() {
         what would it look like for them to catch Solana?
       </p>
 
+      <div className="payment-section">
       <PayUSDCButton
         webpageId={2}
         webpageOwnerAddress="0x8f6577F8C5130BDd2d1E38D3e821C97A17d927c8"
@@ -290,6 +291,7 @@ function ScaleEssay() {
           nowhere near that scale.*****
         </p>
       </PayUSDCButton>
+      </div>
     </div>
   );
 }
