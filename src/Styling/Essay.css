@@ -67,6 +67,190 @@
     margin-top: 40px;
 }
 
+.essay-container .section-header {
+    font-weight: 700;
+    font-size: 20px;
+    margin-top: 40px;
+    color: var(--text-color);
+    border-bottom: 1px solid var(--toggle-border);
+    padding-bottom: 8px;
+}
+
+.essay-container .sub-section-header {
+    font-weight: 600;
+    font-size: 17px;
+    margin-top: 32px;
+    color: var(--text-color);
+}
+
+.essay-container .quote {
+    font-style: italic;
+    border-left: 3px solid var(--highlight-color);
+    padding-left: 16px;
+    margin: 20px 0;
+    color: var(--nav-link-color);
+}
+
+.essay-container .code-block {
+    font-family: 'SFMono', monospace;
+    background-color: var(--toggle-bg);
+    border: 1px solid var(--toggle-border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 16px 0;
+    font-size: 14px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.essay-container .sub-reference {
+    font-size: 14px;
+    color: var(--nav-link-color);
+    font-style: italic;
+    margin-top: -8px;
+    margin-bottom: 16px;
+}
+
+.essay-container .formula-note {
+    font-size: 14px;
+    color: var(--nav-link-color);
+    font-style: italic;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
+
+.essay-container .popout-example {
+    background-color: var(--toggle-bg);
+    border: 1px solid var(--toggle-border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 16px 0;
+}
+
+.essay-container .popout-example summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text-color);
+    user-select: none;
+}
+
+.essay-container .popout-example summary:hover {
+    color: var(--highlight-color);
+}
+
+.essay-container .popout-example p {
+    margin-top: 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    color: var(--nav-link-color);
+}
+
+/* Table of Contents styling */
+.essay-container .table-of-contents {
+    background-color: var(--toggle-bg);
+    border: 1px solid var(--toggle-border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    width: fit-content;
+}
+
+.essay-container .table-of-contents .toc-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--nav-link-color);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.essay-container .table-of-contents ol {
+    margin: 0;
+    padding-left: 20px;
+    counter-reset: toc-counter;
+    list-style: none;
+}
+
+.essay-container .table-of-contents li {
+    counter-increment: toc-counter;
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.essay-container .table-of-contents li::before {
+    content: counter(toc-counter) ".";
+    color: var(--nav-link-color);
+    font-weight: 500;
+    margin-right: 8px;
+    display: inline-block;
+    width: 20px;
+}
+
+.essay-container .table-of-contents li a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: color 0.15s ease;
+}
+
+.essay-container .table-of-contents li a:hover {
+    color: var(--highlight-color);
+    background-color: transparent;
+}
+
+.essay-container ol,
+.essay-container ul {
+    margin: 16px 0;
+    padding-left: 24px;
+}
+
+.essay-container li {
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.essay-container .reference-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.essay-container .reference-list li {
+    margin-bottom: 12px;
+    padding-left: 16px;
+    border-left: 2px solid var(--toggle-border);
+}
+
+.essay-container .reference-list li:hover {
+    border-left-color: var(--highlight-color);
+}
+
+.essay-container .lifecycle-list li {
+    margin-bottom: 12px;
+}
+
+.essay-container .lifecycle-list strong {
+    color: var(--highlight-color);
+}
+
+.essay-container .definition-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.essay-container .definition-list li {
+    margin-bottom: 16px;
+    padding-left: 16px;
+    border-left: 2px solid var(--toggle-border);
+}
+
+.essay-container .definition-list li:hover {
+    border-left-color: var(--highlight-color);
+}
+
+.essay-container .definition-list strong {
+    color: var(--highlight-color);
+}
+
 .essay-container .large-space {
     margin-bottom: 300px;
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import '../Styling/App.css';
 import ScaleEssay from './ScaleEssay.tsx';
 import EthicsEssay from './EthicsEssay.tsx';
+import QMDBEssay from './QMDBEssay.tsx';
 import AssortedLinks from './AssortedLinks.tsx';
 import Home from './Home.tsx';
 import Contact from './Contact.tsx';
@@ -66,6 +67,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/scaleEssay" element={<ScaleEssay />} />
           <Route path="/EthicsEssay" element={<EthicsEssay />} />
+          <Route path="/QMDBEssay" element={<QMDBEssay />} />
         </Routes>
 
         <div className="theme-toggle">

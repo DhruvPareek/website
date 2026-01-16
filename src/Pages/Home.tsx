@@ -47,6 +47,11 @@ const previews: Record<string, PreviewItem> = {
         type: 'essay',
         title: 'On the Scale of Networks',
         excerpt: "I've recently become concerned that Ethereum's decentralization priority may always stand in the way of the network's scale being competitive with rival networks. The purpose of this write-up is to define the metrics that determine scalability, compare the differences in these metrics between Ethereum and Solana, and analyze the tradeoffs taken to achieve that scalability..."
+    },
+    qmdbessay: {
+        type: 'essay',
+        title: 'QMDB for Noobs',
+        excerpt: "At their core, blockchains are software programs that replicate state across many independent computers. Through clever innovations, LayerZero created the Quick Merkle Database (QMDB) which significantly improves the performance of data authentication. This write-up explains how QMDB works and why it is a huge improvement for performant data authentication..."
     }
 };
 
@@ -78,6 +83,15 @@ function Home() {
                         >
                             Micropayments
                         </a>
+                    </li>
+                    <li>
+                        <Link 
+                            to="/QMDBEssay"
+                            onMouseEnter={() => setActivePreview(previews.qmdbessay)}
+                            onMouseLeave={() => setActivePreview(null)}
+                        >
+                            QMDB for Noobs
+                        </Link>
                     </li>
                     <li>
                         <a 
