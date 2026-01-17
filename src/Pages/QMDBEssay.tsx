@@ -42,7 +42,7 @@ function QMDBEssay() {
         performance of data authentication in comparison to existing data structures. QMDB's key breakthrough 
         is that the sections of the data structure relevant to new 
         updates/writes are compacted into a smaller contiguous space mostly held in 
-        memory. This allows us to do speedy writes to QMDB's with minimal write amplification, whereas writes to other variants of 
+        memory. This allows us to do speedy writes to QMDBs with minimal write amplification, whereas writes to other variants of 
         merkle trees incur a large cost in SSD accesses (relevant portions of the tree that need 
         to be updated are more scattered in SSD + memory). A blockchain that stores state via QMDB 
         theoretically enables nodes to achieve significantly greater throughput than blockchains 
@@ -237,7 +237,7 @@ function QMDBEssay() {
       </div>
 
       <p>
-        Updates to MMR's have two key benefits, they require (1) minimal reads from storage (only retrieve the values 
+        Updates to MMRs have two key benefits, they require (1) minimal reads from storage (only retrieve the values 
         of a few hashes throughout the MMR) and (2) a single contiguous write to storage (write the 
         values of the newly created nodes in the MMR).
       </p>
@@ -585,7 +585,7 @@ function QMDBEssay() {
         <li>
           <strong>Twigs:</strong> Subtrees with fixed depth and entry count. Additionally, twigs store a 
           bitmap at the twig root which represents the activity status of each of entry in the twig. (Commonware's 
-          QMDB implementation has 256 leaves in a twig and therefore a 256 bit map at the twig root)
+          QMDB implementation has 256 leaves in a twig and therefore a 256 bitmap at the twig root)
         </li>
         <li>
           <strong>Upper Nodes:</strong> Can be several levels of nodes that connect twigs.
@@ -618,7 +618,7 @@ function QMDBEssay() {
       <p>
         Entries have several fields, each of which is necessary for storing information directly related 
         to the entry or for generating a state proof related to the entry. Key, Value, and Version fields are 
-        relatively straightforward. Id's are a nonce-like value that allow distinguishing between several 
+        relatively straightforward. IDs are a nonce-like value that allow distinguishing between several 
         entries in the QMDB for the same key. NextKey, OldId, and OldNextKeyId act as 
         pointers to related keys or entries, storing these pointers in the entry itself allows the 
         generation of various types of inclusion, exclusion, and deletion proofs.
@@ -744,7 +744,7 @@ function QMDBEssay() {
         E' = (E.Key, E.NextKey, E.Id, E.OldNextKeyId)
       </p>
       <p className="formula-note">
-        (Where E.Key is entry E's key value, E.NextKey is entry E's NextKey, etc.)
+        (Where E.Key is entry E's key, E.NextKey is entry E's NextKey, etc.)
       </p>
       <br />
       <p>
