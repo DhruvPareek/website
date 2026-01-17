@@ -267,10 +267,13 @@ function QMDBEssay() {
       </p>
       <br />
       <p>
-        An additional possible feature is to prune old/unnecessary leaves is possible with MMR's. Since leaves are appended in time order, you can compact the log by discarding old ranges (e.g., everything before an "inactivity floor") and rebuilding a new MMR over the remaining operations. The irrelevant/old leaves before the Inactivity Floor can be called inactive leaves, while leaves with necessary data can be called active leaves.
+        An additional possible feature is to prune old/unnecessary leaves in an MMR. 
+         Since leaves are appended in time order, you can compact the log by discarding old ranges (e.g.,
+         everything before an "inactivity floor") and rebuilding a new MMR over the remaining operations.
+         The irrelevant/old leaves before the Inactivity Floor can be called inactive leaves, while
+          leaves with necessary data can be called active leaves.
       </p>
       <br />
-
       <div className="image-container">
         <img 
           src="/qmdb_fig4.png" 

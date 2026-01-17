@@ -2,6 +2,7 @@
 
 .essay-container {
     max-width: 800px;
+    width: calc(100% - 48px);
     margin: 0 auto;
     padding: 20px;
     font-family: 'SFMono', monospace;
