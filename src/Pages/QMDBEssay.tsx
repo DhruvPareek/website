@@ -211,7 +211,7 @@ function QMDBEssay() {
         Where merkle trees usually represent a key-value pair in a single leaf and update the key's 
         value by updating that same leaf in place, merkle mountain ranges instead append a new leaf 
         to the MMR per update to a key's value. In other words, the MMR acts as a log of operations. As
-        an example, a leaf in the log could represent an oepration like creating a new variable or updating an existing variable
+        an example, a leaf in the log could represent an operation like creating a new variable or updating an existing variable
       </p>
       <br />
       <p>
