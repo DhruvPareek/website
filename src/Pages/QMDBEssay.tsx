@@ -267,14 +267,6 @@ function QMDBEssay() {
       </p>
       <br />
       <p>
-        Another useful feature of MMRs is to prune old/unnecessary leaves in an MMR.
-         Since leaves are appended in time order, you can compact the log by discarding old ranges (e.g.,
-         everything before an "inactivity floor") and rebuilding a new MMR over the remaining operations.
-         The irrelevant/old leaves before the Inactivity Floor can be called inactive leaves, while
-          leaves with necessary data can be called active leaves.
-      </p>
-      <br />
-      <p>
         Another useful feature of MMRs is the ability to prune inactive leaves. An operation in the MMR can be 
         classified as inactive if its key has been overwritten, or active if its key hasn't been overwritten. 
         All leaves up to the "Inactivity Floor" can be pruned, where the Inactivity Floor is the leaf index before which all operations are inactive.
