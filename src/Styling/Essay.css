@@ -44,6 +44,26 @@
     background-color: var(--highlight-color);
 }
 
+/* Superscript reference links */
+.essay-container sup {
+    font-size: 11px;
+    line-height: 0;
+    vertical-align: super;
+}
+
+.essay-container sup a {
+    color: var(--highlight-color);
+    text-decoration: none;
+    font-weight: 600;
+    padding: 0 2px;
+}
+
+.essay-container sup a:hover {
+    background-color: var(--highlight-color);
+    color: var(--bg-color);
+    border-radius: 2px;
+}
+
 .essay-container .image-container {
     text-align: center;
     margin: 30px 0;

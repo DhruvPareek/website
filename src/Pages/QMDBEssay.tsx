@@ -268,8 +268,11 @@ function QMDBEssay() {
       <br />
       <p>
         Another useful feature of MMRs is the ability to prune inactive leaves. An operation in the MMR can be 
-        classified as inactive if its key has been overwritten, or active if its key hasn't been overwritten. 
-        All leaves up to the "Inactivity Floor" can be pruned, where the Inactivity Floor is the leaf index before which all operations are inactive.
+        classified as inactive if its key has been overwritten, or active if its key hasn't been overwritten<sup><a 
+          href="https://docs.google.com/presentation/d/1WcEp-hvgJd16qi7v_9Dpp8uWP2SwgTIoy8kP-Ir-cwk/edit?slide=id.g3ae50b59c2d_9_208#slide=id.g3ae50b59c2d_9_208" 
+          target="_blank" 
+          rel="noopener noreferrer"
+        >1</a></sup>. All leaves up to the "Inactivity Floor" can be pruned, where the Inactivity Floor is the leaf index before which all operations are inactive.
       </p>
       <br />
 
@@ -335,14 +338,11 @@ function QMDBEssay() {
       <p>
         As a reminder, an MMR is a data structure that allows efficiently proving the inclusion of an 
         element in a growing ordered list. However, to be useful for blockchains, we need a lightweight 
-        authenticated database (ADB) capable of storing and proving mutable state efficiently.{' '}
-        (<a 
+        authenticated database (ADB) capable of storing and proving mutable state efficiently.<sup><a 
           href="https://commonware.xyz/blogs/adb-any#:~:text=In%20a%20previous,Apache%2D2%20license." 
           target="_blank" 
           rel="noopener noreferrer"
-        >
-          Reference
-        </a>)
+        >2</a></sup>
       </p>
       <br />
       <p>
@@ -411,14 +411,11 @@ function QMDBEssay() {
         <li>A new leaf representing the active status of this operation is appended to the Activity Status Merkle Tree.</li>
         <li>
           The leaf corresponding to the key's previous update is flipped from active to inactive in 
-          the Activity Status Merkle Tree.{' '} <br />
-          <a 
+          the Activity Status Merkle Tree.<sup><a 
             href="https://commonware.xyz/blogs/adb-current#:~:text=In%20this%20post,the%20latest%20update." 
             target="_blank" 
             rel="noopener noreferrer"
-          >
-            Reference
-          </a>
+          >3</a></sup>
         </li>
       </ol>
       <br />
@@ -433,14 +430,11 @@ function QMDBEssay() {
           for a given key is current. In this figure the siblings along the two paths from root 
           highlighted in red provide the necessary digests for proving "foo currently has value 6". 
           Leaf X in the MMR is an operation with its activity status stored in leaf X of the merkle 
-          tree. In the merkle tree, a leaf value of 0 == 'inactive' while 1 == 'active'.{' '}
-          <a 
+          tree. In the merkle tree, a leaf value of 0 == 'inactive' while 1 == 'active'.<sup><a 
             href="https://commonware.xyz/blogs/adb-current#:~:text=Figure%202%3A%20A%20combined%20MMR%20%2B%20Merkle%20Tree%20(MT)%20of%20identical%20structure%20allows%20proving%20which%20value%20for%20a%20given%20key%20is%20current.%20In%20this%20figure%20the%20siblings%20along%20the%20two%20paths%20from%20root%20highlighted%20in%20red%20provide%20the%20necessary%20digests%20for%20proving%20%E2%80%9Cfoo%20currently%20has%20value%206%E2%80%9D." 
             target="_blank" 
             rel="noopener noreferrer"
-          >
-            Reference
-          </a>
+          >4</a></sup>
         </p>
       </div>
       
@@ -507,14 +501,11 @@ function QMDBEssay() {
         proof from this data structure could be up to 2x larger because it includes the path to an 
         operation leaf and to an activity status leaf. But this can also be resolved if we maintain the structure of the 
         Activity Status MT to match exactly that of the MMR with its bottom N levels removed. By doing this, we can 
-        layer each leaf of the MT onto its corresponding internal node of the MMR.{' '}
-        (<a 
+        layer each leaf of the MT onto its corresponding internal node of the MMR.<sup><a 
           href="https://commonware.xyz/blogs/adb-current#:~:text=As%20described%20above,MMR%20(figure%204)." 
           target="_blank" 
           rel="noopener noreferrer"
-        >
-          Reference
-        </a>)
+        >5</a></sup>
       </p>
       <br />
 
@@ -530,14 +521,11 @@ function QMDBEssay() {
 
       <p>
         Generating a proof of an operation includes the same internal nodes in the MMR as before, 
-        except it also includes a bitmap which contains the operation's activity bit.{' '}
-        (<a 
+        except it also includes a bitmap which contains the operation's activity bit.<sup><a 
           href="https://commonware.xyz/blogs/adb-current#:~:text=Generating%20a%20proof,the%20same%20value." 
           target="_blank" 
           rel="noopener noreferrer"
-        >
-          Reference
-        </a>). This structure is now essentially QMDB!
+        >6</a></sup> This structure is now essentially QMDB!
       </p>
       <br />
 
