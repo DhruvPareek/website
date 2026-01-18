@@ -849,12 +849,9 @@ function QMDBEssay() {
       <br />
       <ul>
         <li><strong>any</strong> - todo</li>
-        <li><strong>benches</strong> - todo</li>
         <li><strong>current</strong> - todo</li>
         <li><strong>immutable</strong> - todo</li>
         <li><strong>keyless</strong> - todo</li>
-        <li><strong>store</strong> - todo</li>
-        <li><strong>sync</strong> - todo</li>
       </ul>
       <br />
     </div>
