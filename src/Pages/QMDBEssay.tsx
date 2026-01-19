@@ -858,7 +858,7 @@ function QMDBEssay() {
         </ul>
         <li><strong>current</strong> - A database that stores fixed-length values, supports succinct proofs of any value ever associated with a key, and also whether that value is the current value associated with it.</li>
         <ul>
-          <li><strong>current::ordered</strong> - A variant that supports exclusion proofs because it maintains a lexicographic-next active key for each active key. This is equivalent to the final form of QMDB described in the write-up above.</li>
+          <li><strong>current::ordered</strong> - A variant that supports exclusion proofs because it maintains a lexicographic-next active key for each active key. This is equivalent to the final form of QMDB described above and in the whitepaper.</li>
           <li><strong>current::unordered</strong> - A variant that does not support exclusion proofs, but has less overhead than the ordered variant.</li>
         </ul>
       </ul>
