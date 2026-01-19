@@ -276,6 +276,99 @@
     margin-bottom: 300px;
 }
 
+/* Comparison table styling */
+.essay-container .comparison-table-wrapper {
+    margin: 24px -40px;
+    border-radius: 6px;
+    border: 1px solid var(--toggle-border);
+    width: calc(100% + 80px);
+}
+
+.essay-container .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+.essay-container .comparison-table th,
+.essay-container .comparison-table td {
+    padding: 5px 6px;
+    text-align: center;
+    border-bottom: 1px solid var(--toggle-border);
+    white-space: nowrap;
+}
+
+.essay-container .comparison-table th {
+    background-color: var(--toggle-bg);
+    color: var(--nav-link-color);
+    font-weight: 600;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+    padding: 6px 6px;
+}
+
+.essay-container .comparison-table th:first-child,
+.essay-container .comparison-table td:first-child {
+    text-align: left;
+    padding-left: 10px;
+}
+
+.essay-container .comparison-table tbody tr {
+    background-color: var(--bg-color);
+    transition: background-color 0.15s ease;
+}
+
+.essay-container .comparison-table tbody tr:hover {
+    background-color: var(--toggle-bg);
+}
+
+.essay-container .comparison-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.essay-container .comparison-table .variant-name {
+    font-family: 'SFMono', monospace;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 11px;
+}
+
+.essay-container .comparison-table .variant-subtext {
+    font-size: 9px;
+    color: var(--nav-link-color);
+    font-weight: 400;
+    display: block;
+    margin-top: 1px;
+}
+
+.essay-container .comparison-table .check {
+    color: #22c55e;
+    font-size: 13px;
+}
+
+.essay-container .comparison-table .cross {
+    color: #ef4444;
+    font-size: 13px;
+}
+
+.essay-container .comparison-table .na-text {
+    color: var(--nav-link-color);
+    font-size: 10px;
+}
+
+.essay-container .comparison-table .note-text {
+    color: #ef4444;
+    font-size: 9px;
+    display: block;
+}
+
+.essay-container .comparison-table .note-text-positive {
+    color: var(--nav-link-color);
+    font-size: 9px;
+    display: block;
+}
+
 /* PayUSDCButton styling to match site theme */
 .essay-container button,
 .essay-container [class*="PayUSDC"] button,

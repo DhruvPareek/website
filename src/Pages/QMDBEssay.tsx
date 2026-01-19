@@ -847,16 +847,102 @@ function QMDBEssay() {
         <a href="https://docs.rs/commonware-storage/latest/commonware_storage/qmdb/index.html" target="_blank" rel="noopener noreferrer">QMDB Implementation Crate Docs</a>
       </p>
       <br />
+      <p>These are commonware's variations of authenticated databases and QMDBs:</p>
       <ul>
-        <li><strong>any</strong> - todo</li>
-        <li><strong>current</strong> - todo</li>
-        <li><strong>immutable</strong> - todo</li>
-        <li><strong>keyless</strong> - todo</li>
+        <li><strong>keyless</strong> - Append-only storage of arbitrary variable-length data that can later be retrieved by its location. There is no key-value pair, data is simply appended and its location is returned for future retrieval.</li>
+        <li><strong>immutable</strong> - Append-only only storage that supports adding new keyed values (no updates or deletions), where values can have varying sizes. In other words, keys cannot be overwritten or deleted.</li>
+        <li><strong>any</strong> - A database that stores fixed or variable-length values and supports succinct proofs of any value ever associated with a key.
+        This can be 'unordered', where the database does not maintain a lexicographically sorted list of keys, or 'ordered', where the database maintains a lexicographically sorted list of keys.</li>
+        <li><strong>current</strong> - A database that stores fixed length values, supports succinct proofs of any value ever associated with a 
+        key, and also whether that value is the current value associated with it. The ordered variant supports exclusion proofs because
+        it maintains a lexicographic-next active key for each active key. The unordered variant does not support exclusion proofs, but has less overhead than the ordered variant.</li>
+        <ul>
+          <li>current::ordered is equivalent to the final form of QMDB described in the write-upabove.</li>
+        </ul>
       </ul>
+      <br />
+
+      <div className="comparison-table-wrapper">
+        <table className="comparison-table">
+          <thead>
+            <tr>
+              <th>Variant</th>
+              <th>Index by Key?</th>
+              <th>Updates?</th>
+              <th>Deletes?</th>
+              <th>Ordered?</th>
+              <th>Proves Current?</th>
+              <th>Inclusion Proofs?</th>
+              <th>Exclusion Proofs?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span className="variant-name">keyless</span> <span className="variant-subtext">(variable)</span></td>
+              <td><span className="cross">✗</span> <span className="note-text">Location only</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="na-text">N/A</span></td>
+              <td><span className="na-text">N/A</span></td>
+              <td><span className="check">✓</span> <span className="note-text-positive">By location</span></td>
+              <td><span className="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td><span className="variant-name">immutable</span> <span className="variant-subtext">(fixed, variable)</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td><span className="variant-name">any::unordered</span> <span className="variant-subtext">(fixed, variable)</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td><span className="variant-name">any::ordered</span> <span className="variant-subtext">(fixed, variable)</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td><span className="variant-name">current::unordered</span> <span className="variant-subtext">(fixed)</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="cross">✗</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="cross">✗</span></td>
+            </tr>
+            <tr>
+              <td><span className="variant-name">current::ordered</span> <span className="variant-subtext">(fixed)</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+              <td><span className="check">✓</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <br />
     </div>
   );
 }
 
 export default QMDBEssay;
-
