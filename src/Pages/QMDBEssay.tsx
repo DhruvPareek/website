@@ -851,13 +851,15 @@ function QMDBEssay() {
       <ul>
         <li><strong>keyless</strong> - Append-only storage of arbitrary variable-length data that can later be retrieved by its location. There is no key-value pair, data is simply appended and its location is returned for future retrieval.</li>
         <li><strong>immutable</strong> - Append-only only storage that supports adding new keyed values (no updates or deletions), where values can have varying sizes. In other words, keys cannot be overwritten or deleted.</li>
-        <li><strong>any</strong> - A database that stores fixed or variable-length values and supports succinct proofs of any value ever associated with a key.
-        This can be 'unordered', where the database does not maintain a lexicographically sorted list of keys, or 'ordered', where the database maintains a lexicographically sorted list of keys.</li>
-        <li><strong>current</strong> - A database that stores fixed length values, supports succinct proofs of any value ever associated with a 
-        key, and also whether that value is the current value associated with it. The ordered variant supports exclusion proofs because
-        it maintains a lexicographic-next active key for each active key. The unordered variant does not support exclusion proofs, but has less overhead than the ordered variant.</li>
+        <li><strong>any</strong> - A database that stores fixed or variable-length values and supports succinct proofs of any value ever associated with a key.</li>
         <ul>
-          <li>current::ordered is equivalent to the final form of QMDB described in the write-upabove.</li>
+          <li><strong>any::ordered</strong> - A variant that maintains a lexicographically sorted list of keys.</li>
+          <li><strong>any::unordered</strong> - A variant that does not maintain a lexicographically sorted list of keys.</li>
+        </ul>
+        <li><strong>current</strong> - A database that stores fixed-length values, supports succinct proofs of any value ever associated with a key, and also whether that value is the current value associated with it.</li>
+        <ul>
+          <li><strong>current::ordered</strong> - A variant that supports exclusion proofs because it maintains a lexicographic-next active key for each active key. This is equivalent to the final form of QMDB described in the write-up above.</li>
+          <li><strong>current::unordered</strong> - A variant that does not support exclusion proofs, but has less overhead than the ordered variant.</li>
         </ul>
       </ul>
       <br />
