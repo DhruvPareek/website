@@ -1,0 +1,739 @@
+/* Erasure Coding Visualizations */
+
+/* Step reveal animation */
+.ec-step {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ec-step-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Tabs */
+.ec-tabs {
+  display: flex;
+  gap: 4px;
+  margin: 20px 0 24px;
+}
+
+.ec-tab {
+  font-family: 'SFMono', monospace;
+  font-size: 13px;
+  padding: 7px 14px;
+  background: var(--toggle-bg);
+  border: 1px solid var(--toggle-border);
+  border-radius: 4px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ec-tab:hover {
+  color: var(--text-color);
+  background: var(--bg-color);
+  border-color: var(--text-secondary);
+}
+
+.ec-tab-active {
+  color: var(--bg-color);
+  border-color: var(--highlight-color);
+  background: var(--highlight-color);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  font-size: 14px;
+}
+
+.ec-intro-defs {
+  margin: 16px 0;
+  padding: 16px 20px;
+  border: 1px solid var(--toggle-border);
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 2;
+}
+
+.ec-intro-defs strong {
+  color: var(--highlight-color);
+}
+
+/* Overview diagram: k → n → k */
+.ec-overview-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 28px 0;
+  gap: 6px;
+}
+
+/* Animated overview flow */
+.ec-ov-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  opacity: 0.3;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: scale(0.97);
+}
+
+.ec-ov-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ec-ov-active .ec-diagram-box {
+  box-shadow: 0 0 12px rgba(68, 221, 181, 0.25);
+}
+
+.ec-ov-done {
+  opacity: 0.55;
+  transform: scale(1);
+}
+
+.ec-ov-arrow {
+  font-size: 13px;
+  color: var(--text-secondary);
+  opacity: 0.15;
+  margin: 6px 0;
+  transition: opacity 0.4s ease, color 0.4s ease;
+}
+
+.ec-ov-arrow-active {
+  opacity: 0.7;
+  color: var(--highlight-color);
+}
+
+.ec-diagram-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  margin-bottom: 2px;
+}
+
+.ec-diagram-row {
+  display: flex;
+  gap: 6px;
+}
+
+.ec-diagram-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 40px;
+  border: 1px solid var(--toggle-border);
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--bg-color);
+  transition: all 0.3s ease;
+}
+
+.ec-diagram-msg {
+  border-color: var(--text-secondary);
+  color: var(--text-color);
+}
+
+.ec-diagram-cw.ec-diagram-selected {
+  border-color: var(--highlight-color);
+  color: var(--highlight-color);
+  font-weight: 600;
+}
+
+.ec-diagram-cw.ec-diagram-erased,
+.ec-diagram-erased {
+  border-color: #e74c3c;
+  color: #e74c3c;
+  opacity: 0.5;
+  border-style: dashed;
+}
+
+.ec-diagram-recovered {
+  border-color: var(--highlight-color);
+  color: var(--highlight-color);
+  background: rgba(68, 221, 181, 0.06);
+}
+
+[data-theme="dark"] .ec-diagram-recovered {
+  background: rgba(68, 221, 181, 0.1);
+}
+
+.ec-diagram-parity {
+  border: 2px solid var(--highlight-color);
+  color: var(--highlight-color);
+  background: rgba(68, 221, 181, 0.06);
+}
+
+[data-theme="dark"] .ec-diagram-parity {
+  background: rgba(68, 221, 181, 0.1);
+}
+
+/* Box with label, value, and binary */
+.ec-diagram-box-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+}
+
+.ec-diagram-box-inner .ec-diagram-box-label {
+  font-size: 9px;
+  opacity: 0.5;
+}
+
+.ec-diagram-box-inner .ec-diagram-box-bin {
+  font-size: 9px;
+  opacity: 0.35;
+  letter-spacing: 1px;
+}
+
+.ec-diagram-box:has(.ec-diagram-box-inner) {
+  width: auto;
+  min-width: 50px;
+  height: auto;
+  padding: 6px 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Polynomial display within diagram */
+.ec-diagram-poly {
+  font-size: 15px;
+  padding: 8px 14px;
+  border-left: 3px solid var(--highlight-color);
+  background: var(--toggle-bg);
+  border-radius: 0 4px 4px 0;
+  margin: 2px 0;
+}
+
+/* Computation line within diagram */
+.ec-diagram-computation {
+  font-size: 14px;
+  color: var(--text-color);
+  margin: 2px 0;
+}
+
+.ec-diagram-arrow {
+  font-size: 13px;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  margin: 6px 0;
+}
+
+/* Divider between message and redundancy */
+.ec-divider {
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  font-size: 18px;
+  color: var(--text-secondary);
+  opacity: 0.3;
+}
+
+.ec-hl {
+  color: var(--highlight-color);
+  font-weight: 600;
+}
+
+/* RS step rows: text left, graph right, vertically aligned */
+.ec-rs-row {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  width: 100%;
+  margin: 4px 0;
+}
+
+.ec-rs-left {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ec-rs-right {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.ec-graph-stage-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 900px) {
+  .ec-rs-row {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* Evaluation lines */
+.ec-evals {
+  margin: 12px 0;
+}
+
+.ec-eval-line {
+  font-size: 13px;
+  padding: 6px 12px;
+  border-left: 2px solid var(--toggle-border);
+  margin: 4px 0;
+  transition: all 0.3s ease;
+  animation: ecFadeIn 0.35s ease forwards;
+}
+
+.ec-eval-line.ec-active {
+  border-left-color: var(--highlight-color);
+  background: rgba(68, 221, 181, 0.04);
+}
+
+[data-theme="dark"] .ec-eval-line.ec-active {
+  background: rgba(68, 221, 181, 0.08);
+}
+
+
+/* Polynomial graph */
+.ec-poly-graph {
+  flex-shrink: 0;
+  border: 1px solid var(--toggle-border);
+  border-radius: 4px;
+  background: var(--bg-color);
+}
+
+.ec-graph-axis {
+  stroke: var(--text-secondary);
+  stroke-width: 1;
+  opacity: 0.3;
+}
+
+.ec-graph-guide {
+  stroke: var(--highlight-color);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  opacity: 0.3;
+}
+
+.ec-graph-curve {
+  fill: none;
+  stroke: var(--text-secondary);
+  stroke-width: 1.5;
+  opacity: 0.5;
+}
+
+.ec-graph-point {
+  fill: var(--highlight-color);
+  stroke: none;
+}
+
+.ec-graph-point-label {
+  font-family: 'SFMono', monospace;
+  font-size: 10px;
+  fill: var(--highlight-color);
+  font-weight: 600;
+}
+
+.ec-graph-tick {
+  font-family: 'SFMono', monospace;
+  font-size: 9px;
+  fill: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.ec-graph-axis-label {
+  font-family: 'SFMono', monospace;
+  font-size: 10px;
+  fill: var(--text-secondary);
+  opacity: 0.5;
+  font-style: italic;
+}
+
+.ec-graph-erased-mark {
+  stroke: #e74c3c;
+  stroke-width: 2;
+  opacity: 0.5;
+}
+
+.ec-graph-erased-label {
+  font-family: 'SFMono', monospace;
+  font-size: 11px;
+  fill: #e74c3c;
+  opacity: 0.6;
+}
+
+/* Shamir Secret Sharing specific */
+
+/* Animated circular overview */
+.ss-anim-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.ss-key-insight {
+  text-align: center;
+  border-left: 3px solid var(--highlight-color);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.ss-anim-params {
+  font-size: 14px;
+  color: var(--text-color);
+  margin-top: 10px;
+  letter-spacing: 0.2px;
+}
+
+.ss-anim-params strong {
+  color: var(--highlight-color);
+  font-weight: 700;
+}
+
+.ss-anim-params-sep {
+  margin: 0 8px;
+  opacity: 0.3;
+}
+
+.ss-anim-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+  min-height: 20px;
+  margin-bottom: 8px;
+  transition: opacity 0.3s ease;
+}
+
+.ss-anim-svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Entity nodes in circle */
+.ss-entity {
+  fill: var(--toggle-bg);
+  stroke: var(--toggle-border);
+  stroke-width: 1.5;
+  transition: all 0.6s ease;
+}
+
+.ss-entity-dim {
+  opacity: 0.25;
+}
+
+.ss-entity-glow {
+  stroke: var(--highlight-color);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 6px rgba(68, 221, 181, 0.4));
+}
+
+.ss-entity-label {
+  font-family: 'SFMono', monospace;
+  font-size: 11px;
+  fill: var(--text-color);
+  transition: opacity 0.6s ease;
+}
+
+.ss-entity-dim + text,
+.ss-entity-dim ~ .ss-entity-label {
+  opacity: 0.25;
+}
+
+/* Share dots on entities */
+.ss-share-dot {
+  fill: var(--highlight-color);
+  transition: opacity 0.5s ease;
+}
+
+.ss-share-dim {
+  opacity: 0.2;
+}
+
+/* Dealer in center */
+.ss-dealer {
+  transition: opacity 0.8s ease;
+}
+
+.ss-dealer-gone {
+  opacity: 0;
+}
+
+.ss-dealer-circle {
+  fill: var(--toggle-bg);
+  stroke: var(--highlight-color);
+  stroke-width: 2;
+}
+
+.ss-dealer-text {
+  font-family: 'SFMono', monospace;
+  font-size: 10px;
+  fill: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.ss-secret-text {
+  font-family: 'SFMono', monospace;
+  font-size: 16px;
+  font-weight: 700;
+  fill: var(--highlight-color);
+}
+
+/* Share particles */
+.ss-share-particle {
+  fill: var(--highlight-color);
+  opacity: 0.9;
+}
+
+.ss-share-flying {
+  animation: ssShareFly 1.6s ease-out forwards;
+}
+
+@keyframes ssShareFly {
+  0% {
+    opacity: 1;
+    r: 5;
+  }
+  80% {
+    opacity: 0.8;
+    r: 4;
+  }
+  100% {
+    opacity: 0;
+    r: 3;
+  }
+}
+
+/* Reconstruction lines */
+.ss-recon-line {
+  stroke: var(--highlight-color);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  opacity: 0;
+  animation: ssLineIn 0.6s ease forwards;
+}
+
+@keyframes ssLineIn {
+  to { opacity: 0.4; }
+}
+
+/* Recovered secret */
+.ss-recovered-circle {
+  fill: var(--toggle-bg);
+  stroke: #e6a733;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 10px rgba(230, 167, 51, 0.5));
+  animation: ssRecoverPulse 0.6s ease forwards;
+}
+
+@keyframes ssRecoverPulse {
+  0% { r: 0; opacity: 0; }
+  100% { r: 28; opacity: 1; }
+}
+
+.ss-recovered-text {
+  font-family: 'SFMono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  fill: #e6a733;
+  animation: ssTextIn 0.4s ease 0.2s forwards;
+  opacity: 0;
+}
+
+@keyframes ssTextIn {
+  to { opacity: 1; }
+}
+
+/* Distribution / reconstruction layouts */
+.ss-distribution,
+.ss-reconstruction {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+}
+
+.ss-dealer-col,
+.ss-combine-col {
+  flex-shrink: 0;
+}
+
+.ss-arrows-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.ss-arrow-line {
+  font-size: 14px;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ss-people-col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ss-person-box {
+  min-width: auto;
+  width: auto;
+  height: 32px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.ss-person-box .ec-diagram-box-inner {
+  flex-direction: row;
+  gap: 6px;
+}
+
+.ss-person-box .ec-diagram-box-label {
+  font-size: 9px;
+}
+
+.ss-combine-box {
+  padding: 16px 20px;
+  border: 2px solid var(--highlight-color);
+  border-radius: 6px;
+  background: rgba(68, 221, 181, 0.06);
+  font-size: 13px;
+  color: var(--text-color);
+  text-align: center;
+}
+
+[data-theme="dark"] .ss-combine-box {
+  background: rgba(68, 221, 181, 0.1);
+}
+
+.ss-combine-box .ec-diagram-box-inner {
+  gap: 4px;
+}
+
+.ss-combine-box .ec-diagram-box-label {
+  opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+  .ss-distribution,
+  .ss-reconstruction {
+    flex-direction: column;
+  }
+
+  .ss-people-col {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ss-arrows-col {
+    flex-direction: row;
+  }
+}
+
+.ss-diagram-secret {
+  border: 2px solid var(--highlight-color);
+  color: var(--highlight-color);
+  background: rgba(68, 221, 181, 0.06);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .ss-diagram-secret {
+  background: rgba(68, 221, 181, 0.1);
+}
+
+.ss-graph-secret {
+  fill: var(--highlight-color);
+  stroke: var(--bg-color);
+  stroke-width: 2;
+}
+
+.ss-graph-secret-label {
+  font-family: 'SFMono', monospace;
+  font-size: 11px;
+  fill: var(--highlight-color);
+  font-weight: 700;
+}
+
+/* Controls */
+.ec-controls {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ec-controls label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.ec-controls select {
+  font-family: 'SFMono', monospace;
+  font-size: 13px;
+  padding: 3px 6px;
+  background: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid var(--toggle-border);
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+.ec-info {
+  font-size: 12px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+
+/* Fade-in animation */
+@keyframes ecFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .ec-viz {
+    padding: 16px;
+  }
+
+  .ec-symbol {
+    min-width: 44px;
+    padding: 8px 10px;
+  }
+
+  .ec-symbol-value {
+    font-size: 16px;
+  }
+
+  .ec-eval-line {
+    font-size: 12px;
+  }
+}

@@ -444,6 +444,52 @@ h1, h2 {
   opacity: 0.85;
 }
 
+.nav-link {
+  cursor: default;
+  color: var(--link-color);
+}
+
+.nav-link:hover {
+  color: var(--text-color);
+  background-color: var(--highlight-color);
+}
+
+.visualizations-item {
+  position: relative;
+}
+
+.visualizations-tree {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.2s ease, opacity 0.2s ease;
+  padding-left: 16px;
+}
+
+.visualizations-item:hover .visualizations-tree {
+  max-height: 200px;
+  opacity: 1;
+}
+
+.visualizations-tree-branch {
+  line-height: 1.8;
+  white-space: nowrap;
+}
+
+.visualizations-tree-connector {
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.visualizations-tree-branch a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.visualizations-tree-branch a:hover {
+  text-decoration: underline;
+}
+
 /* Responsive - hide preview on smaller screens */
 @media (max-width: 900px) {
   .home-content {

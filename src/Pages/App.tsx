@@ -4,6 +4,8 @@ import '../Styling/App.css';
 import ScaleEssay from './ScaleEssay.tsx';
 import EthicsEssay from './EthicsEssay.tsx';
 import QMDBEssay from './QMDBEssay.tsx';
+import ErasureCoding from './ErasureCoding.tsx';
+import ShamirSecretSharing from './ShamirSecretSharing.tsx';
 import AssortedLinks from './AssortedLinks.tsx';
 import Home from './Home.tsx';
 import Contact from './Contact.tsx';
@@ -68,6 +70,8 @@ function App() {
           <Route path="/scaleEssay" element={<ScaleEssay />} />
           <Route path="/EthicsEssay" element={<EthicsEssay />} />
           <Route path="/QMDBEssay" element={<QMDBEssay />} />
+          <Route path="/erasureCoding" element={<ErasureCoding />} />
+          <Route path="/shamirSecretSharing" element={<ShamirSecretSharing />} />
         </Routes>
 
         <div className="theme-toggle">

@@ -2,11 +2,22 @@ import '../Styling/App.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
+type TreeChild = {
+    label: string;
+    href: string;
+    previewSrc?: string;
+    internal?: boolean;
+};
+
 type PreviewItem = {
     type: 'image' | 'essay';
     src?: string;
     title?: string;
     excerpt?: string;
+} | {
+    type: 'tree';
+    title: string;
+    children: TreeChild[];
 } | null;
 
 const previews: Record<string, PreviewItem> = {
@@ -48,6 +59,16 @@ const previews: Record<string, PreviewItem> = {
         title: 'On the Scale of Networks',
         excerpt: "I've recently become concerned that Ethereum's decentralization priority may always stand in the way of the network's scale being competitive with rival networks. The purpose of this write-up is to define the metrics that determine scalability, compare the differences in these metrics between Ethereum and Solana, and analyze the tradeoffs taken to achieve that scalability..."
     },
+    visualizations: {
+        type: 'tree',
+        title: 'Visualizations',
+        children: [
+            { label: 'Commonware', href: 'https://monorepo-three-khaki.vercel.app/', previewSrc: '/commonware_preview.png' },
+            { label: 'FAFO', href: 'https://fafo-visualization.vercel.app/', previewSrc: '/fafo_preview.png' },
+            { label: 'Erasure Coding', href: '/erasureCoding', internal: true, previewSrc: '/erasure_preview.png' },
+            { label: 'Shamir Secret Sharing', href: '/shamirSecretSharing', internal: true, previewSrc: '/shamir_preview.png' },
+        ],
+    },
     qmdbessay: {
         type: 'essay',
         title: 'QMDB for Noobs',
@@ -84,8 +105,39 @@ function Home() {
                             Micropayments
                         </a>
                     </li>
+                    <li className="visualizations-item">
+                        <span className="nav-link">Visualizations</span>
+                        <div className="visualizations-tree">
+                            {previews.visualizations && previews.visualizations.type === 'tree' && previews.visualizations.children.map((child, i) => (
+                                <div key={i} className="visualizations-tree-branch">
+                                    <span className="visualizations-tree-connector">
+                                        {i === (previews.visualizations as Extract<PreviewItem, {type: 'tree'}>).children.length - 1 ? '└── ' : '├── '}
+                                    </span>
+                                    {child.internal ? (
+                                        <Link
+                                            to={child.href}
+                                            onMouseEnter={() => child.previewSrc ? setActivePreview({ type: 'image', src: child.previewSrc }) : undefined}
+                                            onMouseLeave={() => setActivePreview(null)}
+                                        >
+                                            {child.label}
+                                        </Link>
+                                    ) : (
+                                        <a
+                                            href={child.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onMouseEnter={() => child.previewSrc && setActivePreview({ type: 'image', src: child.previewSrc })}
+                                            onMouseLeave={() => setActivePreview(null)}
+                                        >
+                                            {child.label}
+                                        </a>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </li>
                     <li>
-                        <Link 
+                        <Link
                             to="/QMDBEssay"
                             onMouseEnter={() => setActivePreview(previews.qmdbessay)}
                             onMouseLeave={() => setActivePreview(null)}
