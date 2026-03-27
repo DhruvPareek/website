@@ -184,11 +184,11 @@ function ParityCheckViz() {
       </div>
 
       <div className={`ec-ov-arrow ${active >= 4 ? 'ec-ov-arrow-active' : ''}`}>
-        <span>&darr; recovered</span>
+        <span>&darr; recover</span>
       </div>
 
       <div className={`ec-ov-step ${active === 4 ? 'ec-ov-active' : active > 4 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">recovered codeword</div>
+        <div className="ec-diagram-label">codeword</div>
         <div className="ec-diagram-row">
           {P_ALL.map((val, i) => {
             const isParity = i === P_DATA.length;
@@ -681,7 +681,7 @@ function OverviewDiagram() {
   return (
     <div className="ec-overview-diagram">
       <div className={`ec-ov-step ${active === 0 ? 'ec-ov-active' : active > 0 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">message (k symbols)</div>
+        <div className="ec-diagram-label">message (k=4 symbols)</div>
         <div className="ec-diagram-row">
           {[0, 1, 2, 3].map(i => (
             <div key={i} className="ec-diagram-box ec-diagram-msg">{`m${SUB[i]}`}</div>
@@ -694,7 +694,7 @@ function OverviewDiagram() {
       </div>
 
       <div className={`ec-ov-step ${active === 1 ? 'ec-ov-active' : active > 1 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">codeword (n symbols)</div>
+        <div className="ec-diagram-label">codeword (n=6 symbols)</div>
         <div className="ec-diagram-row">
           {[0, 1, 2, 3, 4, 5].map(i => (
             <div key={i} className="ec-diagram-box ec-diagram-cw">{`c${SUB[i]}`}</div>
@@ -703,11 +703,10 @@ function OverviewDiagram() {
       </div>
 
       <div className={`ec-ov-arrow ${active >= 2 ? 'ec-ov-arrow-active' : ''}`}>
-        <span>&darr; transport</span>
+        <span>&darr; transport (some symbols lost)</span>
       </div>
 
       <div className={`ec-ov-step ${active === 2 ? 'ec-ov-active' : active > 2 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">received (some symbols lost)</div>
         <div className="ec-diagram-row">
           {[0, 1, 2, 3, 4, 5].map(i => (
             <div key={i} className={`ec-diagram-box ec-diagram-cw ${i === 1 || i === 3 ? 'ec-diagram-erased' : 'ec-diagram-selected'}`}>
@@ -718,11 +717,10 @@ function OverviewDiagram() {
       </div>
 
       <div className={`ec-ov-arrow ${active >= 3 ? 'ec-ov-arrow-active' : ''}`}>
-        <span>&darr; select k surviving symbols</span>
+        <span>&darr; select k=4 surviving symbols</span>
       </div>
 
       <div className={`ec-ov-step ${active === 3 ? 'ec-ov-active' : active > 3 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">surviving symbols (k)</div>
         <div className="ec-diagram-row">
           {[0, 2, 4, 5].map(i => (
             <div key={i} className="ec-diagram-box ec-diagram-selected">{`c${SUB[i]}`}</div>
