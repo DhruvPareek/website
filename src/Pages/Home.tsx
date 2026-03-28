@@ -67,6 +67,7 @@ const previews: Record<string, PreviewItem> = {
             { label: 'FAFO', href: 'https://fafo-visualization.vercel.app/', previewSrc: '/fafo_preview.png' },
             { label: 'Erasure Coding', href: '/erasureCoding', internal: true, previewSrc: '/erasure_preview.png' },
             { label: 'Shamir Secret Sharing', href: '/shamirSecretSharing', internal: true, previewSrc: '/shamir_preview.png' },
+            { label: 'Consensus Mechanisms', href: '/consensusMechanisms', internal: true },
         ],
     },
     qmdbessay: {
