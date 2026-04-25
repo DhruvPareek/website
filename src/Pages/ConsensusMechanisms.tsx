@@ -2,6 +2,8 @@ import { useState } from 'react';
 import '../Styling/ErasureCoding.css';
 import '../Styling/Essay.css';
 
+const MINIMMIT_URL = 'https://monorepo-three-khaki.vercel.app/minimmit';
+
 function ByzantineDiagram() {
   const [showNote, setShowNote] = useState(false);
   const W = 520;
@@ -364,7 +366,20 @@ export default function ConsensusMechanisms() {
 
   return (
     <div className="essay-container">
-      <p className="essay-title">n &ge; 3f + 1</p>
+      <div className="ec-tabs">
+        <button className="ec-tab ec-tab-active" type="button" aria-current="page">
+          3f+1
+        </button>
+        <a
+          className="ec-tab"
+          href={MINIMMIT_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          minimmit
+        </a>
+      </div>
+
       <p>
         <strong style={{ color: 'var(--highlight-color)' }}>n &ge; 3f + 1</strong> or <strong style={{ color: 'var(--highlight-color)' }}>f &lt; 33% of n</strong> represents
         the maximum proportion of faulty nodes (<em>f</em>) that can be tolerated to reach consensus under partial
