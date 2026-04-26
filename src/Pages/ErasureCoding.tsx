@@ -751,7 +751,7 @@ const PIECE_COLORS = ['#44ddb5', '#5cb3e6', '#a78bfa', '#f59e0b', '#fb7185', '#8
 const SPLIT_PHASE_DURATIONS = [1500, 1500, 2400, 1800];
 
 function BlockSplitViz() {
-  const numNodes = 6;
+  const numNodes = 3;
   const [phase, setPhase] = useState(0);
 
   useEffect(() => {
@@ -982,9 +982,8 @@ function TurbineTreeViz() {
     <div className="turbine-viz">
       <div className="turbine-erasure-layout">
         <svg viewBox={`0 0 ${W} ${H}`} className="turbine-svg" preserveAspectRatio="xMidYMid meet">
-        {(phase === 0 || phase === 1 || phase === 2) &&
+        {(phase === 1 || phase === 2) &&
           trees.map((tree, t) => {
-            if (phase === 0 && t >= k) return null;
             const startX = blockStartX + t * pw + pw / 2;
             return (
               <line
@@ -1321,9 +1320,8 @@ function ErasureCodeViz() {
     <div className="turbine-viz">
       <div className="turbine-erasure-layout">
         <svg viewBox={`0 0 ${W} ${H}`} className="turbine-svg" preserveAspectRatio="xMidYMid meet">
-        {(phase === 0 || phase === 1 || phase === 2) &&
+        {(phase === 1 || phase === 2) &&
           Array.from({ length: numNodes }, (_, i) => {
-            if (phase === 0 && i >= k) return null;
             const x1 = blockStartX + i * pw + pw / 2;
             return (
               <line
@@ -1707,11 +1705,11 @@ function ErasureCoding() {
                   <li>
                     In blockchains, the traditional mechanism for block dissemination from leader
                     to the rest of the network requires the leader to transmit the full proposed block
-                    to several other nodes
+                    to several other validators who then gossip the block to the rest of the network
                   </li>
                   <li>
-                    This is very inefficient for the leader and is a very inefficient use of
-                    the bandwidth of the network
+                    This is a <em>very</em> time consuming step and is an inefficient use of
+                    the network's bandwidth
                   </li>
                 </ul>
                 <LeaderBroadcastViz />
@@ -1784,6 +1782,13 @@ function ErasureCoding() {
                   </li>
                 </ul>
                 <TurbineTreeViz />
+                <ul className="turbine-bullets">
+                  <li>
+                    This structured broadcast strategy prevents redundant transmissions and
+                    increases bandwidth efficiency in comparison to more traditional protocols
+                    like gossip.
+                  </li>
+                </ul>
               </>
             )}
           </div>
