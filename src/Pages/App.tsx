@@ -7,6 +7,7 @@ import QMDBEssay from './QMDBEssay.tsx';
 import ErasureCoding from './ErasureCoding.tsx';
 import ShamirSecretSharing from './ShamirSecretSharing.tsx';
 import ConsensusMechanisms from './ConsensusMechanisms.tsx';
+import ProofOfHistory from './ProofOfHistory.tsx';
 import AssortedLinks from './AssortedLinks.tsx';
 import Home from './Home.tsx';
 import Contact from './Contact.tsx';
@@ -74,6 +75,7 @@ function App() {
           <Route path="/erasureCoding" element={<ErasureCoding />} />
           <Route path="/shamirSecretSharing" element={<ShamirSecretSharing />} />
           <Route path="/consensusMechanisms" element={<ConsensusMechanisms />} />
+          <Route path="/proofOfHistory" element={<ProofOfHistory />} />
         </Routes>
 
         <div className="theme-toggle">

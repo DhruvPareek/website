@@ -1,0 +1,657 @@
+/* ── Proof of History stream visualization ────────────────────── */
+
+.poh-viz-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 36px 0 24px;
+  width: 100%;
+}
+
+.poh-viz-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 18px;
+  width: 100%;
+  max-width: 940px;
+}
+
+/* ── Heights for vertical alignment ─────────────────────── */
+/*
+  validator-label:   ~24px
+  batch section:     ~74px (header + slots + padding)
+  batch-flow:        ~22px
+  stream-area:       7 * 32 = 224px
+*/
+
+/* ── Intake (the wire that carries txs from outside) ─── */
+
+.poh-intake-track {
+  position: relative;
+  flex: 0 0 220px;
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+}
+
+.poh-intake-spacer-top {
+  height: 24px; /* matches .poh-validator-label */
+}
+
+.poh-intake-wire {
+  position: relative;
+  height: 96px; /* matches .poh-batch + a bit of validator-box top padding */
+  margin-top: 18px; /* matches .poh-validator-box padding-top */
+}
+
+.poh-intake-spacer-bot {
+  flex: 1;
+}
+
+.poh-intake-label {
+  position: absolute;
+  top: calc(50% - 22px);
+  left: 12px;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-secondary);
+  opacity: 0.45;
+}
+
+.poh-intake-line {
+  position: absolute;
+  left: 8px;
+  right: -1px;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--text-secondary) 30%,
+    var(--text-secondary) 100%
+  );
+  opacity: 0.5;
+  transform: translateY(-50%);
+}
+
+.poh-intake-arrow {
+  position: absolute;
+  right: -3px;
+  top: 50%;
+  font-size: 9px;
+  color: var(--text-secondary);
+  opacity: 0.55;
+  transform: translateY(-52%);
+  line-height: 1;
+}
+
+/* ── Validator column ─── */
+
+.poh-validator-col {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.poh-validator-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--text-secondary);
+  opacity: 0.55;
+  margin-bottom: 8px;
+  align-self: center;
+  height: 16px;
+  line-height: 16px;
+}
+
+.poh-validator-box {
+  position: relative;
+  width: 480px;
+  border: 1px solid var(--toggle-border);
+  border-radius: 10px;
+  background: var(--bg-color);
+  padding: 18px 22px 20px;
+  overflow: visible;
+  box-shadow: 0 0 0 1px rgba(68, 221, 181, 0.08);
+}
+
+/* ── Batch buffer ─── */
+
+.poh-batch {
+  position: relative;
+  border: 1px dashed var(--toggle-border);
+  border-radius: 6px;
+  padding: 8px 10px 10px;
+  height: 78px;
+  box-sizing: border-box;
+}
+
+.poh-batch-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'SFMono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  opacity: 0.65;
+  margin-bottom: 6px;
+}
+
+.poh-batch-name {
+  font-weight: 600;
+}
+
+.poh-batch-count {
+  color: var(--highlight-color);
+  opacity: 0.85;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
+.poh-batch-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  min-height: 26px;
+}
+
+.poh-batch-empty {
+  font-family: 'SFMono', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.4;
+  font-style: italic;
+}
+
+.poh-batch-tx {
+  font-family: 'SFMono', monospace;
+  font-size: 10.5px;
+  background: rgba(68, 221, 181, 0.18);
+  color: var(--highlight-color);
+  border: 1px solid rgba(68, 221, 181, 0.5);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+  animation: poh-batch-tx-in 240ms cubic-bezier(0.3, 0.6, 0.3, 1.2) both;
+}
+
+@keyframes poh-batch-tx-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-12px) scale(0.6);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(2px) scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* ── Connector between batch and stream ─── */
+
+.poh-batch-flow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 8px 0 6px;
+  font-family: 'SFMono', monospace;
+  font-size: 10px;
+  color: var(--text-secondary);
+  opacity: 0.55;
+}
+
+.poh-batch-flow-line {
+  flex: 1;
+  height: 1px;
+  background: var(--text-secondary);
+  opacity: 0.35;
+}
+
+.poh-batch-flow-label {
+  letter-spacing: 0.4px;
+}
+
+/* ── PoH stream ─── */
+
+.poh-stream-area {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 100%);
+}
+
+.poh-entry {
+  position: absolute;
+  left: 0;
+  right: 0;
+  font-family: 'SFMono', monospace;
+  font-size: 12.5px;
+  color: var(--text-color);
+  transition: bottom 0.85s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.7s ease;
+}
+
+.poh-line {
+  display: block;
+  white-space: pre;
+  height: 16px;
+  line-height: 16px;
+  font-family: 'SFMono', monospace;
+}
+
+.poh-line-hash {
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.poh-line-conn,
+.poh-line-arrow {
+  color: var(--text-secondary);
+  opacity: 0.45;
+}
+
+.poh-line-branch {
+  color: var(--text-secondary);
+  opacity: 0.85;
+}
+
+.poh-entry-record .poh-line-branch,
+.poh-entry-record .poh-line-formula {
+  color: var(--highlight-color);
+  opacity: 1;
+}
+
+.poh-line-formula {
+  color: var(--highlight-color);
+}
+
+.poh-entry-tick .poh-line-branch {
+  color: var(--highlight-color);
+  opacity: 1;
+  letter-spacing: 0.2px;
+}
+
+.poh-entry-pulse .poh-line-hash,
+.poh-entry-pulse .poh-line-formula,
+.poh-entry-pulse .poh-line-branch {
+  animation: poh-entry-pulse 800ms ease-out both;
+}
+
+@keyframes poh-entry-pulse {
+  0% {
+    text-shadow: 0 0 14px rgba(68, 221, 181, 0.9);
+  }
+  100% {
+    text-shadow: none;
+  }
+}
+
+/* ── Flying tx pills travel along the intake wire ─── */
+
+.poh-tx-pill {
+  position: absolute;
+  left: 0;
+  font-family: 'SFMono', monospace;
+  font-size: 10.5px;
+  background: var(--highlight-color);
+  color: #0a0a0a;
+  padding: 3px 9px;
+  border-radius: 11px;
+  font-weight: 600;
+  pointer-events: none;
+  white-space: nowrap;
+  animation: poh-tx-fly 950ms cubic-bezier(0.4, 0, 0.55, 1) forwards;
+  z-index: 3;
+  box-shadow: 0 0 8px rgba(68, 221, 181, 0.35);
+}
+
+@keyframes poh-tx-fly {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  18% {
+    transform: translateX(20px);
+    opacity: 1;
+  }
+  85% {
+    transform: translateX(196px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(220px);
+    opacity: 0;
+  }
+}
+
+/* ── Legend / parameters panel ─── */
+
+.poh-legend {
+  flex: 0 0 170px;
+  width: 170px;
+  align-self: flex-end;
+  border: 1px solid var(--toggle-border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  background: var(--bg-color);
+  font-family: 'SFMono', monospace;
+}
+
+.poh-legend-title {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-secondary);
+  opacity: 0.55;
+  margin-bottom: 10px;
+}
+
+.poh-legend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+}
+
+.poh-legend-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.poh-legend-row dt {
+  font-size: 10.5px;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.poh-legend-row dd {
+  margin: 0;
+  font-size: 12.5px;
+  color: var(--highlight-color);
+  font-weight: 600;
+}
+
+/* ── Primitives definitions below the viz ─── */
+
+.poh-primitives {
+  width: 100%;
+  max-width: 760px;
+  margin-top: 24px;
+  padding: 16px 20px 18px;
+  border: 1px solid var(--toggle-border);
+  border-radius: 8px;
+  background: var(--bg-color);
+}
+
+.poh-primitives-title {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  color: var(--text-secondary);
+  opacity: 0.55;
+  margin-bottom: 14px;
+}
+
+.poh-primitives-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.poh-primitive {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  align-items: baseline;
+}
+
+.poh-primitive dt {
+  margin: 0;
+}
+
+.poh-primitive dt code,
+.poh-primitive dd code {
+  font-family: 'SFMono', monospace;
+  font-size: 12.5px;
+  color: var(--highlight-color);
+  background: transparent;
+  padding: 0;
+}
+
+.poh-primitive dd {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-color);
+  line-height: 1.55;
+  opacity: 0.92;
+}
+
+.poh-primitive dd code {
+  font-size: 12px;
+  color: var(--text-color);
+  opacity: 0.85;
+}
+
+/* ── Parallel verification visualization ─── */
+
+.poh-verify-wrapper {
+  width: 100%;
+  max-width: 760px;
+  margin: 28px auto 12px;
+  padding: 18px 22px 20px;
+  border: 1px solid var(--toggle-border);
+  border-radius: 10px;
+  background: var(--bg-color);
+}
+
+.poh-verify-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 14px;
+}
+
+.poh-verify-title {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+}
+
+.poh-verify-status {
+  font-family: 'SFMono', monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+  opacity: 0.65;
+  letter-spacing: 0.4px;
+}
+
+.poh-verify-status-done {
+  color: var(--highlight-color);
+  opacity: 1;
+}
+
+.poh-verify-cores {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.poh-verify-core {
+  border: 1px dashed var(--toggle-border);
+  border-radius: 8px;
+  padding: 10px 12px 12px;
+}
+
+.poh-verify-core-label {
+  font-family: 'SFMono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-secondary);
+  opacity: 0.65;
+  margin-bottom: 8px;
+}
+
+.poh-verify-core-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  font-family: 'SFMono', monospace;
+}
+
+.poh-verify-segment {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.poh-verify-cell {
+  font-size: 11.5px;
+  color: var(--text-color);
+  background: rgba(68, 221, 181, 0.08);
+  border: 1px solid var(--toggle-border);
+  border-radius: 4px;
+  padding: 2px 5px;
+  min-width: 26px;
+  text-align: center;
+}
+
+.poh-verify-link {
+  font-size: 12px;
+  width: 14px;
+  display: inline-flex;
+  justify-content: center;
+  transition: color 0.3s, opacity 0.3s, transform 0.3s;
+}
+
+.poh-verify-link.verified {
+  color: var(--highlight-color);
+  font-weight: 700;
+  transform: scale(1.05);
+}
+
+.poh-verify-link.active {
+  color: var(--highlight-color);
+  animation: poh-verify-pulse 700ms ease-in-out infinite alternate;
+}
+
+.poh-verify-link.pending {
+  color: var(--text-secondary);
+  opacity: 0.3;
+}
+
+@keyframes poh-verify-pulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.poh-verify-caption {
+  font-size: 12px;
+  color: var(--text-secondary);
+  opacity: 0.75;
+  margin-top: 14px;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.poh-verify-caption code {
+  font-family: 'SFMono', monospace;
+  font-size: 11.5px;
+  color: var(--highlight-color);
+  background: transparent;
+}
+
+/* ── Mobile / responsive ─── */
+
+@media (max-width: 900px) {
+  .poh-viz-row {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .poh-legend {
+    flex: 1 1 auto;
+    width: auto;
+    align-self: stretch;
+    order: 3;
+  }
+  .poh-legend-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 14px 22px;
+  }
+}
+
+@media (max-width: 720px) {
+  .poh-viz-row {
+    max-width: 100%;
+  }
+  .poh-intake-track {
+    flex: 0 0 130px;
+    width: 130px;
+  }
+  .poh-intake-label {
+    font-size: 8.5px;
+    left: 4px;
+  }
+  .poh-validator-box {
+    width: 100%;
+    max-width: calc(100vw - 160px);
+    padding: 14px 14px 18px;
+  }
+  .poh-entry,
+  .poh-entry-fn {
+    font-size: 11.5px;
+  }
+  .poh-tx-pill {
+    font-size: 10px;
+  }
+  .poh-batch {
+    height: 84px;
+  }
+  .poh-primitive {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .poh-verify-cores {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @keyframes poh-tx-fly {
+    0% {
+      transform: translateX(-20px);
+      opacity: 0;
+    }
+    18% {
+      transform: translateX(10px);
+      opacity: 1;
+    }
+    85% {
+      transform: translateX(108px);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(132px);
+      opacity: 0;
+    }
+  }
+}
