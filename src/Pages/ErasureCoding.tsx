@@ -1705,7 +1705,7 @@ function ErasureCoding() {
               <>
                 <ul className="turbine-bullets">
                   <li>
-                    In blockchains, the traditional mechanism for block propagation from leader
+                    In blockchains, the traditional mechanism for block dissemination from leader
                     to the rest of the network requires the leader to transmit the full proposed block
                     to several other nodes
                   </li>
@@ -1751,7 +1751,7 @@ function ErasureCoding() {
               <>
                 <ul className="turbine-bullets">
                   <li>
-                    Solana's shredding splits blocks into shreds, which are grouped into Forward
+                    Solana splits blocks into shreds, which are grouped into Forward
                     Error Correction (FEC) sets.
                     <ul className="turbine-subbullets">
                       <li>
@@ -1762,12 +1762,12 @@ function ErasureCoding() {
                     </ul>
                   </li>
                   <li>
-                    Each shred gets its own "Turbine Tree" — a tree-shaped hierarchy of validators
+                    Each shred gets its own "Turbine Tree", a tree-shaped hierarchy of validators
                     that the shred disseminates through.
                     <ul className="turbine-subbullets">
                       <li>
                         Every validator can independently compute the Turbine Tree for a shred
-                        from a deterministic seed of: leader id, slot, shred index, and shred
+                        using a deterministic seed of: leader id, slot, shred index, and shred
                         type.
                       </li>
                       <li>
