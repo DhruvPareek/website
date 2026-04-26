@@ -744,24 +744,880 @@ function OverviewDiagram() {
   );
 }
 
+// ── Solana Turbine: Block Split Visualization ───────────
+
+const PIECE_COLORS = ['#44ddb5', '#5cb3e6', '#a78bfa', '#f59e0b', '#fb7185', '#84cc16'];
+
+const SPLIT_PHASE_DURATIONS = [1500, 1500, 2400, 1800];
+
+function BlockSplitViz() {
+  const numNodes = 6;
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    const t = setTimeout(
+      () => setPhase(p => (p + 1) % 4),
+      SPLIT_PHASE_DURATIONS[phase]
+    );
+    return () => clearTimeout(t);
+  }, [phase]);
+
+  const W = 540;
+  const H = 290;
+  const leader = { x: W / 2, y: 38 };
+  const blockY = 78;
+  const nodes = Array.from({ length: numNodes }, (_, i) => ({
+    x: 50 + (i * (W - 100)) / (numNodes - 1),
+    y: H - 70,
+  }));
+
+  const pw = 12;
+  const ph = 28;
+  const blockStartX = leader.x - (pw * numNodes) / 2;
+  const blockTotalW = pw * numNodes;
+  const mw = 4;
+  const mh = 14;
+
+  return (
+    <div className="turbine-viz">
+      <svg viewBox={`0 0 ${W} ${H}`} className="turbine-svg" preserveAspectRatio="xMidYMid meet">
+        {(phase === 0 || phase === 1) &&
+          nodes.map((p, i) => (
+            <line
+              key={`l-${i}`}
+              x1={blockStartX + i * pw + pw / 2}
+              y1={blockY + ph}
+              x2={p.x}
+              y2={p.y - 22}
+              className={`turbine-line ${phase === 1 ? 'turbine-line-active' : ''}`}
+            />
+          ))}
+
+        {phase === 2 && (
+          <>
+            <line
+              x1={nodes[0].x}
+              y1={nodes[0].y}
+              x2={nodes[nodes.length - 1].x}
+              y2={nodes[nodes.length - 1].y}
+              className="turbine-peer-mesh"
+            />
+            {nodes.flatMap((src, i) =>
+              nodes.map((dst, j) => {
+                if (i === j) return null;
+                const dx = dst.x - src.x;
+                const dy = dst.y - src.y;
+                const delay = ((i * 17 + j * 23) % 19) * 30;
+                const duration = 1000 + ((i * 13 + j * 7) % 11) * 30;
+                return (
+                  <circle
+                    key={`peer-particle-${i}-${j}`}
+                    cx={src.x}
+                    cy={src.y}
+                    r={4}
+                    fill={PIECE_COLORS[i]}
+                    className="turbine-peer-particle"
+                    style={
+                      {
+                        '--pdx': `${dx}px`,
+                        '--pdy': `${dy}px`,
+                        animationDelay: `${delay}ms`,
+                        animationDuration: `${duration}ms`,
+                      } as React.CSSProperties
+                    }
+                  />
+                );
+              })
+            )}
+          </>
+        )}
+
+        <circle cx={leader.x} cy={leader.y} r={22} className="turbine-leader" />
+        <text x={leader.x} y={leader.y + 4} textAnchor="middle" className="turbine-leader-label">
+          leader
+        </text>
+
+        {(phase === 0 || phase === 1) && (
+          <g
+            key={`block-frame-${phase}`}
+            className={phase === 1 ? 'turbine-block-frame-fade' : ''}
+          >
+            <rect
+              x={blockStartX - 1}
+              y={blockY - 1}
+              width={blockTotalW + 2}
+              height={ph + 2}
+              rx={3}
+              fill="none"
+              className="turbine-block-frame"
+            />
+          </g>
+        )}
+
+        {(phase === 0 || phase === 1) &&
+          Array.from({ length: numNodes }, (_, i) => {
+            const startX = blockStartX + i * pw;
+            const endX = nodes[i].x - pw / 2;
+            const endY = nodes[i].y - ph / 2;
+            const dx = endX - startX;
+            const dy = endY - blockY;
+
+            return (
+              <rect
+                key={`piece-${phase}-${i}`}
+                x={startX}
+                y={blockY}
+                width={pw}
+                height={ph}
+                fill={PIECE_COLORS[i]}
+                className={phase === 1 ? 'turbine-piece-travel' : ''}
+                style={
+                  phase === 1
+                    ? ({ '--end-x': `${dx}px`, '--end-y': `${dy}px` } as React.CSSProperties)
+                    : {}
+                }
+              />
+            );
+          })}
+
+        {nodes.map((p, i) => (
+          <g key={`n-${i}`}>
+            <circle
+              cx={p.x}
+              cy={p.y}
+              r={20}
+              className={`turbine-node ${phase >= 2 ? 'turbine-node-active' : ''}`}
+            />
+            <text x={p.x} y={p.y + 4} textAnchor="middle" className="turbine-node-label">
+              N{SUB[i + 1]}
+            </text>
+
+            {phase === 2 && (
+              <rect
+                x={p.x - pw / 2}
+                y={p.y + 26}
+                width={pw}
+                height={ph}
+                fill={PIECE_COLORS[i]}
+              />
+            )}
+
+            {phase === 3 && (
+              <>
+                <rect
+                  x={p.x - (mw * numNodes) / 2 - 1}
+                  y={p.y + 25}
+                  width={mw * numNodes + 2}
+                  height={mh + 2}
+                  rx={2}
+                  fill="none"
+                  className="turbine-block-frame"
+                />
+                {Array.from({ length: numNodes }, (_, j) => (
+                  <rect
+                    key={`m-${i}-${j}`}
+                    x={p.x - (mw * numNodes) / 2 + j * mw}
+                    y={p.y + 26}
+                    width={mw}
+                    height={mh}
+                    fill={PIECE_COLORS[j]}
+                  />
+                ))}
+              </>
+            )}
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+// ── Solana Turbine: Turbine Tree Visualization ──────────
+
+const TURBINE_TREE_PHASE_DURATIONS = [1300, 1500, 1500, 1300, 1500, 900];
+
+function TurbineTreeViz() {
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    const t = setTimeout(
+      () => setPhase(p => (p + 1) % TURBINE_TREE_PHASE_DURATIONS.length),
+      TURBINE_TREE_PHASE_DURATIONS[phase]
+    );
+    return () => clearTimeout(t);
+  }, [phase]);
+
+  const W = 540;
+  const H = 320;
+  const k = 2;
+  const numShreds = 4;
+
+  const leader = { x: W / 2, y: 30 };
+  const blockY = 65;
+  const pw = 12;
+  const ph = 28;
+
+  const shredsAtLeader = phase === 0 ? k : numShreds;
+  const blockTotalW = pw * shredsAtLeader;
+  const blockStartX = leader.x - blockTotalW / 2;
+
+  const treeCenters = [70, 200, 340, 470];
+
+  const trees = treeCenters.map((cx, i) => ({
+    color: PIECE_COLORS[i],
+    root: { x: cx, y: 158 },
+    layer1: [
+      { x: cx - 22, y: 218 },
+      { x: cx + 22, y: 218 },
+    ],
+    layer2: [
+      { x: cx - 33, y: 280, parent: 0 },
+      { x: cx - 11, y: 280, parent: 0 },
+      { x: cx + 11, y: 280, parent: 1 },
+      { x: cx + 33, y: 280, parent: 1 },
+    ],
+  }));
+
+  return (
+    <div className="turbine-viz">
+      <div className="turbine-erasure-layout">
+        <svg viewBox={`0 0 ${W} ${H}`} className="turbine-svg" preserveAspectRatio="xMidYMid meet">
+        {(phase === 0 || phase === 1 || phase === 2) &&
+          trees.map((tree, t) => {
+            if (phase === 0 && t >= k) return null;
+            const startX = blockStartX + t * pw + pw / 2;
+            return (
+              <line
+                key={`l-r-${t}`}
+                x1={startX}
+                y1={blockY + ph}
+                x2={tree.root.x}
+                y2={tree.root.y}
+                className={`turbine-tree-edge ${phase === 2 ? 'turbine-tree-edge-active' : ''}`}
+                style={
+                  phase === 2
+                    ? ({ '--tree-color': tree.color } as React.CSSProperties)
+                    : {}
+                }
+              />
+            );
+          })}
+
+        {trees.map((tree, t) => (
+          <g
+            key={`tree-edges-${t}`}
+            style={{ '--tree-color': tree.color } as React.CSSProperties}
+          >
+            {tree.layer1.map((p, i) => (
+              <line
+                key={`r-l1-${i}`}
+                x1={tree.root.x}
+                y1={tree.root.y}
+                x2={p.x}
+                y2={p.y}
+                className={`turbine-tree-edge ${phase === 3 ? 'turbine-tree-edge-active' : ''}`}
+              />
+            ))}
+            {tree.layer2.map((p, i) => (
+              <line
+                key={`l1-l2-${i}`}
+                x1={tree.layer1[p.parent].x}
+                y1={tree.layer1[p.parent].y}
+                x2={p.x}
+                y2={p.y}
+                className={`turbine-tree-edge ${phase === 4 ? 'turbine-tree-edge-active' : ''}`}
+              />
+            ))}
+          </g>
+        ))}
+
+        {phase === 2 &&
+          trees.map((tree, t) => {
+            const startX = blockStartX + t * pw + pw / 2;
+            const startY = blockY + ph;
+            const dx = tree.root.x - startX;
+            const dy = tree.root.y - startY;
+            return (
+              <circle
+                key={`p2-${t}`}
+                cx={startX}
+                cy={startY}
+                r={5}
+                fill={tree.color}
+                className="turbine-peer-particle"
+                style={
+                  {
+                    '--pdx': `${dx}px`,
+                    '--pdy': `${dy}px`,
+                    animationDuration: '1.2s',
+                    animationDelay: `${t * 40}ms`,
+                  } as React.CSSProperties
+                }
+              />
+            );
+          })}
+
+        {phase === 3 &&
+          trees.flatMap((tree, t) =>
+            tree.layer1.map((p, i) => {
+              const dx = p.x - tree.root.x;
+              const dy = p.y - tree.root.y;
+              return (
+                <circle
+                  key={`p3-${t}-${i}`}
+                  cx={tree.root.x}
+                  cy={tree.root.y}
+                  r={4}
+                  fill={tree.color}
+                  className="turbine-peer-particle"
+                  style={
+                    {
+                      '--pdx': `${dx}px`,
+                      '--pdy': `${dy}px`,
+                      animationDuration: '1.0s',
+                      animationDelay: `${i * 30}ms`,
+                    } as React.CSSProperties
+                  }
+                />
+              );
+            })
+          )}
+
+        {phase === 4 &&
+          trees.flatMap((tree, t) =>
+            tree.layer2.map((p, i) => {
+              const parent = tree.layer1[p.parent];
+              const dx = p.x - parent.x;
+              const dy = p.y - parent.y;
+              return (
+                <circle
+                  key={`p4-${t}-${i}`}
+                  cx={parent.x}
+                  cy={parent.y}
+                  r={4}
+                  fill={tree.color}
+                  className="turbine-peer-particle"
+                  style={
+                    {
+                      '--pdx': `${dx}px`,
+                      '--pdy': `${dy}px`,
+                      animationDuration: '1.0s',
+                      animationDelay: `${(i % 2) * 30}ms`,
+                    } as React.CSSProperties
+                  }
+                />
+              );
+            })
+          )}
+
+        <circle cx={leader.x} cy={leader.y} r={20} className="turbine-leader" />
+        <text x={leader.x} y={leader.y + 4} textAnchor="middle" className="turbine-leader-label">
+          leader
+        </text>
+
+        {(phase === 0 || phase === 1) && (
+          <rect
+            x={blockStartX - 1}
+            y={blockY - 1}
+            width={blockTotalW + 2}
+            height={ph + 2}
+            rx={3}
+            fill="none"
+            className="turbine-block-frame"
+          />
+        )}
+
+        {(phase === 0 || phase === 1) &&
+          Array.from({ length: numShreds }, (_, i) => {
+            if (phase === 0 && i >= k) return null;
+            const startX = blockStartX + i * pw;
+            const isParity = i >= k;
+            const fadeIn = phase === 1 && isParity;
+            return (
+              <rect
+                key={`piece-${phase}-${i}`}
+                x={startX}
+                y={blockY}
+                width={pw}
+                height={ph}
+                fill={PIECE_COLORS[i]}
+                className={fadeIn ? 'turbine-parity-fade-in' : ''}
+              />
+            );
+          })}
+
+        {trees.map((tree, t) => (
+          <g
+            key={`tree-nodes-${t}`}
+            style={{ '--tree-color': tree.color } as React.CSSProperties}
+          >
+            <circle
+              cx={tree.root.x}
+              cy={tree.root.y}
+              r={11}
+              className={`turbine-tree-node ${phase >= 3 ? 'turbine-tree-node-active' : ''}`}
+            />
+            {tree.layer1.map((p, i) => (
+              <circle
+                key={`l1-${i}`}
+                cx={p.x}
+                cy={p.y}
+                r={8}
+                className={`turbine-tree-node ${phase >= 4 ? 'turbine-tree-node-active' : ''}`}
+              />
+            ))}
+            {tree.layer2.map((p, i) => (
+              <circle
+                key={`l2-${i}`}
+                cx={p.x}
+                cy={p.y}
+                r={6}
+                className={`turbine-tree-node ${phase >= 5 ? 'turbine-tree-node-active' : ''}`}
+              />
+            ))}
+          </g>
+        ))}
+        </svg>
+        <ErasureGrid phase={phase >= 1 ? 1 : 0} dataRows={k} parityRows={numShreds - k} />
+      </div>
+    </div>
+  );
+}
+
+// ── Solana Turbine: Erasure Coding Visualization ────────
+
+const ERASURE_PHASE_DURATIONS = [1500, 1800, 1500, 1500, 2400, 1800];
+const BAD_NODE_INDICES = new Set([1, 4]);
+
+function ErasureGrid({
+  phase,
+  dataRows = 3,
+  parityRows = 3,
+}: {
+  phase: number;
+  dataRows?: number;
+  parityRows?: number;
+}) {
+  const cols = 4;
+  const cell = 14;
+
+  const gridX = 6;
+  const gridY = 22;
+  const arrowH = 24;
+
+  const dataH = dataRows * cell;
+  const parityH = parityRows * cell;
+  const gridW = cols * cell;
+
+  const parityY = gridY + dataH + arrowH;
+  const arrowCenterY = gridY + dataH + arrowH / 2;
+
+  const totalW = gridW + 26;
+  const totalH = gridY + dataH + arrowH + parityH + 16;
+  const cx = gridX + gridW / 2;
+
+  return (
+    <svg
+      viewBox={`0 0 ${totalW} ${totalH}`}
+      className="turbine-erasure-grid"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <text x={cx} y={14} textAnchor="middle" className="turbine-erasure-label">
+        block
+      </text>
+
+      {Array.from({ length: dataRows }, (_, r) =>
+        Array.from({ length: cols }, (_, c) => (
+          <rect
+            key={`d-${r}-${c}`}
+            x={gridX + c * cell}
+            y={gridY + r * cell}
+            width={cell}
+            height={cell}
+            fill={PIECE_COLORS[r]}
+            opacity={0.85}
+            className="turbine-erasure-cell"
+          />
+        ))
+      )}
+
+      {phase >= 1 && (
+        <g className={phase === 1 ? 'turbine-encoding-arrow-anim' : ''}>
+          <line
+            x1={cx}
+            y1={arrowCenterY - 9}
+            x2={cx}
+            y2={arrowCenterY + 4}
+            className="turbine-encoding-arrow"
+          />
+          <polygon
+            points={`${cx - 5},${arrowCenterY + 2} ${cx + 5},${arrowCenterY + 2} ${cx},${arrowCenterY + 9}`}
+            className="turbine-encoding-arrow-head"
+          />
+        </g>
+      )}
+
+      {phase >= 1 &&
+        Array.from({ length: parityRows }, (_, r) =>
+          Array.from({ length: cols }, (_, c) => (
+            <rect
+              key={`p-${r}-${c}`}
+              x={gridX + c * cell}
+              y={parityY + r * cell}
+              width={cell}
+              height={cell}
+              fill={PIECE_COLORS[dataRows + r]}
+              opacity={0.85}
+              className={`turbine-erasure-cell ${phase === 1 ? 'turbine-parity-fade-in' : ''}`}
+            />
+          ))
+        )}
+
+      {phase >= 1 && (
+        <text x={cx} y={totalH - 4} textAnchor="middle" className="turbine-erasure-label">
+          encoded
+        </text>
+      )}
+    </svg>
+  );
+}
+
+function ErasureCodeViz() {
+  const k = 3;
+  const numNodes = 6;
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    const t = setTimeout(
+      () => setPhase(p => (p + 1) % ERASURE_PHASE_DURATIONS.length),
+      ERASURE_PHASE_DURATIONS[phase]
+    );
+    return () => clearTimeout(t);
+  }, [phase]);
+
+  const W = 540;
+  const H = 290;
+  const leader = { x: W / 2, y: 38 };
+  const blockY = 78;
+  const nodes = Array.from({ length: numNodes }, (_, i) => ({
+    x: 50 + (i * (W - 100)) / (numNodes - 1),
+    y: H - 70,
+  }));
+
+  const pw = 12;
+  const ph = 28;
+  const mw = 4;
+  const mh = 14;
+
+  const shredsAtLeader = phase === 0 ? k : numNodes;
+  const blockTotalW = pw * shredsAtLeader;
+  const blockStartX = leader.x - blockTotalW / 2;
+
+  const survivingIndices = Array.from({ length: numNodes }, (_, i) => i).filter(
+    i => !BAD_NODE_INDICES.has(i)
+  );
+
+  return (
+    <div className="turbine-viz">
+      <div className="turbine-erasure-layout">
+        <svg viewBox={`0 0 ${W} ${H}`} className="turbine-svg" preserveAspectRatio="xMidYMid meet">
+        {(phase === 0 || phase === 1 || phase === 2) &&
+          Array.from({ length: numNodes }, (_, i) => {
+            if (phase === 0 && i >= k) return null;
+            const x1 = blockStartX + i * pw + pw / 2;
+            return (
+              <line
+                key={`l-${i}`}
+                x1={x1}
+                y1={blockY + ph}
+                x2={nodes[i].x}
+                y2={nodes[i].y - 22}
+                className={`turbine-line ${phase === 2 ? 'turbine-line-active' : ''}`}
+              />
+            );
+          })}
+
+        {phase === 4 && (
+          <>
+            <line
+              x1={nodes[survivingIndices[0]].x}
+              y1={nodes[survivingIndices[0]].y}
+              x2={nodes[survivingIndices[survivingIndices.length - 1]].x}
+              y2={nodes[survivingIndices[survivingIndices.length - 1]].y}
+              className="turbine-peer-mesh"
+            />
+            {survivingIndices.flatMap(i =>
+              survivingIndices.map(j => {
+                if (i === j) return null;
+                const src = nodes[i];
+                const dst = nodes[j];
+                const dx = dst.x - src.x;
+                const dy = dst.y - src.y;
+                const delay = ((i * 17 + j * 23) % 19) * 30;
+                const duration = 1000 + ((i * 13 + j * 7) % 11) * 30;
+                return (
+                  <circle
+                    key={`peer-${i}-${j}`}
+                    cx={src.x}
+                    cy={src.y}
+                    r={4}
+                    fill={PIECE_COLORS[i]}
+                    className="turbine-peer-particle"
+                    style={
+                      {
+                        '--pdx': `${dx}px`,
+                        '--pdy': `${dy}px`,
+                        animationDelay: `${delay}ms`,
+                        animationDuration: `${duration}ms`,
+                      } as React.CSSProperties
+                    }
+                  />
+                );
+              })
+            )}
+          </>
+        )}
+
+        <circle cx={leader.x} cy={leader.y} r={22} className="turbine-leader" />
+        <text x={leader.x} y={leader.y + 4} textAnchor="middle" className="turbine-leader-label">
+          leader
+        </text>
+
+        {(phase === 0 || phase === 1) && (
+          <rect
+            x={blockStartX - 1}
+            y={blockY - 1}
+            width={blockTotalW + 2}
+            height={ph + 2}
+            rx={3}
+            fill="none"
+            className="turbine-block-frame"
+          />
+        )}
+
+        {(phase === 0 || phase === 1 || phase === 2) &&
+          Array.from({ length: numNodes }, (_, i) => {
+            if (phase === 0 && i >= k) return null;
+            const startX = blockStartX + i * pw;
+            const endX = nodes[i].x - pw / 2;
+            const endY = nodes[i].y - ph / 2;
+            const dx = endX - startX;
+            const dy = endY - blockY;
+            const isParity = i >= k;
+            const fadeIn = phase === 1 && isParity;
+
+            return (
+              <rect
+                key={`piece-${phase}-${i}`}
+                x={startX}
+                y={blockY}
+                width={pw}
+                height={ph}
+                fill={PIECE_COLORS[i]}
+                className={
+                  phase === 2
+                    ? 'turbine-piece-travel'
+                    : fadeIn
+                    ? 'turbine-parity-fade-in'
+                    : ''
+                }
+                style={
+                  phase === 2
+                    ? ({ '--end-x': `${dx}px`, '--end-y': `${dy}px` } as React.CSSProperties)
+                    : {}
+                }
+              />
+            );
+          })}
+
+        {nodes.map((p, i) => {
+          const isBad = BAD_NODE_INDICES.has(i);
+          const showBadIndicator = isBad && phase >= 3;
+          const showShred = phase === 3 || phase === 4 || (phase === 5 && isBad);
+          const showReconstructed = phase === 5 && !isBad;
+
+          return (
+            <g key={`n-${i}`}>
+              <circle
+                cx={p.x}
+                cy={p.y}
+                r={20}
+                className={
+                  showBadIndicator
+                    ? 'turbine-node turbine-node-bad'
+                    : phase >= 2
+                    ? 'turbine-node turbine-node-active'
+                    : 'turbine-node'
+                }
+              />
+              <text x={p.x} y={p.y + 4} textAnchor="middle" className="turbine-node-label">
+                N{SUB[i + 1]}
+              </text>
+
+              {showShred && (
+                <rect
+                  x={p.x - pw / 2}
+                  y={p.y + 26}
+                  width={pw}
+                  height={ph}
+                  fill={PIECE_COLORS[i]}
+                  opacity={isBad ? 0.35 : 1}
+                />
+              )}
+
+              {showBadIndicator && showShred && (
+                <g className="turbine-bad-x">
+                  <line
+                    x1={p.x - pw / 2 - 3}
+                    y1={p.y + 24}
+                    x2={p.x + pw / 2 + 3}
+                    y2={p.y + 28 + ph}
+                  />
+                  <line
+                    x1={p.x + pw / 2 + 3}
+                    y1={p.y + 24}
+                    x2={p.x - pw / 2 - 3}
+                    y2={p.y + 28 + ph}
+                  />
+                </g>
+              )}
+
+              {showReconstructed && (
+                <>
+                  <rect
+                    x={p.x - (mw * k) / 2 - 1}
+                    y={p.y + 25}
+                    width={mw * k + 2}
+                    height={mh + 2}
+                    rx={2}
+                    fill="none"
+                    className="turbine-block-frame"
+                  />
+                  {Array.from({ length: k }, (_, j) => (
+                    <rect
+                      key={`m-${i}-${j}`}
+                      x={p.x - (mw * k) / 2 + j * mw}
+                      y={p.y + 26}
+                      width={mw}
+                      height={mh}
+                      fill={PIECE_COLORS[j]}
+                    />
+                  ))}
+                </>
+              )}
+            </g>
+          );
+        })}
+        </svg>
+        <ErasureGrid phase={phase} />
+      </div>
+    </div>
+  );
+}
+
+// ── Solana Turbine: Leader Broadcast Visualization ──────
+
+function LeaderBroadcastViz() {
+  const numNodes = 6;
+  const [phase, setPhase] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setPhase(p => p + 1), 1400);
+    return () => clearInterval(t);
+  }, []);
+
+  const W = 540;
+  const H = 260;
+  const leader = { x: W / 2, y: 50 };
+  const nodes = Array.from({ length: numNodes }, (_, i) => ({
+    x: 50 + (i * (W - 100)) / (numNodes - 1),
+    y: H - 50,
+  }));
+
+  const currentNode = phase % numNodes;
+  const target = nodes[currentNode];
+  const dx = target.x - leader.x;
+  const dy = target.y - leader.y;
+
+  return (
+    <div className="turbine-viz">
+      <svg viewBox={`0 0 ${W} ${H}`} className="turbine-svg" preserveAspectRatio="xMidYMid meet">
+        {nodes.map((p, i) => (
+          <line
+            key={i}
+            x1={leader.x}
+            y1={leader.y}
+            x2={p.x}
+            y2={p.y}
+            className={`turbine-line ${i === currentNode ? 'turbine-line-active' : ''}`}
+          />
+        ))}
+
+        <g
+          key={phase}
+          className="turbine-block-travel"
+          style={{ '--end-x': `${dx}px`, '--end-y': `${dy}px` } as React.CSSProperties}
+        >
+          <rect
+            x={leader.x - 10}
+            y={leader.y - 7}
+            width={20}
+            height={14}
+            rx={2}
+            className="turbine-block"
+          />
+        </g>
+
+        <circle cx={leader.x} cy={leader.y} r={28} className="turbine-leader" />
+        <text x={leader.x} y={leader.y + 4} textAnchor="middle" className="turbine-leader-label">
+          leader
+        </text>
+
+        {nodes.map((p, i) => (
+          <g key={i}>
+            <circle
+              cx={p.x}
+              cy={p.y}
+              r={20}
+              className={`turbine-node ${i === currentNode ? 'turbine-node-active' : ''}`}
+            />
+            <text x={p.x} y={p.y + 4} textAnchor="middle" className="turbine-node-label">
+              N{SUB[i + 1]}
+            </text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
 // ── Main Page ───────────────────────────────────────────
 
-type Tab = 'overview' | 'parity' | 'reed-solomon' | 'systematic';
+type Tab = 'overview' | 'parity' | 'reed-solomon' | 'systematic' | 'solana-turbine';
+type TurbineTab = 'intro' | 'splitting' | 'erasure' | 'turbine';
+
+const TURBINE_TABS: { id: TurbineTab; label: string }[] = [
+  { id: 'intro', label: 'Intro' },
+  { id: 'splitting', label: 'Shredding' },
+  { id: 'erasure', label: 'Erasure Coding' },
+  { id: 'turbine', label: 'Turbine' },
+];
 
 const TABS: { id: Tab; label: string }[] = [
   { id: 'overview', label: 'Overview' },
   { id: 'parity', label: 'Parity Check' },
   { id: 'reed-solomon', label: 'Reed-Solomon' },
   { id: 'systematic', label: 'Systematic RS' },
+  { id: 'solana-turbine', label: 'Solana Turbine' },
 ];
 
 function ErasureCoding() {
   const [tab, setTab] = useState<Tab>('overview');
+  const [turbineTab, setTurbineTab] = useState<TurbineTab>('intro');
 
   return (
     <div className="essay-container">
       <p className="essay-title">Erasure Coding</p>
-      <p className="date">March 2026</p>
 
       <div className="ec-tabs">
         {TABS.map(t => (
@@ -829,6 +1685,109 @@ function ErasureCoding() {
           </p>
           <SystematicRSViz />
         </>
+      )}
+
+      {tab === 'solana-turbine' && (
+        <div className="turbine-layout">
+          <div className="turbine-sidebar">
+            {TURBINE_TABS.map(t => (
+              <button
+                key={t.id}
+                className={`turbine-vtab ${turbineTab === t.id ? 'turbine-vtab-active' : ''}`}
+                onClick={() => setTurbineTab(t.id)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+          <div className="turbine-content">
+            {turbineTab === 'intro' && (
+              <>
+                <ul className="turbine-bullets">
+                  <li>
+                    In blockchains, the traditional mechanism for block propagation from leader
+                    to the rest of the network requires the leader to transmit the full proposed block
+                    to several other nodes
+                  </li>
+                  <li>
+                    This is very inefficient for the leader and is a very inefficient use of
+                    the bandwidth of the network
+                  </li>
+                </ul>
+                <LeaderBroadcastViz />
+              </>
+            )}
+            {turbineTab === 'splitting' && (
+              <>
+                <p>
+                  A more efficient use of the network's bandwidth would be to split this block up
+                  into smaller pieces (shreds) and disseminate different shreds to different nodes,
+                  who then collaborate to reconstruct the entire block.
+                </p>
+                <BlockSplitViz />
+                <p>
+                  However, malicious nodes now have the ability to withold their shred and prevent
+                  reconstruction of the block.
+                </p>
+              </>
+            )}
+            {turbineTab === 'erasure' && (
+              <>
+                <ul className="turbine-bullets">
+                  <li>
+                    Instead of naively shredding the block and distributing shreds, the leader
+                    could erasure code their block into shreds with redundancy.
+                  </li>
+                  <li>
+                    A protocol can tune the redundancy to the desired level so that there is a
+                    high level of confidence the block can always be reconstructed despite network
+                    failures or malicious nodes.
+                  </li>
+                </ul>
+                <ErasureCodeViz />
+              </>
+            )}
+            {turbineTab === 'turbine' && (
+              <>
+                <ul className="turbine-bullets">
+                  <li>
+                    Solana's shredding splits blocks into shreds, which are grouped into Forward
+                    Error Correction (FEC) sets.
+                    <ul className="turbine-subbullets">
+                      <li>
+                        FEC sets are commonly 32 data shreds + 32 Reed-Solomon coded shreds for
+                        redundancy, so up to 32 shreds from the set can be lost and the entire
+                        set can still be recovered.
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    Each shred gets its own "Turbine Tree" — a tree-shaped hierarchy of validators
+                    that the shred disseminates through.
+                    <ul className="turbine-subbullets">
+                      <li>
+                        Every validator can independently compute the Turbine Tree for a shred
+                        from a deterministic seed of: leader id, slot, shred index, and shred
+                        type.
+                      </li>
+                      <li>
+                        The tree-construction algorithm favors more heavily stake-weighted
+                        validators closer to the root, with some shuffling so it isn't purely
+                        stake-based.
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    The leader sends the shred to the root node; the root computes the same tree
+                    and fans the shred out to ~200 validators in the next layer; each of those
+                    fans out to ~200 more, and so on.
+                  </li>
+                </ul>
+                <TurbineTreeViz />
+              </>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );
