@@ -19,6 +19,21 @@ function ByzantineDiagram() {
   const midBH1 = { x: (B.x + H1.x) / 2 - 30, y: (B.y + H1.y) / 2 - 10 };
   const midBH2 = { x: (B.x + H2.x) / 2 + 30, y: (B.y + H2.y) / 2 - 10 };
 
+  // Compute arrowhead points aligned with the line direction
+  const arrowHead = (x1: number, y1: number, x2: number, y2: number, size = 12) => {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const len = Math.hypot(dx, dy) || 1;
+    const ux = dx / len;
+    const uy = dy / len;
+    const px = -uy;
+    const py = ux;
+    const half = size * 0.45;
+    const bx = x2 - ux * size;
+    const by = y2 - uy * size;
+    return `${x2},${y2} ${bx + px * half},${by + py * half} ${bx - px * half},${by - py * half}`;
+  };
+
   return (
     <div className="ec-overview-diagram" style={{ marginTop: 32 }}>
       <div className="ec-diagram-label">pre-GST: byzantine block proposer equivocates</div>
@@ -62,7 +77,7 @@ function ByzantineDiagram() {
         />
         {/* Arrow head B → H1 */}
         <polygon
-          points={`${H1.x + 20},${H1.y - 28} ${H1.x + 28},${H1.y - 40} ${H1.x + 12},${H1.y - 36}`}
+          points={arrowHead(B.x, B.y + 32, H1.x + 20, H1.y - 28)}
           fill="var(--highlight-color)"
           opacity={0.5}
         />
@@ -76,7 +91,7 @@ function ByzantineDiagram() {
         />
         {/* Arrow head B → H2 */}
         <polygon
-          points={`${H2.x - 20},${H2.y - 28} ${H2.x - 28},${H2.y - 40} ${H2.x - 12},${H2.y - 36}`}
+          points={arrowHead(B.x, B.y + 32, H2.x - 20, H2.y - 28)}
           fill="var(--highlight-color)"
           opacity={0.5}
         />

@@ -93,15 +93,20 @@ function SSGraph({ coeffs, points, showCurve = true, showPoints = true, hiddenIn
 
   return (
     <svg className="ec-poly-graph" viewBox={`0 0 ${W} ${H}`} width={W} height={H}>
-      <line x1={pad.left} y1={pad.top} x2={pad.left} y2={pad.top + plotH} className="ec-graph-axis" />
+      <line x1={toSvgX(0)} y1={pad.top} x2={toSvgX(0)} y2={pad.top + plotH} className="ec-graph-axis" />
       <line x1={pad.left} y1={toSvgY(0)} x2={pad.left + plotW} y2={toSvgY(0)} className="ec-graph-axis" />
 
-      {yTicks.map(v => (
-        <g key={v}>
-          <line x1={pad.left - 3} y1={toSvgY(v)} x2={pad.left} y2={toSvgY(v)} className="ec-graph-axis" />
-          <text x={pad.left - 6} y={toSvgY(v) + 3.5} className="ec-graph-tick" textAnchor="end">{v}</text>
-        </g>
-      ))}
+      {yTicks.map(v => {
+        const hideLabel = showSecret && secret !== undefined && v === secret;
+        return (
+          <g key={v}>
+            <line x1={toSvgX(0) - 3} y1={toSvgY(v)} x2={toSvgX(0)} y2={toSvgY(v)} className="ec-graph-axis" />
+            {!hideLabel && (
+              <text x={toSvgX(0) - 6} y={toSvgY(v) + 3.5} className="ec-graph-tick" textAnchor="end">{v}</text>
+            )}
+          </g>
+        );
+      })}
 
       {allX.map((x, i) => (
         <g key={`xt-${i}`}>
@@ -550,7 +555,6 @@ function ShamirSecretSharing() {
   return (
     <div className="essay-container">
       <p className="essay-title">Shamir Secret Sharing</p>
-      <p className="date">March 2026</p>
 
       <div className="ec-tabs">
         {TABS.map(t => (

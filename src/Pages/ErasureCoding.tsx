@@ -98,111 +98,120 @@ function ParityCheckViz() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setActive(s => (s + 1) % PAR_STEPS), PAR_MS);
+    const t = setInterval(() => {
+      setActive(s => {
+        if (s >= PAR_STEPS - 1) {
+          clearInterval(t);
+          return s;
+        }
+        return s + 1;
+      });
+    }, PAR_MS);
     return () => clearInterval(t);
   }, []);
 
   return (
     <div className="ec-overview-diagram">
-      <div className={`ec-ov-step ${active === 0 ? 'ec-ov-active' : active > 0 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">data symbols (k = 4)</div>
-        <div className="ec-diagram-row">
-          {P_DATA.map((val, i) => (
-            <div key={i} className="ec-diagram-box ec-diagram-msg">
-              <div className="ec-diagram-box-inner">
-                <span className="ec-diagram-box-label">d{SUB[i]}</span>
-                <span>{val}</span>
-                <span className="ec-diagram-box-bin">{toBin(val)}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className={`ec-ov-arrow ${active >= 1 ? 'ec-ov-arrow-active' : ''}`}>
-        <span>&darr; XOR all data symbols</span>
-      </div>
-
-      <div className={`ec-ov-step ${active === 1 ? 'ec-ov-active' : active > 1 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-computation">
-          {P_DATA.map((v, i) => (
-            <span key={i}>{i > 0 ? ' \u2295 ' : ''}{v}</span>
-          ))}
-          {' = '}<span className="ec-hl">{P_VAL}</span>
-        </div>
-        <div className="ec-diagram-label">codeword (n = k + 1 = 5)</div>
-        <div className="ec-diagram-row">
-          {P_ALL.map((val, i) => {
-            const isParity = i === P_DATA.length;
-            return (
-              <div key={i} className={`ec-diagram-box ${isParity ? 'ec-diagram-parity' : 'ec-diagram-msg'}`}>
+      <div className="ec-side ec-side-sender">
+        <div className="ec-side-label">sender</div>
+        <div className={`ec-ov-step ${active === 0 ? 'ec-ov-active' : active > 0 ? 'ec-ov-done' : ''}`}>
+          <div className="ec-diagram-label">data symbols (k = 4)</div>
+          <div className="ec-diagram-row">
+            {P_DATA.map((val, i) => (
+              <div key={i} className="ec-diagram-box ec-diagram-msg">
                 <div className="ec-diagram-box-inner">
-                  <span className="ec-diagram-box-label">{isParity ? 'P' : `d${SUB[i]}`}</span>
-                  <span>{val}</span>
+                  <span className="ec-diagram-box-label">d{SUB[i]}</span>
                   <span className="ec-diagram-box-bin">{toBin(val)}</span>
                 </div>
               </div>
-            );
-          })}
+            ))}
+          </div>
         </div>
-      </div>
 
-      <div className={`ec-ov-arrow ${active >= 2 ? 'ec-ov-arrow-active' : ''}`}>
-        <span>&darr; symbol d{SUB[P_ERASE]} lost</span>
-      </div>
+        <div className={`ec-ov-arrow ${active >= 1 ? 'ec-ov-arrow-active' : ''}`}>
+          <span>&darr; XOR all data symbols</span>
+        </div>
 
-      <div className={`ec-ov-step ${active === 2 ? 'ec-ov-active' : active > 2 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">received</div>
-        <div className="ec-diagram-row">
-          {P_ALL.map((val, i) => {
-            const isParity = i === P_DATA.length;
-            const erased = i === P_ERASE;
-            return (
-              <div key={i} className={`ec-diagram-box ${erased ? 'ec-diagram-erased' : isParity ? 'ec-diagram-parity' : 'ec-diagram-msg'}`}>
-                <div className="ec-diagram-box-inner">
-                  <span className="ec-diagram-box-label">{isParity ? 'P' : `d${SUB[i]}`}</span>
-                  <span>{erased ? '?' : val}</span>
-                  <span className="ec-diagram-box-bin">{erased ? '????' : toBin(val)}</span>
+        <div className={`ec-ov-step ${active === 1 ? 'ec-ov-active' : active > 1 ? 'ec-ov-done' : ''}`}>
+          <div className="ec-diagram-computation">
+            {P_DATA.map((v, i) => (
+              <span key={i}>{i > 0 ? ' \u2295 ' : ''}{toBin(v)}</span>
+            ))}
+            {' = '}<span className="ec-hl">{toBin(P_VAL)}</span>
+          </div>
+          <div className="ec-diagram-label">codeword (n = k + 1 = 5)</div>
+          <div className="ec-diagram-row">
+            {P_ALL.map((val, i) => {
+              const isParity = i === P_DATA.length;
+              return (
+                <div key={i} className={`ec-diagram-box ${isParity ? 'ec-diagram-parity' : 'ec-diagram-msg'}`}>
+                  <div className="ec-diagram-box-inner">
+                    <span className="ec-diagram-box-label">{isParity ? 'P' : `d${SUB[i]}`}</span>
+                    <span className="ec-diagram-box-bin">{toBin(val)}</span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
 
-      <div className={`ec-ov-arrow ${active >= 3 ? 'ec-ov-arrow-active' : ''}`}>
-        <span>&darr; XOR remaining symbols</span>
+      <div className={`ec-ov-arrow ec-ov-arrow-transport ${active >= 2 ? 'ec-ov-arrow-active' : ''}`}>
+        <span>&darr; transport &mdash; symbol d{SUB[P_ERASE]} lost</span>
       </div>
 
-      <div className={`ec-ov-step ${active === 3 ? 'ec-ov-active' : active > 3 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-computation">
-          {P_REMAINING.map((v, i) => (
-            <span key={i}>{i > 0 ? ' \u2295 ' : ''}{v}</span>
-          ))}
-          {' = '}<span className="ec-hl">{P_RECOVERED}</span>
-        </div>
-      </div>
-
-      <div className={`ec-ov-arrow ${active >= 4 ? 'ec-ov-arrow-active' : ''}`}>
-        <span>&darr; recover</span>
-      </div>
-
-      <div className={`ec-ov-step ${active === 4 ? 'ec-ov-active' : active > 4 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">codeword</div>
-        <div className="ec-diagram-row">
-          {P_ALL.map((val, i) => {
-            const isParity = i === P_DATA.length;
-            const wasErased = i === P_ERASE;
-            return (
-              <div key={i} className={`ec-diagram-box ${wasErased ? 'ec-diagram-recovered' : isParity ? 'ec-diagram-parity' : 'ec-diagram-msg'}`}>
-                <div className="ec-diagram-box-inner">
-                  <span className="ec-diagram-box-label">{isParity ? 'P' : `d${SUB[i]}`}</span>
-                  <span>{val}</span>
-                  <span className="ec-diagram-box-bin">{toBin(val)}</span>
+      <div className="ec-side ec-side-receiver">
+        <div className="ec-side-label">receiver</div>
+        <div className={`ec-ov-step ${active === 2 ? 'ec-ov-active' : active > 2 ? 'ec-ov-done' : ''}`}>
+          <div className="ec-diagram-label">received</div>
+          <div className="ec-diagram-row">
+            {P_ALL.map((val, i) => {
+              const isParity = i === P_DATA.length;
+              const erased = i === P_ERASE;
+              return (
+                <div key={i} className={`ec-diagram-box ${erased ? 'ec-diagram-erased' : isParity ? 'ec-diagram-parity' : 'ec-diagram-msg'}`}>
+                  <div className="ec-diagram-box-inner">
+                    <span className="ec-diagram-box-label">{isParity ? 'P' : `d${SUB[i]}`}</span>
+                    <span className="ec-diagram-box-bin">{erased ? '????' : toBin(val)}</span>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        </div>
+
+        <div className={`ec-ov-arrow ${active >= 3 ? 'ec-ov-arrow-active' : ''}`}>
+          <span>&darr; XOR received symbols</span>
+        </div>
+
+        <div className={`ec-ov-step ${active === 3 ? 'ec-ov-active' : active > 3 ? 'ec-ov-done' : ''}`}>
+          <div className="ec-diagram-computation">
+            {P_REMAINING.map((v, i) => (
+              <span key={i}>{i > 0 ? ' \u2295 ' : ''}{toBin(v)}</span>
+            ))}
+            {' = '}<span className="ec-hl">{toBin(P_RECOVERED)}</span>
+          </div>
+        </div>
+
+        <div className={`ec-ov-arrow ${active >= 4 ? 'ec-ov-arrow-active' : ''}`}>
+          <span>&darr; recover codeword</span>
+        </div>
+
+        <div className={`ec-ov-step ${active === 4 ? 'ec-ov-active' : active > 4 ? 'ec-ov-done' : ''}`}>
+          <div className="ec-diagram-row">
+            {P_ALL.map((val, i) => {
+              const isParity = i === P_DATA.length;
+              const wasErased = i === P_ERASE;
+              return (
+                <div key={i} className={`ec-diagram-box ${wasErased ? 'ec-diagram-recovered' : isParity ? 'ec-diagram-parity' : 'ec-diagram-msg'}`}>
+                  <div className="ec-diagram-box-inner">
+                    <span className="ec-diagram-box-label">{isParity ? 'P' : `d${SUB[i]}`}</span>
+                    <span className="ec-diagram-box-bin">{toBin(val)}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>
@@ -455,8 +464,7 @@ function ReedSolomonViz() {
             <div className="ec-diagram-computation">
               surviving: {survivingPoints.join(', ')} &rarr; p(x) = {fmtPoly(coeffs)}
             </div>
-            <div className="ec-diagram-arrow">&darr; coefficients = message</div>
-            <div className="ec-diagram-label">recovered message</div>
+            <div className="ec-diagram-arrow">&darr; coefficients = recovered message</div>
             <div className="ec-diagram-row">
               {coeffs.map((c, i) => (
                 <div key={i} className="ec-diagram-box ec-diagram-recovered">
@@ -674,7 +682,15 @@ function OverviewDiagram() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const t = setInterval(() => setActive(s => (s + 1) % OV_STEPS), OV_MS);
+    const t = setInterval(() => {
+      setActive(s => {
+        if (s >= OV_STEPS - 1) {
+          clearInterval(t);
+          return s;
+        }
+        return s + 1;
+      });
+    }, OV_MS);
     return () => clearInterval(t);
   }, []);
 
@@ -690,11 +706,10 @@ function OverviewDiagram() {
       </div>
 
       <div className={`ec-ov-arrow ${active >= 1 ? 'ec-ov-arrow-active' : ''}`}>
-        <span>&darr; encode</span>
+        <span>&darr; encode a codeword (n=6 symbols)</span>
       </div>
 
       <div className={`ec-ov-step ${active === 1 ? 'ec-ov-active' : active > 1 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">codeword (n=6 symbols)</div>
         <div className="ec-diagram-row">
           {[0, 1, 2, 3, 4, 5].map(i => (
             <div key={i} className="ec-diagram-box ec-diagram-cw">{`c${SUB[i]}`}</div>
@@ -729,11 +744,10 @@ function OverviewDiagram() {
       </div>
 
       <div className={`ec-ov-arrow ${active >= 4 ? 'ec-ov-arrow-active' : ''}`}>
-        <span>&darr; decode</span>
+        <span>&darr; decode a recovered message</span>
       </div>
 
       <div className={`ec-ov-step ${active === 4 ? 'ec-ov-active' : active > 4 ? 'ec-ov-done' : ''}`}>
-        <div className="ec-diagram-label">recovered message</div>
         <div className="ec-diagram-row">
           {[0, 1, 2, 3].map(i => (
             <div key={i} className="ec-diagram-box ec-diagram-recovered">{`m${SUB[i]}`}</div>
@@ -1631,7 +1645,7 @@ function ErasureCoding() {
 
       {tab === 'overview' && (
         <>
-          <p>
+          <p className="ec-body-text">
             Erasure coding is where a sender adds extra "backup" information to a
             message to allow a receiver to reconstruct the message in case any part
             gets dropped.
@@ -1647,7 +1661,7 @@ function ErasureCoding() {
 
       {tab === 'parity' && (
         <>
-          <p>
+          <p className="ec-body-text">
             n = k + 1. XOR all k data symbols to produce a single parity symbol.
             If any one of the k + 1 values is erased, XOR the remaining values to recover it.
             RAID5 is a widely used application of this.
@@ -1658,11 +1672,11 @@ function ErasureCoding() {
 
       {tab === 'reed-solomon' && (
         <>
-          <p>
+          <p className="ec-body-text">
             The most common erasure code in storage systems.
             The key idea: any polynomial of degree k &minus; 1 is uniquely determined by any k points on it.
           </p>
-          <p>
+          <p className="ec-body-text">
             The k message symbols become coefficients of a polynomial p(x).
             Evaluate p(x) at n fixed values of x to produce the codeword.
             The receiver can use any k values from the codeword to re-derive the polynomial
@@ -1674,7 +1688,7 @@ function ErasureCoding() {
 
       {tab === 'systematic' && (
         <>
-          <p>
+          <p className="ec-body-text">
             Standard Reed-Solomon produces a codeword where every symbol differs from the original message.
             A systematic code preserves the original message symbols in the codeword, appending
             only the redundant symbols. The message symbols are treated as evaluations of p(x) at agreed-upon
@@ -1705,7 +1719,7 @@ function ErasureCoding() {
                   <li>
                     In blockchains, the traditional mechanism for block dissemination from leader
                     to the rest of the network requires the leader to transmit the full proposed block
-                    to several other validators who then gossip the block to the rest of the network
+                    to several other validators who gossip the block to the rest of the network
                   </li>
                   <li>
                     This is a <em>very</em> time consuming step and is an inefficient use of
@@ -1717,13 +1731,13 @@ function ErasureCoding() {
             )}
             {turbineTab === 'splitting' && (
               <>
-                <p>
+                <p className="ec-body-text">
                   A more efficient use of the network's bandwidth would be to split this block up
                   into smaller pieces (shreds) and disseminate different shreds to different nodes,
                   who then collaborate to reconstruct the entire block.
                 </p>
                 <BlockSplitViz />
-                <p>
+                <p className="ec-body-text">
                   However, malicious nodes now have the ability to withold their shred and prevent
                   reconstruction of the block.
                 </p>

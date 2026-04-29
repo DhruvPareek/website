@@ -115,16 +115,16 @@ type BatchTx = { id: number; num: number };
 
 type StepPlan = { kind: EntryKind; spawn: number };
 
-// Cycle: txs land in the batch, sit for ~2 steps, then a record() folds them in.
+// Cycle: txs land in the batch over several steps, then a record() folds them in.
 const PATTERN: StepPlan[] = [
-  { kind: 'hash', spawn: 1 },    //  0  spawn 1 → lands at idx 1
-  { kind: 'hash', spawn: 0 },    //  1  tx in batch
-  { kind: 'hash', spawn: 0 },    //  2
-  { kind: 'record', spawn: 0 },  //  3  flush [tx1]
-  { kind: 'hash', spawn: 2 },    //  4  spawn 2 → land at idx 5
-  { kind: 'hash', spawn: 0 },    //  5  txs in batch
-  { kind: 'hash', spawn: 0 },    //  6
-  { kind: 'record', spawn: 0 },  //  7  flush [tx2, tx3]
+  { kind: 'hash', spawn: 2 },    //  0  spawn 2 → land at idx 1
+  { kind: 'hash', spawn: 2 },    //  1  spawn 2 → land at idx 2
+  { kind: 'hash', spawn: 2 },    //  2  spawn 2 → land at idx 3
+  { kind: 'record', spawn: 0 },  //  3  flush [tx1..tx6]
+  { kind: 'hash', spawn: 3 },    //  4  spawn 3 → land at idx 5
+  { kind: 'hash', spawn: 3 },    //  5  spawn 3 → land at idx 6
+  { kind: 'hash', spawn: 2 },    //  6  spawn 2 → land at idx 7
+  { kind: 'record', spawn: 0 },  //  7  flush [tx7..tx14]
   { kind: 'hash', spawn: 0 },    //  8
   { kind: 'hash', spawn: 0 },    //  9
   { kind: 'tick', spawn: 0 },    // 10
@@ -195,10 +195,11 @@ function PoHStreamViz() {
       // 3. Spawn flying txs for next step
       if (plan.spawn > 0) {
         const newFlying: FlyingTx[] = [];
+        const center = (plan.spawn - 1) / 2;
         for (let i = 0; i < plan.spawn; i++) {
           txIdRef.current += 1;
           txNumRef.current += 1;
-          newFlying.push({ id: txIdRef.current, num: txNumRef.current, lane: i });
+          newFlying.push({ id: txIdRef.current, num: txNumRef.current, lane: i - center });
         }
         flyingRef.current = newFlying;
       }
@@ -239,7 +240,7 @@ function PoHStreamViz() {
               <div
                 key={t.id}
                 className="poh-tx-pill"
-                style={{ top: `calc(50% - 11px + ${(t.lane - 0.5) * 20}px)` }}
+                style={{ top: `calc(50% - 11px + ${t.lane * 22}px)` }}
               >
                 tx{t.num}
               </div>
@@ -377,8 +378,8 @@ function PoHStreamViz() {
 
 function ProofOfHistory() {
   return (
-    <div className="essay-content">
-      <h1>Proof of History</h1>
+    <div className="essay-container">
+      <p className="essay-title">Proof of History</p>
       <div className="turbine-content">
         <ul className="turbine-bullets">
           <li>

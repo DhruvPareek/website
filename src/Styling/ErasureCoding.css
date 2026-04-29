@@ -63,6 +63,11 @@
   line-height: 2;
 }
 
+.essay-container p.ec-body-text {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
 .ec-intro-defs strong {
   color: var(--highlight-color);
 }
@@ -74,6 +79,36 @@
   align-items: center;
   margin: 28px 0;
   gap: 6px;
+}
+
+/* Sender / Receiver side panels */
+.ec-side {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 28px 16px 16px;
+  border: 1px dashed var(--toggle-border);
+  border-radius: 6px;
+}
+
+.ec-side-label {
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  padding: 0 8px;
+  background: var(--bg-color);
+  font-family: 'SFMono', monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.ec-ov-arrow-transport {
+  font-style: italic;
 }
 
 /* Animated overview flow */
@@ -163,22 +198,28 @@
 
 .ec-diagram-recovered {
   border-color: var(--highlight-color);
-  color: var(--highlight-color);
-  background: rgba(68, 221, 181, 0.06);
+  color: var(--text-color);
+  background: rgba(68, 221, 181, 0.12);
 }
 
 [data-theme="dark"] .ec-diagram-recovered {
-  background: rgba(68, 221, 181, 0.1);
+  background: rgba(68, 221, 181, 0.18);
 }
 
 .ec-diagram-parity {
   border: 2px solid var(--highlight-color);
-  color: var(--highlight-color);
-  background: rgba(68, 221, 181, 0.06);
+  color: var(--text-color);
+  background: rgba(68, 221, 181, 0.12);
 }
 
 [data-theme="dark"] .ec-diagram-parity {
-  background: rgba(68, 221, 181, 0.1);
+  background: rgba(68, 221, 181, 0.18);
+}
+
+.ec-diagram-recovered .ec-diagram-box-label,
+.ec-diagram-parity .ec-diagram-box-label {
+  color: var(--highlight-color);
+  opacity: 0.9;
 }
 
 /* Box with label, value, and binary */
@@ -190,14 +231,16 @@
 }
 
 .ec-diagram-box-inner .ec-diagram-box-label {
-  font-size: 9px;
-  opacity: 0.5;
+  font-size: 10px;
+  opacity: 0.7;
 }
 
 .ec-diagram-box-inner .ec-diagram-box-bin {
-  font-size: 9px;
-  opacity: 0.35;
+  font-size: 11px;
+  opacity: 0.95;
   letter-spacing: 1px;
+  font-family: 'SFMono', monospace;
+  font-weight: 600;
 }
 
 .ec-diagram-box:has(.ec-diagram-box-inner) {
@@ -853,6 +896,8 @@
 
 .turbine-bullets li {
   margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 .turbine-subbullets {
