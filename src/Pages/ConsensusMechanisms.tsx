@@ -399,7 +399,7 @@ export default function ConsensusMechanisms() {
         <strong style={{ color: 'var(--highlight-color)' }}>n &ge; 3f + 1</strong> or <strong style={{ color: 'var(--highlight-color)' }}>f &lt; 33% of n</strong> represents
         the maximum proportion of faulty nodes (<em>f</em>) that can be tolerated to reach consensus under partial
         synchrony<span className="cm-info-btn-inline" onClick={() => setShowSyncNote(!showSyncNote)}>?</span>. This is the bound most modern proof of stake blockchains are designed around.
-        But why is this the bound? Why would <strong style={{ color: 'var(--highlight-color)' }}>f = 33% of n</strong> fail?
+        But why is this the bound? Why would <strong style={{ color: 'var(--highlight-color)' }}>f = n/3</strong> fail?
       </p>
 
       {showSyncNote && (
